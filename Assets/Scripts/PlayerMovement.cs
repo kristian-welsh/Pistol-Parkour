@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(float h, float v)
     {
-        // todo: move relative to local z axis
         movement.Set(h, 0f, v);
         movement = movement.normalized * speed * Time.deltaTime;
         movement = transform.TransformDirection(movement);// to world space

@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 282840813}
   - component: {fileID: 282840811}
   - component: {fileID: 282840812}
+  - component: {fileID: 282840815}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 5
+  inverted: 0
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -258,12 +260,27 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.0588918, z: 0.01}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 689773219}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &282840815
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &689773218
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,10 +289,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 689773219}
-  - component: {fileID: 689773223}
-  - component: {fileID: 689773220}
-  - component: {fileID: 689773221}
   - component: {fileID: 689773222}
+  - component: {fileID: 689773220}
+  - component: {fileID: 689773223}
+  - component: {fileID: 689773221}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -322,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c19024b064993489ff8a3631d45da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
 --- !u!54 &689773222
 Rigidbody:
   m_ObjectHideFlags: 0
