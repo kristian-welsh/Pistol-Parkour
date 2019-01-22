@@ -22,7 +22,7 @@ public class PlayerCamera : MonoBehaviour
         md = Vector2.Scale(md, new Vector2(sensitivity, sensitivity));
         md.y *= inv;
 
-        Quaternion yrot = Quaternion.AngleAxis(-md.y, Vector3.right);
+        Quaternion yrot = Quaternion.AngleAxis(md.y, Vector3.right);
         Quaternion xrot = Quaternion.AngleAxis(md.x, playerTransform.up);
         transform.Rotate(yrot.eulerAngles);
         playerTransform.Rotate(xrot.eulerAngles);
