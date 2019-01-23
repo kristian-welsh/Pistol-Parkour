@@ -2,7 +2,8 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 10f;
+    public float jumpPower = 15f;
     
     Rigidbody playerRigidbody;
 
@@ -10,14 +11,28 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
 	}
-
-    // called once per physics update
+    
     void FixedUpdate()
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        
+        bool space = Input.GetKeyDown("space");
+
         Move(h, v);
+        if (space && grounded())
+            jump();
+    }
+
+    // todo: you can only jump while on the ground
+    private bool grounded()
+    {
+        return true;
+    }
+
+    private void jump()
+    {
+        Vector3 impulse = transform.up * jumpPower;
+        playerRigidbody.AddForce(impulse, ForceMode.Impulse);
     }
 
     private void Move(float h, float v)
