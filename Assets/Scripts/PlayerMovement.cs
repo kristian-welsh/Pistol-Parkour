@@ -2,8 +2,8 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10f;
-    public float jumpPower = 15f;
+    public float speed = 1000f;
+    public float jumpPower = 20f;
     
     Rigidbody playerRigidbody;
 
@@ -39,7 +39,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 movement = new Vector3(h, 0f, v);
         movement = movement.normalized * speed * Time.deltaTime;
-        movement = transform.TransformDirection(movement);
-        playerRigidbody.MovePosition(transform.position + movement);
+        Vector3 vMovement = transform.forward * movement.z;
+        Vector3 hMovement = transform.right * movement.x;
+        Vector3 fullMovement = vMovement + hMovement;
+        playerRigidbody.AddForce(fullMovement, ForceMode.Acceleration);
     }
 }
