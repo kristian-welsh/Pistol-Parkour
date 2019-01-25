@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ff3cf9ba06cd147af3f90a43431378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  bounceSpeed: 2
+  rotationSpeed: 0.5
+  bounceSpeed: 0.5
   bounceMagnitude: 0.5
 --- !u!135 &135046509419342276
 SphereCollider:

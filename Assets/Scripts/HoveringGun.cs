@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
 public class HoveringGun : MonoBehaviour {
-    public float rotationSpeed = 2f;
-    public float bounceSpeed = 2f;
+    public float rotationSpeed = 0.5f;
+    public float bounceSpeed = 0.5f;
     public float bounceMagnitude = 0.5f;
 
-    float rotationTime;
-    float bounceTime;
+    ModularFloat rotationTime;
+    ModularFloat bounceTime;
     GameObject gun;
-    Vector3 startingPosition;
 
     void Start () {
         gun = transform.GetChild(0).gameObject;
-        startingPosition = gun.transform.position;
+        rotationTime = new ModularFloat(1/rotationSpeed);
+        bounceTime = new ModularFloat(1/bounceSpeed);
     }
     
     void FixedUpdate()
@@ -22,18 +22,25 @@ public class HoveringGun : MonoBehaviour {
 
     void Update()
     {
-        rotationTime += Time.deltaTime;
-        rotationTime %= rotationSpeed;
-        float rotationAmount = (rotationTime / rotationSpeed) * 360;
-        transform.eulerAngles = new Vector3(0, rotationAmount, 0);
+        Rotate();
+        Bounce();
+    }
 
-        // deltabounce is nessecary because the gun's origin isn't centere on the object
-        // meaning setting its position relative to start position nullifies change in
-        // position from parent's rotation
-        bounceTime += Time.deltaTime;
-        bounceTime %= bounceSpeed;
-        float bounceAmount = Mathf.Sin((bounceTime / bounceSpeed) * 2 * Mathf.PI) * bounceMagnitude;
-        //float deltaBounce = 
-        gun.transform.position = gun.transform.position + new Vector3(0, bounceAmount * Time.deltaTime, 0);
+    private void Rotate()
+    {
+        rotationTime.Add(Time.deltaTime);
+        transform.eulerAngles = new Vector3(0, rotationTime.Percent * 360, 0);
+    }
+
+    private void Bounce()
+    {
+        bounceTime.Add(Time.deltaTime);
+        float displacement = Mathf.Sin(ToRadians(bounceTime.Percent)) * bounceMagnitude;
+        gun.transform.position = gun.transform.position + new Vector3(0, displacement * Time.deltaTime, 0);
+    }
+
+    private float ToRadians(float percent)
+    {
+        return percent * 2 * Mathf.PI;
     }
 }
