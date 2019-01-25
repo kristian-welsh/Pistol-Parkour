@@ -3,7 +3,7 @@
     private float value;
     private float maximum;
 
-    /** A float that wraps back around to 0 once it reaches a maximum value*/
+    /// A float that wraps back around to 0 once it reaches a maximum value
     public ModularFloat(float maximum, float value = 0)
     {
         this.value = value;
