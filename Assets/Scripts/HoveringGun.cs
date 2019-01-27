@@ -16,7 +16,7 @@ public class HoveringGun : MonoBehaviour {
     void Start ()
     {
         gun = transform.GetChild(0).gameObject;
-        beaconLight = GetComponentInChildren<Light>();
+        beaconLight = transform.GetChild(1).GetComponent<Light>();
         rotationTime = new ModularFloat(1 / rotationSpeed);
         bounceTime = new ModularFloat(1 / bounceSpeed);
     }
