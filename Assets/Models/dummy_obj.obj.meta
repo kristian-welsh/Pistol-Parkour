@@ -64,6 +64,35 @@ ModelImporter:
     400056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
     400058: //RootNode
     2100000: blinn3SG
+    2100002: dummy_hips3Mat
+    2100004: dummy_hips3_dummy_bellyMat
+    2100006: dummy_hips3_dummy_belly_dummy_torsoMat
+    2100008: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulderMat
+    2100010: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larmMat
+    2100012: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbowMat
+    2100014: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarmMat
+    2100016: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwristMat
+    2100018: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhandMat
+    2100020: dummy_hips3_dummy_belly_dummy_torso_dummy_neckMat
+    2100022: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headqMat
+    2100024: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulderMat
+    2100026: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarmMat
+    2100028: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbowMat
+    2100030: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarmMat
+    2100032: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwristMat
+    2100034: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhandMat
+    2100036: dummy_hips3_dummy_lpelvisMat
+    2100038: dummy_hips3_dummy_lpelvis_dummy_luplegMat
+    2100040: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lkneeMat
+    2100042: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_llegMat
+    2100044: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankleMat
+    2100046: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfootMat
+    2100048: dummy_hips3_dummy_rpelvisMat
+    2100050: dummy_hips3_dummy_rpelvis_dummy_ruplegMat
+    2100052: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rkneeMat
+    2100054: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rlegMat
+    2100056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankleMat
+    2100058: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfootMat
     2300000: dummy_hips3
     2300002: dummy_hips3_dummy_belly
     2300004: dummy_hips3_dummy_belly_dummy_torso
