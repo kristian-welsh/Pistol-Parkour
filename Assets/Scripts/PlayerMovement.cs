@@ -69,10 +69,14 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable Gun"))
-            CollectGun(other.gameObject);
+        {
+            HoveringGun hover = other.gameObject.GetComponent<HoveringGun>();
+            if(hover.GetActive())
+                CollectGun(other.gameObject, hover);
+        }
     }
 
-    private void CollectGun(GameObject hoveringGun)
+    private void CollectGun(GameObject hoveringGun, HoveringGun hover)
     {
         // todo: dont allow when hovering gun inactive
         GameObject gun = hoveringGun.transform.GetChild(0).gameObject;
@@ -87,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         myGun.transform.localRotation = Quaternion.identity;
         myGun.SetActive(true);
         myGun.GetComponentInChildren<PlayerShooting>(true).gameObject.SetActive(true);
+
+        hover.Disapear();
     }
     
     private bool canJump()
