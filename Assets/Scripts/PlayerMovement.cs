@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 1000f;
     public float jumpPower = 20f;
     public int climbAngleTolerence = 10;
-    public int climbSpeed = 3;
-    public int climbLength = 3;
+    public int climbSpeed = 5;
+    public int climbLength = 2;
 
     const float RAY_RANGE = 1;
 
@@ -134,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         if (!hasClimbed && MovingForwards())
         {
             MaybeWallClimb();
+            MaybeWallRun();
             //todo: stop climbing when you crest the top of climbable
             //todo: allow player to quickly jump off walls without using climbing and using charges
             //todo: wallrun
@@ -141,6 +142,39 @@ public class PlayerMovement : MonoBehaviour
             //    if you're in the air and raycast detects wall: wallrun
             //once you're climbing or running: allow turning, stop after pre-determined time or on jump
         }
+    }
+
+    private void MaybeWallRun()
+    {
+        Ray right = new Ray(transform.position, transform.right);
+        Ray left = new Ray(transform.position, -transform.right);
+        RaycastHit hit;
+        if (Physics.Raycast(right, out hit, RAY_RANGE, climbableMask))
+            Wallrun(hit, true);
+        if (Physics.Raycast(left, out hit, RAY_RANGE, climbableMask))
+            Wallrun(hit);
+    }
+
+    private void Wallrun(RaycastHit hit, bool reverse = false)
+    {
+        int rev = reverse ? -1 : 1;
+        hasClimbed = true;
+        climbing = true;
+        grounded = false;
+        jumpNormal = hit.normal;
+        playerRigidbody.velocity = CalculateWallrunVelocity(hit, rev);
+        playerRigidbody.drag = 0;
+        playerRigidbody.useGravity = false;
+        stopCurrentProcess = ClimbingTimer();
+        StartCoroutine(stopCurrentProcess);
+    }
+
+    private Vector3 CalculateWallrunVelocity(RaycastHit hit, int rev)
+    {
+        Vector3 upVel = Vector3.up * climbSpeed * 0.3f;
+        Vector3 sideVel = SideAxisFromSurface(hit.normal, hit.transform) * climbSpeed * rev;
+        print(SideAxisFromSurface(hit.normal, hit.transform));
+        return upVel + sideVel;
     }
 
     private bool MovingForwards()
@@ -179,24 +213,27 @@ public class PlayerMovement : MonoBehaviour
         return velocity;
     }
     
+    //possibly replaceable by just directly setting velocity.
     private Vector3 ExtractSidewaysMovement(Vector3 velocity, RaycastHit hit)
     {
-        Vector3 wallSideAxis = Vector3.Cross(hit.normal, Vector3.up);
-        Vector3 worldWallSideAxis = hit.transform.TransformVector(wallSideAxis);
-        return Vector3.Project(velocity, worldWallSideAxis);
+        Vector3 sideAxis = SideAxisFromSurface(hit.normal, hit.transform);
+        return Vector3.Project(velocity, sideAxis);
+    }
+
+    private Vector3 SideAxisFromSurface(Vector3 normal, Transform transform)
+    {
+        Vector3 wallSideAxis = Vector3.Cross(normal, Vector3.up);
+        return transform.TransformVector(wallSideAxis).normalized;
     }
 
     private IEnumerator ClimbingTimer()
     {
-        print(0);
         yield return new WaitForSeconds(climbLength);
-        print(1);
         StopWallclimb();
     }
 
     private void StopWallclimb()
     {
-        print(2);
         climbing = false;
         playerRigidbody.useGravity = true;
         playerRigidbody.drag = originalDrag;

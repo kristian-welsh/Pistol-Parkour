@@ -377,10 +377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1000
-  jumpPower: 15
+  jumpPower: 20
   climbAngleTolerence: 10
-  climbSpeed: 3
-  climbLength: 3
+  climbSpeed: 5
+  climbLength: 1
 --- !u!54 &689773222
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -51,7 +51,6 @@ public class PlayerCamera : MonoBehaviour
         Quaternion localRot = transform.localRotation;
         localRot.x = Mathf.Clamp(localRot.x, -0.7f, 0.7f);
         transform.localRotation = localRot;
-        print(transform.localRotation);
     }
 
     private Quaternion CameraRotationNeeded(float amount)
