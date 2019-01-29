@@ -130,17 +130,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void MaybeParkour()
     {
-
         if (!hasClimbed && MovingForwards())
         {
             MaybeWallClimb();
-            MaybeWallRun();
-            //todo: stop climbing when you crest the top of climbable
-            //todo: allow player to quickly jump off walls without using climbing and using charges
-            //todo: wallrun
-            //raycast to sides
-            //    if you're in the air and raycast detects wall: wallrun
-            //once you're climbing or running: allow turning, stop after pre-determined time or on jump
+            if(!grounded)
+                MaybeWallRun();
         }
     }
 
