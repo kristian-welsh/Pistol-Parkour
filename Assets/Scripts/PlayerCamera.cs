@@ -34,8 +34,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void RotatePlayer(float amount)
     {
-        Quaternion xrot = PlayerRotationNeeded(amount);
-        playerRigid.MoveRotation(playerRigid.rotation * xrot);
+        Quaternion yrot = PlayerRotationNeeded(amount);
+        playerRigid.MoveRotation(playerRigid.rotation * yrot);
     }
 
     private Quaternion PlayerRotationNeeded(float amount)
@@ -45,8 +45,13 @@ public class PlayerCamera : MonoBehaviour
 
     private void RotateCamera(float amount)
     {
-        Quaternion yrot = CameraRotationNeeded(amount);
-        transform.rotation = transform.rotation * yrot;
+        Quaternion xrot = CameraRotationNeeded(amount);
+        transform.rotation = transform.rotation * xrot;
+        
+        Quaternion localRot = transform.localRotation;
+        localRot.x = Mathf.Clamp(localRot.x, -0.7f, 0.7f);
+        transform.localRotation = localRot;
+        print(transform.localRotation);
     }
 
     private Quaternion CameraRotationNeeded(float amount)
