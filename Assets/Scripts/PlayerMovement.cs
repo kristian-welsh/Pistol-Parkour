@@ -134,29 +134,50 @@ public class PlayerMovement : MonoBehaviour
         {
             MaybeWallClimb();
             if(!grounded)
-                MaybeWallRun();
+                MaybeWallrun();
         }
     }
 
-    private void MaybeWallRun()
+    private void MaybeWallrun()
     {
-        Ray right = new Ray(transform.position, transform.right);
-        Ray left = new Ray(transform.position, -transform.right);
+        MaybeWallrunSpecific(transform.right, true);
+        MaybeWallrunSpecific(-transform.right, false);
+    }
+
+    private void MaybeWallrunSpecific(Vector3 axis, bool reverse)
+    {
+        Ray ray = new Ray(transform.position, axis);
         RaycastHit hit;
-        if (Physics.Raycast(right, out hit, RAY_RANGE, climbableMask))
-            Wallrun(hit, true);
-        if (Physics.Raycast(left, out hit, RAY_RANGE, climbableMask))
-            Wallrun(hit);
+        if (Physics.Raycast(ray, out hit, RAY_RANGE, climbableMask))
+            Wallrun(hit, reverse);
     }
 
     private void Wallrun(RaycastHit hit, bool reverse = false)
     {
         int rev = reverse ? -1 : 1;
+        setClimbingData(hit.normal);
+        playerRigidbody.velocity = CalculateWallrunVelocity(hit, rev);
+        postFoo();
+    }
+
+    private void Wallclimb(RaycastHit hit)
+    {
+        setClimbingData(hit.normal);
+        playerRigidbody.velocity = CalculateWallclimbVelocity(hit);
+        postFoo();
+    }
+
+    private void setClimbingData(Vector3 normal)
+    {
         hasClimbed = true;
         climbing = true;
         grounded = false;
-        jumpNormal = hit.normal;
-        playerRigidbody.velocity = CalculateWallrunVelocity(hit, rev);
+        jumpNormal = normal;
+    }
+
+    private void startClimbingProcess(Vector3 velocity)
+    {
+        playerRigidbody.velocity = velocity;
         playerRigidbody.drag = 0;
         playerRigidbody.useGravity = false;
         stopCurrentProcess = ClimbingTimer();
@@ -184,19 +205,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(forward, out hit, RAY_RANGE, climbableMask))
             Wallclimb(hit);
-    }
-
-    private void Wallclimb(RaycastHit hit)
-    {
-        hasClimbed = true;
-        climbing = true;
-        grounded = false;
-        jumpNormal = hit.normal;
-        playerRigidbody.velocity = CalculateWallclimbVelocity(hit);
-        playerRigidbody.drag = 0;
-        playerRigidbody.useGravity = false;
-        stopCurrentProcess = ClimbingTimer();
-        StartCoroutine(stopCurrentProcess);
     }
 
     private Vector3 CalculateWallclimbVelocity(RaycastHit hit)
