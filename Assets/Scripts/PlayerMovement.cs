@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     const float RAY_RANGE = 1;
 
-    Rigidbody playerRigidbody;
+    Rigidbody rigidbody;
     GameObject myCamera;
     GameObject myGun;
     bool hasClimbed = false;
@@ -22,13 +23,16 @@ public class PlayerMovement : MonoBehaviour
     Vector3 jumpNormal;
     IEnumerator stopCurrentProcess;
 
+    public bool HasClimbed { get { return hasClimbed; } }
+    public bool Grounded { get { return grounded; } }
+
     void Start()
     {
         climbableMask = LayerMask.GetMask("Climbable");
         myCamera = transform.GetComponentInChildren<Camera>().gameObject;
         myGun = myCamera.transform.GetChild(0).gameObject;
-        playerRigidbody = GetComponent<Rigidbody>();
-        originalDrag = playerRigidbody.drag;
+        rigidbody = GetComponent<Rigidbody>();
+        originalDrag = rigidbody.drag;
         jumpNormal = Vector3.up;
     }
 
@@ -44,12 +48,11 @@ public class PlayerMovement : MonoBehaviour
             Move(h, v);
         if (canJump() && space)
             Jump();
-        MaybeParkour();
     }
 
     private void CheckGround()
     {
-        if(playerRigidbody.velocity.y < 0)
+        if(rigidbody.velocity.y < 0)
         {
             Ray down = new Ray(transform.position, -transform.up);
             RaycastHit hit;
@@ -103,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         Vector3 impulse = jumpNormal * jumpPower;
-        playerRigidbody.AddForce(impulse, ForceMode.Impulse);
+        rigidbody.AddForce(impulse, ForceMode.Impulse);
         grounded = false;
         climbing = false;
         if (stopCurrentProcess != null)
@@ -114,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     private void JumpGround()
     {
         Vector3 impulse = transform.up * jumpPower;
-        playerRigidbody.AddForce(impulse, ForceMode.Impulse);
+        rigidbody.AddForce(impulse, ForceMode.Impulse);
         grounded = false;
     }
 
@@ -125,107 +128,20 @@ public class PlayerMovement : MonoBehaviour
         Vector3 vMovement = transform.forward * movement.z;
         Vector3 hMovement = transform.right * movement.x;
         Vector3 fullMovement = vMovement + hMovement;
-        playerRigidbody.AddForce(fullMovement, ForceMode.Acceleration);
+        rigidbody.AddForce(fullMovement, ForceMode.Acceleration);
     }
 
-    private void MaybeParkour()
-    {
-        if (!hasClimbed && MovingForwards())
-        {
-            MaybeWallClimb();
-            if(!grounded)
-                MaybeWallrun();
-        }
-    }
-
-    private void MaybeWallrun()
-    {
-        MaybeWallrunSpecific(transform.right, true);
-        MaybeWallrunSpecific(-transform.right, false);
-    }
-
-    private void MaybeWallrunSpecific(Vector3 axis, bool reverse)
-    {
-        Ray ray = new Ray(transform.position, axis);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, RAY_RANGE, climbableMask))
-            Wallrun(hit, reverse);
-    }
-
-    private void Wallrun(RaycastHit hit, bool reverse = false)
-    {
-        int rev = reverse ? -1 : 1;
-        setClimbingData(hit.normal);
-        playerRigidbody.velocity = CalculateWallrunVelocity(hit, rev);
-        postFoo();
-    }
-
-    private void Wallclimb(RaycastHit hit)
-    {
-        setClimbingData(hit.normal);
-        playerRigidbody.velocity = CalculateWallclimbVelocity(hit);
-        postFoo();
-    }
-
-    private void setClimbingData(Vector3 normal)
+    public void StartParkour(Vector3 normal, Vector3 velocity)
     {
         hasClimbed = true;
         climbing = true;
         grounded = false;
         jumpNormal = normal;
-    }
-
-    private void startClimbingProcess(Vector3 velocity)
-    {
-        playerRigidbody.velocity = velocity;
-        playerRigidbody.drag = 0;
-        playerRigidbody.useGravity = false;
+        rigidbody.velocity = velocity;
+        rigidbody.drag = 0;
+        rigidbody.useGravity = false;
         stopCurrentProcess = ClimbingTimer();
         StartCoroutine(stopCurrentProcess);
-    }
-
-    private Vector3 CalculateWallrunVelocity(RaycastHit hit, int rev)
-    {
-        Vector3 upVel = Vector3.up * climbSpeed * 0.3f;
-        Vector3 sideVel = SideAxisFromSurface(hit.normal, hit.transform) * climbSpeed * rev;
-        print(SideAxisFromSurface(hit.normal, hit.transform));
-        return upVel + sideVel;
-    }
-
-    private bool MovingForwards()
-    {
-        Vector3 velocity2D = playerRigidbody.velocity;
-        velocity2D.y = 0;
-        return Vector3.Angle(transform.forward, velocity2D.normalized) < climbAngleTolerence;
-    }
-
-    private void MaybeWallClimb()
-    {
-        Ray forward = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        if (Physics.Raycast(forward, out hit, RAY_RANGE, climbableMask))
-            Wallclimb(hit);
-    }
-
-    private Vector3 CalculateWallclimbVelocity(RaycastHit hit)
-    {
-        Vector3 velocity = playerRigidbody.velocity;
-        velocity.y = climbSpeed;
-        velocity = velocity - ExtractSidewaysMovement(velocity, hit);
-        return velocity;
-    }
-    
-    //possibly replaceable by just directly setting velocity.
-    private Vector3 ExtractSidewaysMovement(Vector3 velocity, RaycastHit hit)
-    {
-        Vector3 sideAxis = SideAxisFromSurface(hit.normal, hit.transform);
-        return Vector3.Project(velocity, sideAxis);
-    }
-
-    private Vector3 SideAxisFromSurface(Vector3 normal, Transform transform)
-    {
-        Vector3 wallSideAxis = Vector3.Cross(normal, Vector3.up);
-        return transform.TransformVector(wallSideAxis).normalized;
     }
 
     private IEnumerator ClimbingTimer()
@@ -237,8 +153,8 @@ public class PlayerMovement : MonoBehaviour
     private void StopWallclimb()
     {
         climbing = false;
-        playerRigidbody.useGravity = true;
-        playerRigidbody.drag = originalDrag;
+        rigidbody.useGravity = true;
+        rigidbody.drag = originalDrag;
         stopCurrentProcess = null;
     }
 }
