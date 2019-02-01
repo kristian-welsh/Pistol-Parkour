@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MachinegunShooting : PlayerShooting
+public class RaycastGun : GunShooting
 {
     public float range = 100f;
-    
+
     int shootableMask;
     LineRenderer gunLine;
     Light gunLight;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         shootableMask = LayerMask.GetMask("Shootable");

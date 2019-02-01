@@ -12,13 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     const float RAY_RANGE = 1;
 
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     GameObject myCamera;
     GameObject myGun;
     bool hasClimbed = false;
     bool climbing = false;
     bool grounded = false;
-    int climbableMask;
     float originalDrag;
     Vector3 jumpNormal;
     IEnumerator stopCurrentProcess;
@@ -28,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        climbableMask = LayerMask.GetMask("Climbable");
         myCamera = transform.GetComponentInChildren<Camera>().gameObject;
         myGun = myCamera.transform.GetChild(0).gameObject;
         rigidbody = GetComponent<Rigidbody>();
@@ -87,13 +85,15 @@ public class PlayerMovement : MonoBehaviour
         // disable old gun
         myCamera.transform.DetachChildren();
         myGun.SetActive(false);
+        Destroy(myGun);
+        
 
         // create and enable new gun
         myGun = Instantiate(gun, myCamera.transform);
         myGun.transform.localPosition = Vector3.zero;
         myGun.transform.localRotation = Quaternion.identity;
         myGun.SetActive(true);
-        myGun.GetComponentInChildren<PlayerShooting>(true).gameObject.SetActive(true);
+        myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
 
         hover.Disapear();
     }

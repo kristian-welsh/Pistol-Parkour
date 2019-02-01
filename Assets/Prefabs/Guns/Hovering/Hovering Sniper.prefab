@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 108489691617903630}
   - component: {fileID: 82721917418135696}
   - component: {fileID: 120171847269609466}
-  - component: {fileID: 114679166848266448}
+  - component: {fileID: 114321534244751548}
   m_Layer: 0
   m_Name: Gun Tip
   m_TagString: Untagged
@@ -332,7 +332,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1917821950565916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.129999, y: 0, z: 10.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4083266734270442}
@@ -1235,6 +1235,20 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114321534244751548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1516058944417368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c7b9bbf58c71446aeca3ab40b86959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerShot: 50
+  timeBetweenBullets: 1
+  range: 1000
 --- !u!114 &114494619971910810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1250,20 +1264,6 @@ MonoBehaviour:
   bounceSpeed: 0.5
   bounceMagnitude: 0.5
   respawnTime: 10
---- !u!114 &114679166848266448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1516058944417368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5823d6cf11ede4946a289c1fee3491a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 20
-  timeBetweenBullets: 0.15
-  range: 100
 --- !u!120 &120171847269609466
 LineRenderer:
   m_ObjectHideFlags: 1

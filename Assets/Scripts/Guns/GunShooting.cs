@@ -1,13 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class GunShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
     public float timeBetweenBullets = 0.15f;
+	[Range(0,1)]
+    public float effectsDisplayPercentage = 0.2f;
     
     float timer;
-    float effectsDisplayTime = 0.2f;
 
     protected AudioSource gunAudio;
 
@@ -26,7 +26,7 @@ public class PlayerShooting : MonoBehaviour
             Shoot();
         }
 
-        if (timer >= timeBetweenBullets * effectsDisplayTime)
+        if (timer >= timeBetweenBullets * effectsDisplayPercentage)
         {
             DisableEffects();
         }

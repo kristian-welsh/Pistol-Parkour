@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 108445315579478520}
   - component: {fileID: 82930520546875560}
   - component: {fileID: 120743261984829828}
-  - component: {fileID: 114338246406168938}
+  - component: {fileID: 114479449180999564}
   m_Layer: 0
   m_Name: Gun Tip
   m_TagString: Untagged
@@ -378,7 +378,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114338246406168938
+--- !u!114 &114479449180999564
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1244211347350784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5823d6cf11ede4946a289c1fee3491a0, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c7b9bbf58c71446aeca3ab40b86959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerShot: 20

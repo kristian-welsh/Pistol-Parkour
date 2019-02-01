@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 108445572070902210}
   - component: {fileID: 82200327527281412}
   - component: {fileID: 120613823020922868}
-  - component: {fileID: 114967501771844308}
+  - component: {fileID: 114502592698462808}
   m_Layer: 0
   m_Name: Gun Tip
   m_TagString: Untagged
@@ -1109,7 +1109,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114967501771844308
+--- !u!114 &114502592698462808
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1117,12 +1117,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725112621528142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5823d6cf11ede4946a289c1fee3491a0, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c7b9bbf58c71446aeca3ab40b86959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
-  timeBetweenBullets: 0.15
-  range: 100
+  damagePerShot: 50
+  timeBetweenBullets: 1
+  range: 1000
 --- !u!120 &120613823020922868
 LineRenderer:
   m_ObjectHideFlags: 1
