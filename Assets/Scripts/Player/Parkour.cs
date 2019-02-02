@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerParkour : MonoBehaviour
+public class Parkour : MonoBehaviour
 {
     public PlayerMovement movement;
     public int climbAngleTolerence = 10;
