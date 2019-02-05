@@ -24,9 +24,9 @@ public class CharacterMovement : MonoBehaviour
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    void Start()
+    public virtual void Start()
     {
-        myCamera = transform.GetComponentInChildren<Camera>().gameObject;
+        myCamera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
         myGun = myCamera.transform.GetChild(0).gameObject;
         rigidbody = GetComponent<Rigidbody>();
         originalDrag = rigidbody.drag;
