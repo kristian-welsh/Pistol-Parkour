@@ -24,6 +24,7 @@ public class AIMovement : CharacterMovement
 		if(Vector3.Distance(destination.transform.position, transform.position) < 1f)
 		{
 			movement = Vector3.zero;
+			// if we're agroed on a character, set destination to the nearest out of the children of current destination waypoint
 		}
 		else 
 		{
