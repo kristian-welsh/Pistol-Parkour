@@ -85,6 +85,7 @@ public class CharacterMovement : MonoBehaviour
 
 	private void Jump()
 	{
+        print("Jump()");
 		Vector3 impulse = jumpNormal * jumpPower;
 		rigidbody.AddForce(impulse, ForceMode.Impulse);
 		grounded = false;
