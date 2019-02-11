@@ -33,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
         jumpNormal = Vector3.up;
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!grounded)
             CheckGround();

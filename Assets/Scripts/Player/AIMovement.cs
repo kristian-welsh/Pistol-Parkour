@@ -8,32 +8,30 @@ public class AIMovement : CharacterMovement
 	private GameObject aggro;
 	private bool jump = false;
 	private Vector3 movement = Vector3.zero;
-	new private Transform transform;
-	private Waypoint[] navRoute;
 	private Waypoint destination;
 
 	public override void Start ()
 	{
-		//aggro = GameObject.FindGameObjectsWithTag("Player")[0];
-		transform = GetComponent<Transform>();
+		aggro = GameObject.FindGameObjectsWithTag("Player")[0];
 		destination = GetNearestWaypoint(gameObject);
 		base.Start();
 	}
 	
-	void FixedUpdate ()
+	protected override void FixedUpdate ()
 	{
-		if(Vector3.Distance(destination.transform.position, transform.position) < distanceThreshold)
+		float distance = Vector3.Distance(destination.transform.position, gameObject.transform.position);
+		if(distance < distanceThreshold)
 		{
 			movement = Vector3.zero;
 			UpdateDestination();
 		}
 		else 
 		{
-			movement = destination.transform.position - transform.position;
+			movement = destination.transform.position - gameObject.transform.position;
 			movement = movement.normalized * speed;
-			print("enemy movement.normalized: " + movement.normalized);
 			movement = new Vector3(movement.x, 0f, movement.z);
 		}
+		base.FixedUpdate();
 	}
 
 	private void UpdateDestination()
@@ -103,6 +101,7 @@ public class AIMovement : CharacterMovement
 
 	protected override Vector3 CalculateMovementForce()
 	{
+		print(movement);
 		return movement;
 	}
 }
