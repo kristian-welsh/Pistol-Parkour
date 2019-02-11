@@ -2,17 +2,27 @@
 
 public class PlayerMovement : CharacterMovement
 {
+	private Vector3 movement = Vector3.zero;
+	private bool jump = false;
+
 	protected override bool wantsToJump()
 	{
-		return Input.GetKeyDown("space");
+		bool result = jump;
+		jump = false;
+		return result;
+	}
+
+	void Update()
+	{
+		Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+		movement = input.normalized * speed;
+		if(Input.GetKeyDown("space"))
+			jump = true;
 	}
 
 	protected override Vector3 CalculateMovementForce()
 	{
-		float h = Input.GetAxisRaw("Horizontal");
-		float v = Input.GetAxisRaw("Vertical");
-		Vector3 input = new Vector3(h, 0f, v);
-		Vector3 movement = input.normalized * speed * Time.deltaTime;
+		//movement was calculated in world space, transform to player space
 		return transform.forward * movement.z + transform.right * movement.x;
 	}
 }

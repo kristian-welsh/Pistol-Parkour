@@ -165,6 +165,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114614544356489928, guid: b4a20423d980fa5449f9c4deabb8c3c4,
+        type: 2}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
   m_IsPrefabParent: 0
@@ -260,11 +265,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4023748102223610, guid: 7130d9b0e97f1a8499eacad01f9395c8,
     type: 2}
   m_PrefabInternal: {fileID: 1766637739}
---- !u!1 &511834178 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1668149357436664, guid: b4a20423d980fa5449f9c4deabb8c3c4,
-    type: 2}
-  m_PrefabInternal: {fileID: 145738238}
 --- !u!1001 &513274694
 Prefab:
   m_ObjectHideFlags: 0
@@ -436,13 +436,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b28b5d128c02a49b3ef9c3ca05f0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 15
   jumpPower: 20
   climbAngleTolerence: 10
   climbSpeed: 5
   climbLength: 2
-  target: {fileID: 511834178}
   waypoints: {fileID: 1795130266}
+  distanceThreshold: 1
+--- !u!4 &772888636 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4058481951957848, guid: b4a20423d980fa5449f9c4deabb8c3c4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1224469283}
 --- !u!1001 &784855662
 Prefab:
   m_ObjectHideFlags: 0
@@ -693,6 +698,7 @@ Transform:
   - {fileID: 1737357323}
   - {fileID: 689773219}
   - {fileID: 1795130267}
+  - {fileID: 772888636}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -717,7 +723,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1211963088}
     m_Modifications:
     - target: {fileID: 4058481951957848, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
       propertyPath: m_LocalPosition.x
@@ -749,7 +755,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4058481951957848, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114397463356042728, guid: b4a20423d980fa5449f9c4deabb8c3c4,
         type: 2}
