@@ -152,28 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114397463356042728, guid: b4a20423d980fa5449f9c4deabb8c3c4,
-        type: 2}
-      propertyPath: movement
-      value: 
-      objectReference: {fileID: 511834183}
-    - target: {fileID: 4375755871168802, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4718910960598974, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114614544356489928, guid: b4a20423d980fa5449f9c4deabb8c3c4,
-        type: 2}
-      propertyPath: speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4058481951957848, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -97.716
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4a20423d980fa5449f9c4deabb8c3c4, type: 2}
   m_IsPrefabParent: 0
@@ -252,28 +230,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4023748102223610, guid: 7130d9b0e97f1a8499eacad01f9395c8,
     type: 2}
   m_PrefabInternal: {fileID: 1766637739}
---- !u!1 &511834178 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1668149357436664, guid: b4a20423d980fa5449f9c4deabb8c3c4,
-    type: 2}
-  m_PrefabInternal: {fileID: 145738238}
---- !u!114 &511834179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 511834178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c16fb9f95df0fb64f8ce93c097bc3e7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &511834183 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114614544356489928, guid: b4a20423d980fa5449f9c4deabb8c3c4,
-    type: 2}
-  m_PrefabInternal: {fileID: 145738238}
-  m_Script: {fileID: 11500000, guid: 75d4dc641d9373448a8f3b55afd8534d, type: 3}
 --- !u!1001 &513274694
 Prefab:
   m_ObjectHideFlags: 0

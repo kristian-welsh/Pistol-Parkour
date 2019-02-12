@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 136129082592516834}
   - component: {fileID: 114397463356042728}
   - component: {fileID: 114614544356489928}
+  - component: {fileID: 114414829516740008}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -858,15 +859,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668149357436664}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.033, y: 0.01, z: 0}
+  m_LocalRotation: {x: -0, y: -0.7530824, z: -0, w: 0.6579262}
+  m_LocalPosition: {x: 3.26, y: 0.01, z: -26.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4375755871168802}
   - {fileID: 4718910960598974}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -97.716, z: 0}
 --- !u!4 &4114681433446358
 Transform:
   m_ObjectHideFlags: 1
@@ -3446,10 +3447,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566af7e5be6b0be418b63811da4ce353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 0}
+  movement: {fileID: 114614544356489928}
   climbAngleTolerence: 10
   climbSpeed: 5
   climbLength: 2
+--- !u!114 &114414829516740008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668149357436664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16fb9f95df0fb64f8ce93c097bc3e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114614544356489928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3461,7 +3473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d4dc641d9373448a8f3b55afd8534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 15
   jumpPower: 20
   climbAngleTolerence: 10
   climbSpeed: 5
