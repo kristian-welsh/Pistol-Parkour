@@ -12,10 +12,16 @@ public class AICamera : CharacterCamera
 		player = GameObject.FindGameObjectsWithTag("Player")[0];
 		base.Start();
 	}
-	
-	void Update ()
+
+	public override void FixedUpdate ()
 	{
-		
+		Vector3 difference = player.transform.position - transform.position;
+		difference.y = 0;
+		float amount = Vector3.Angle(Vector3.forward, difference.normalized);
+		if (difference.x < 0)
+			amount = 360 - amount;
+		charRot = Vector3.up * amount;
+		base.FixedUpdate();
 	}
 	
 	protected override Quaternion NewCharRotation()
