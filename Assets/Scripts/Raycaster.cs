@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Raycaster
 {
@@ -14,7 +15,7 @@ public class Raycaster
 	public Raycaster(float range, String mask)
 	{
 		this.range = range;
-		this.mask = LayerMask.GetMask(mask); ;
+		this.mask = LayerMask.GetMask(mask);
 	}
 
 	public RaycastHit? CastRay(Vector3 position, Vector3 direction)

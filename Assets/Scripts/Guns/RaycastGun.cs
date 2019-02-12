@@ -31,13 +31,8 @@ public class RaycastGun : GunShooting
         gunLine.SetPosition(0, transform.position);
 		
 		RaycastHit? hit = raycaster.CastRay(transform.position, transform.forward);
-		if (hit.HasValue)
-        {
-            gunLine.SetPosition(1, hit.Value.point);
-        }
-        else
-        {
-            gunLine.SetPosition(1, transform.position + transform.forward * range);
-        }
-    }
+		Vector3 farEndPoint = transform.position + transform.forward * range;
+		Vector3 endPoint = hit.HasValue ? hit.Value.point : farEndPoint;
+		gunLine.SetPosition(1, endPoint);
+	}
 }
