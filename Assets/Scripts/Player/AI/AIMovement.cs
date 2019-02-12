@@ -4,14 +4,12 @@ public class AIMovement : CharacterMovement
 {
 	public float distanceThreshold = 1f;
 	public Waypoint destination;
-
-	private static float GROUND_RAYCAST_RANGE = 3f;
-
+	
 	private NavigationRouter aggroTarget;
 	private Rigidbody rb;
 	private bool jump = false;
 	private Vector3 movement = Vector3.zero;
-	private int standableMask;
+	private Raycaster raycaster;
 
 	public override void Start ()
 	{
@@ -19,7 +17,7 @@ public class AIMovement : CharacterMovement
 		rb = GetComponent<Rigidbody>();
 		if(aggroTarget == null)
 			aggroTarget = new NullNavigationRouter();
-		standableMask = LayerMask.GetMask("Shootable");
+		raycaster = new Raycaster(3f, "Shootable");
 		base.Start();
 	}
 	
@@ -52,23 +50,19 @@ public class AIMovement : CharacterMovement
 
 	private void JumpOverPits()
 	{
-		Ray ray = CreateLookDownRay();
-		RaycastHit hit;
-		bool result = Physics.Raycast(ray, out hit, GROUND_RAYCAST_RANGE, standableMask);
-		if(!result)
+		Vector3 position = gameObject.transform.position + new Vector3(0f, 1f, 0f);
+		Vector3 angle = CreateLookDownAngle();
+		RaycastHit? hit = raycaster.CastRay(position, angle);
+		if(!hit.HasValue)
 			jump = true;
 	}
 
-	private Ray CreateLookDownRay()
+	private Vector3 CreateLookDownAngle()
 	{
-		Vector3 startPos = gameObject.transform.position + new Vector3(0f, 1f, 0f);
-
 		Vector3 velocity2d = rb.velocity.normalized;
 		velocity2d.y = 0;
 		Vector3 angle = velocity2d - gameObject.transform.up;
-		angle = angle.normalized;
-
-		return new Ray(startPos, angle);
+		return angle.normalized;
 	}
 
 	protected override bool wantsToJump()

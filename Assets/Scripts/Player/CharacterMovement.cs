@@ -8,9 +8,7 @@ public class CharacterMovement : MonoBehaviour
     public int climbAngleTolerence = 10;
     public int climbSpeed = 5;
     public int climbLength = 2;
-
-    const float RAY_RANGE = 1;
-
+	
     new Rigidbody rigidbody;
     GameObject myCamera;
     GameObject myGun;
@@ -20,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     float originalDrag;
     Vector3 jumpNormal;
     IEnumerator stopCurrentProcess;
+	Raycaster raycaster;
 
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
@@ -31,7 +30,9 @@ public class CharacterMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         originalDrag = rigidbody.drag;
         jumpNormal = Vector3.up;
-    }
+		raycaster = new Raycaster(0.1f);
+
+	}
 
     protected virtual void FixedUpdate()
     {
@@ -47,16 +48,15 @@ public class CharacterMovement : MonoBehaviour
     {
         if(rigidbody.velocity.y < 0)
         {
-            Ray down = new Ray(transform.position, -transform.up);
-            RaycastHit hit;
-            if (Physics.Raycast(down, out hit, 0.1f))
+            RaycastHit? hit = raycaster.CastRay(transform.position, -transform.up);
+            if (hit.HasValue)
             {
-                if (hit.transform.gameObject.CompareTag("Ground"))
+                if (hit.Value.transform.gameObject.CompareTag("Ground"))
                 {
                     grounded = true;
                     hasClimbed = false;
                     climbing = false;
-                    jumpNormal = hit.normal;
+                    jumpNormal = hit.Value.normal;
                 }
             }
         }

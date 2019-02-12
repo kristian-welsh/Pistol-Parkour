@@ -9,16 +9,15 @@ public class Parkour : MonoBehaviour
     public int climbSpeed = 5;
     public int climbLength = 2;
 
-    const float RAY_RANGE = 1;
-
     Rigidbody playerRigidbody;
-    int climbableMask;
+	Raycaster raycaster;
 
     void Start()
     {
-        climbableMask = LayerMask.GetMask("Climbable");
         playerRigidbody = GetComponent<Rigidbody>();
-    }
+		raycaster = new Raycaster(1f, "Climbable");
+
+	}
 
     void FixedUpdate()
     {
@@ -42,20 +41,12 @@ public class Parkour : MonoBehaviour
 
     private void MaybeParkour(Vector3 axis, int sideDir, float upSpeed)
     {
-        RaycastHit? hit = CastRay(axis);
+        RaycastHit? hit = raycaster.CastRay(transform.position, axis);
         if (hit.HasValue)
         {
 	        Vector3 velocity = CalculateVelocity(hit.Value, sideDir, upSpeed);
         	movement.StartParkour(hit.Value.normal, velocity);
         }
-    }
-
-    private RaycastHit? CastRay(Vector3 axis)
-    {
-        Ray ray = new Ray(transform.position, axis);
-        RaycastHit hit;
-    	bool hitSomething = Physics.Raycast(ray, out hit, RAY_RANGE, climbableMask);
-    	return hitSomething ? (RaycastHit?)hit : null;
     }
 
     private Vector3 CalculateVelocity(RaycastHit hit, int sideDir, float foo)

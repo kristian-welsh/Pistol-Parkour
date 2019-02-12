@@ -3,18 +3,19 @@
 public class RaycastGun : GunShooting
 {
     public float range = 100f;
-
-    int shootableMask;
+	
     LineRenderer gunLine;
     Light gunLight;
+	Raycaster raycaster;
 
     new void Start()
     {
         base.Start();
-        shootableMask = LayerMask.GetMask("Shootable");
         gunLine = GetComponent<LineRenderer>();
         gunLight = GetComponent<Light>();
-    }
+		raycaster = new Raycaster(range, "Shootable");
+
+	}
 
     protected override void DisableEffects()
     {
@@ -28,16 +29,15 @@ public class RaycastGun : GunShooting
         gunLight.enabled = true;
         gunLine.enabled = true;
         gunLine.SetPosition(0, transform.position);
-
-        Ray shootRay = new Ray(transform.position, transform.forward);
-        RaycastHit shootHit;
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+		
+		RaycastHit? hit = raycaster.CastRay(transform.position, transform.forward);
+		if (hit.HasValue)
         {
-            gunLine.SetPosition(1, shootHit.point);
+            gunLine.SetPosition(1, hit.Value.point);
         }
         else
         {
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+            gunLine.SetPosition(1, transform.position + transform.forward * range);
         }
     }
 }
