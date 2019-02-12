@@ -5,7 +5,7 @@ public class AIMovement : CharacterMovement
 	public float distanceThreshold = 1f;
 	public Waypoint destination;
 
-	private static float GROUND_RAYCAST_RANGE = 300f;
+	private static float GROUND_RAYCAST_RANGE = 3f;
 
 	private NavigationRouter aggroTarget;
 	private Rigidbody rb;
@@ -52,25 +52,27 @@ public class AIMovement : CharacterMovement
 
 	private void JumpOverPits()
 	{
-		Vector3 startPos = gameObject.transform.position - new Vector3(0f, 0f, 0f);
+		Ray ray = CreateLookDownRay();
+		RaycastHit hit;
+		bool result = Physics.Raycast(ray, out hit, GROUND_RAYCAST_RANGE, standableMask);
+		if(!result)
+			jump = true;
+	}
+
+	private Ray CreateLookDownRay()
+	{
+		Vector3 startPos = gameObject.transform.position + new Vector3(0f, 1f, 0f);
 
 		Vector3 velocity2d = rb.velocity.normalized;
 		velocity2d.y = 0;
 		Vector3 angle = velocity2d - gameObject.transform.up;
 		angle = angle.normalized;
 
-		Ray ray = new Ray(startPos, angle);
-		RaycastHit hit;
-		bool result = Physics.Raycast(ray, out hit, GROUND_RAYCAST_RANGE, standableMask);
-		if(!result)
-		{
-			jump = true;
-		}
+		return new Ray(startPos, angle);
 	}
 
 	protected override bool wantsToJump()
 	{
-		print(jump);
 		return jump;
 	}
 
