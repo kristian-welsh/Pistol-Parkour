@@ -3,6 +3,7 @@
 public class AICamera : CharacterCamera
 {
 	public GameObject player;
+	public Transform enemyMidpoint;
 
 	private Vector3 characterRotation = Vector3.zero;
 	private Vector3 cameraRotation = Vector3.zero;
@@ -10,6 +11,7 @@ public class AICamera : CharacterCamera
 	public override void Start ()
 	{
 		player = GameObject.FindGameObjectsWithTag("Player")[0];
+		enemyMidpoint = player.transform.GetChild(0);
 		base.Start();
 	}
 
@@ -17,6 +19,14 @@ public class AICamera : CharacterCamera
 	{
 		Vector3 facingDirection = TargetXZFacingDirection();
 		characterRotation = Vector3.up * YRotationNeeded(facingDirection);
+
+		//cameraRotation
+		Vector3 toPlayer = enemyMidpoint.position - transform.position;
+		Vector3 toPlayer2d = enemyMidpoint.position - transform.position;
+		toPlayer2d.y = 0;
+		float amount = Vector3.Angle(toPlayer2d, toPlayer);
+		cameraRotation = new Vector3(-amount, 0f, 0f);
+
 		base.FixedUpdate();
 	}
 
