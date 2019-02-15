@@ -23,6 +23,6 @@ public class PlayerCamera : CharacterCamera
 	{
 		float amount = Input.GetAxisRaw("Mouse Y") * sensitivity * inversion;
 		Quaternion rotationAction = Quaternion.AngleAxis(amount, Vector3.right);
-		return transform.rotation * rotationAction;
+		return transform.localRotation * rotationAction;
 	}
 }
