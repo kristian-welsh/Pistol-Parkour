@@ -7,20 +7,22 @@ public class GunShooting : MonoBehaviour
 	[Range(0,1)]
     public float effectsDisplayPercentage = 0.2f;
     
-    float timer;
-
     protected AudioSource gunAudio;
+
+    private float timer;
+    private  ShootingInput shootingInput;
 
     protected void Start ()
     {
         gunAudio = GetComponent<AudioSource>();
+        shootingInput = GetComponentInParent(typeof(ShootingInput)) as ShootingInput;
     }
 	
 	void Update ()
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+        if (shootingInput.ShouldShoot() && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             timer = 0f;
             Shoot();
