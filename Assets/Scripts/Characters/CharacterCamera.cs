@@ -18,8 +18,7 @@ public class CharacterCamera : MonoBehaviour
 
 	private void RotateCamera()
 	{
-		transform.localRotation = NewCameraRotation();
-		Quaternion localRot = transform.localRotation;
+		Quaternion localRot = NewCameraRotation();
 		localRot.x = Mathf.Clamp(localRot.x, -0.7f, 0.7f);
 		transform.localRotation = localRot;
 	}
