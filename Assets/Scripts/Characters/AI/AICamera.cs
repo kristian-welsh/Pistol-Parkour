@@ -25,7 +25,7 @@ public class AICamera : CharacterCamera
 	/* Returns the Euler rotation that needs to be performed on direction2d to reach direction3d
 	 * this rotation needs to be performed in the axis direction2d cross direction3d
 	 * currentDisplacement: current displacement on the axis that differentiates the two vectors,
-	 * this is nessecary to differentiate between 270 degrees and 90 degrees from the Vector3.Angle result.
+	 * this is necessary to differentiate between 270 degrees and 90 degrees from the Vector3.Angle result.
 	 */
 	private float RotationNeeded(Vector3 direction2d, Vector3 direction3d, float currentDisplacement)
 	{
