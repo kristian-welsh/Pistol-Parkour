@@ -25,6 +25,8 @@ public class AICamera : CharacterCamera
 		Vector3 toPlayer2d = enemyMidpoint.position - transform.position;
 		toPlayer2d.y = 0;
 		float amount = Vector3.Angle(toPlayer2d, toPlayer);
+		if(toPlayer.y > 0)
+			amount = 360 - amount;
 		cameraRotation = new Vector3(amount, 0f, 0f);
 
 		base.FixedUpdate();
