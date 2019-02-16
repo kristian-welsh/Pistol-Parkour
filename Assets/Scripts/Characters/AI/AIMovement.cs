@@ -23,16 +23,26 @@ public class AIMovement : CharacterMovement
 	
 	protected override void FixedUpdate ()
 	{
+		StopJumping();
 		UpdateDestination();
 		CalculateMovement();
-		JumpOverPits();
+		//JumpOverPits();
 		base.FixedUpdate();
+	}
+
+	private void StopJumping()
+	{
+		jump = false;
 	}
 
 	private void UpdateDestination()
 	{
 		if(ReachedDestination())
+		{
+			if(destination.jump)
+				jump = true;
 			destination = aggroTarget.NextDestination(destination);
+		}
 	}
 
 	private bool ReachedDestination()

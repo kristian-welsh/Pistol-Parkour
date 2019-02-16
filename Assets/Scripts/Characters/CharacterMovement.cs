@@ -9,16 +9,17 @@ public class CharacterMovement : MonoBehaviour
     public int climbSpeed = 5;
     public int climbLength = 2;
 	
-    new Rigidbody rigidbody;
-    GameObject myCamera;
-    GameObject myGun;
-    bool hasClimbed = false;
-    bool climbing = false;
-    bool grounded = true;
-    float originalDrag;
-    Vector3 jumpNormal;
-    IEnumerator stopCurrentProcess;
-	Raycaster raycaster;
+    protected bool grounded = true;
+
+    new private Rigidbody rigidbody;
+    private GameObject myCamera;
+    private GameObject myGun;
+    private bool hasClimbed = false;
+    private bool climbing = false;
+    private float originalDrag;
+    private Vector3 jumpNormal;
+    private IEnumerator stopCurrentProcess;
+	private Raycaster raycaster;
 
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
