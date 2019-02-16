@@ -5,8 +5,10 @@ public class Grenade : MonoBehaviour
 {
 	public int numBounces = 2;
 	public float explosionDisplaylength = 0.5f;
+	public int damagePerExplosion = 50;
 
 	GameObject explosion;
+	GameObject explosionCollider;
 	GameObject model;
 	int timesBounced;
 	float timer;
@@ -14,36 +16,25 @@ public class Grenade : MonoBehaviour
 	void Start()
 	{
 		explosion = transform.GetChild(0).gameObject;
-		model = transform.GetChild(1).gameObject;
+		explosionCollider = transform.GetChild(1).gameObject;
+		model = transform.GetChild(2).gameObject;
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.collider.CompareTag("Player"))
+		if (!Exploded())
 		{
-			if (Exploded())
-			{
-				Damage(other.collider.gameObject);
-			}
-			else
+			if (other.collider.CompareTag("Player"))
 			{
 				Explode();
 			}
-		}
-		else
-		{
-			if (!Exploded())
+			else
 			{
 				timesBounced++;
 				if (timesBounced >= numBounces + 1)
 					Explode();
 			}
 		}
-	}
-
-	private void Damage(GameObject player)
-	{
-		//todo: health system
 	}
 
 	void Update()
@@ -63,12 +54,25 @@ public class Grenade : MonoBehaviour
 
 	private void Explode()
 	{
-		freeze();
+		Freeze();
 		model.SetActive(false);
 		explosion.SetActive(true);
+		DamageObjects();
 	}
 
-	private void freeze()
+    private void DamageObjects()
+    {
+        CollisionLister lister = explosionCollider.GetComponent<CollisionLister>();
+        GameObject[] toDamage = lister.list.ToArray();
+        foreach(GameObject obj in toDamage)
+        {
+            FPSHealth health = obj.GetComponentInParent<FPSHealth>();
+            if(health != null)
+                health.Damage(damagePerExplosion);
+        }
+    }
+
+	private void Freeze()
 	{
 		Rigidbody rb = GetComponent<Rigidbody>();
 		rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;

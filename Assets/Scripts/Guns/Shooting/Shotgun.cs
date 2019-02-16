@@ -20,7 +20,7 @@ public class Shotgun : GunShooting
         gunLight.enabled = false;
     }
 
-    protected override void DrawEffects()
+    protected override void Shoot()
     {
         coneModel.SetActive(true);
         gunAudio.Play();

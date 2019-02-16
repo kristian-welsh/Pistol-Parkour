@@ -12,7 +12,7 @@ public class ProjectileGun : GunShooting
         templateProjectile = transform.GetChild(0).gameObject;
     }
     
-    protected override void DrawEffects()
+    protected override void Shoot()
     {
         GameObject projectile = Instantiate(templateProjectile, templateProjectile.transform.root);
         projectile.SetActive(true);
@@ -20,5 +20,11 @@ public class ProjectileGun : GunShooting
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+    }
+
+    protected override GameObject[] GetObjectsDamaged()
+    {
+        // nothing is damaged immidiately, damage is triggered by projectile scripts
+        return new GameObject[0];
     }
 }

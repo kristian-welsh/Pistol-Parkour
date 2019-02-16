@@ -17,7 +17,7 @@ public class RaycastGun : GunShooting
 
 	}
 
-    protected override void DrawEffects()
+    protected override void Shoot()
     {
         gunAudio.Play();
         gunLight.enabled = true;

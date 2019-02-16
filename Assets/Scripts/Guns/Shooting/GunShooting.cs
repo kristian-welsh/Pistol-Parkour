@@ -26,7 +26,7 @@ public class GunShooting : MonoBehaviour
         if (shootingInput.ShouldShoot() && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             timer = 0f;
-            DrawEffects();
+            Shoot();
             DamageObjects();
         }
 
@@ -46,8 +46,6 @@ public class GunShooting : MonoBehaviour
                 health.Damage(damagePerShot);
         }
     }
-
-    protected virtual void DrawEffects() { }
 
     protected virtual void DisableEffects() { }
 
