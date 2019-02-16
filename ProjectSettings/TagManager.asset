@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable Gun
   - Ground
+  - Shootable
   layers:
   - Default
   - TransparentFX

@@ -2,26 +2,34 @@
 
 public class Shotgun : GunShooting
 {
-    GameObject cone;
+    GameObject coneModel;
+    GameObject coneCollider;
     Light gunLight;
 
     new void Start()
     {
         base.Start();
-        cone = transform.GetChild(0).gameObject;
+        coneModel = transform.GetChild(0).gameObject;
+        coneCollider = transform.GetChild(1).gameObject;
         gunLight = GetComponent<Light>();
     }
 
     protected override void DisableEffects()
     {
-        cone.SetActive(false);
+        coneModel.SetActive(false);
         gunLight.enabled = false;
     }
 
-    protected override void Shoot()
+    protected override void DrawEffects()
     {
-        cone.SetActive(true);
+        coneModel.SetActive(true);
         gunAudio.Play();
         gunLight.enabled = true;
+    }
+
+    protected override GameObject[] GetObjectsDamaged()
+    {
+        CollisionLister coneLister = coneCollider.GetComponent<CollisionLister>();
+        return coneLister.list.ToArray();
     }
 }

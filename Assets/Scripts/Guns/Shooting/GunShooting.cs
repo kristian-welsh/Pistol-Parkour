@@ -41,7 +41,6 @@ public class GunShooting : MonoBehaviour
         GameObject[] toDamage = GetObjectsDamaged();
         foreach(GameObject obj in toDamage)
         {
-            print(obj.name);
             FPSHealth health = obj.GetComponentInParent<FPSHealth>();
             if(health != null)
                 health.Damage(damagePerShot);
@@ -56,6 +55,6 @@ public class GunShooting : MonoBehaviour
 
     protected virtual GameObject[] GetObjectsDamaged()
     {
-        throw new Exception("Unexpected call of GetObjectsDamaged in base class");
+        throw new Exception("Illegal base method call GetObjectsDamaged()");
     }
 }

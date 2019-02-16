@@ -12,7 +12,7 @@ public class ProjectileGun : GunShooting
         templateProjectile = transform.GetChild(0).gameObject;
     }
     
-    protected override void Shoot()
+    protected override void DrawEffects()
     {
         GameObject projectile = Instantiate(templateProjectile, templateProjectile.transform.root);
         projectile.SetActive(true);
