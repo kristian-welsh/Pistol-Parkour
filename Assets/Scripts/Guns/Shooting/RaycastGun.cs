@@ -17,19 +17,7 @@ public class RaycastGun : GunShooting
 
 	}
 
-    protected override void DisableEffects()
-    {
-        gunLine.enabled = false;
-        gunLight.enabled = false;
-    }
-
-    protected override void Shoot()
-    {
-        DrawEffects();
-        DamageObjects();
-	}
-
-    private void DrawEffects()
+    protected override void DrawEffects()
     {
         gunAudio.Play();
         gunLight.enabled = true;
@@ -42,16 +30,17 @@ public class RaycastGun : GunShooting
         gunLine.SetPosition(1, endPoint);
     }
 
-    private void DamageObjects()
+    protected override void DisableEffects()
+    {
+        gunLine.enabled = false;
+        gunLight.enabled = false;
+    }
+
+    protected override GameObject[] GetObjectsDamaged()
     {
         RaycastHit? hit = raycaster.CastRay(transform.position, transform.forward);
         if(hit.HasValue)
-        {
-            GameObject objectHit = hit.Value.transform.gameObject;
-            print(objectHit.name);
-            FPSHealth health = objectHit.GetComponentInParent<FPSHealth>();
-            if(health != null)
-                health.Damage(damagePerShot);
-        }
+            return new GameObject[1]{hit.Value.transform.gameObject};
+        return new GameObject[0];
     }
 }

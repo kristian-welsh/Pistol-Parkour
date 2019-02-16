@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GunShooting : MonoBehaviour
 {
@@ -25,7 +26,8 @@ public class GunShooting : MonoBehaviour
         if (shootingInput.ShouldShoot() && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             timer = 0f;
-            Shoot();
+            DrawEffects();
+            DamageObjects();
         }
 
         if (timer >= timeBetweenBullets * effectsDisplayPercentage)
@@ -34,7 +36,26 @@ public class GunShooting : MonoBehaviour
         }
     }
 
+    private void DamageObjects()
+    {
+        GameObject[] toDamage = GetObjectsDamaged();
+        foreach(GameObject obj in toDamage)
+        {
+            print(obj.name);
+            FPSHealth health = obj.GetComponentInParent<FPSHealth>();
+            if(health != null)
+                health.Damage(damagePerShot);
+        }
+    }
+
+    protected virtual void DrawEffects() { }
+
     protected virtual void DisableEffects() { }
 
     protected virtual void Shoot() { }
+
+    protected virtual GameObject[] GetObjectsDamaged()
+    {
+        throw new Exception("Unexpected call of GetObjectsDamaged in base class");
+    }
 }
