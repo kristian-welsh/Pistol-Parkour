@@ -106,7 +106,6 @@ public class CharacterMovement : MonoBehaviour
 
     private void CollectGun(GameObject hoveringGun, HoveringGun hover)
     {
-        // todo: dont allow when hovering gun inactive
         GameObject gun = hoveringGun.transform.GetChild(0).gameObject;
 
         // disable old gun
