@@ -7,6 +7,24 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Assets/Scripts/Guns/Shooting/GunShooting.cs",
+			"settings":
+			{
+				"buffer_size": 925,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Guns/Shooting/RaycastGun.cs",
+			"settings":
+			{
+				"buffer_size": 1340,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -70,10 +88,13 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/kjw28/Documents/Project/Pistol-Parkour/Assets/Scripts"
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters"
 	],
 	"file_history":
 	[
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Health.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterHealth.cs",
 		"/C/Users/kjw28/Documents/Project/Pistol-Parkour/Assets/Scripts/HoveringGun.cs",
 		"/C/Users/kjw28/Documents/Project/Pistol-Parkour/sublime.sublime-project",
 		"/C/Users/kjw28/Documents/Project/Pistol-Parkour/HoveringGun.cs",
@@ -112,8 +133,74 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Assets/Scripts/Guns/Shooting/GunShooting.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 925,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18,
+								18
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Assets/Scripts/Guns/Shooting/RaycastGun.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								800,
+								792
+							]
+						],
+						"settings":
+						{
+							"oops":
+							{
+								"743,758": "The type or namespace name 'CharacterHealth' could not be found (are you missing a using directive or an assembly reference?)",
+								"791,806": "The type or namespace name 'CharacterHealth' could not be found (are you missing a using directive or an assembly reference?)"
+							},
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -123,7 +210,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 40.0
 	},
 	"layout":
 	{
@@ -158,7 +245,7 @@
 	},
 	"output.variable_get":
 	{
-		"height": 0.0
+		"height": 132.0
 	},
 	"pinned_build_system": "",
 	"project": "sublime.sublime-project",
@@ -202,7 +289,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 238.0,
+	"side_bar_width": 274.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

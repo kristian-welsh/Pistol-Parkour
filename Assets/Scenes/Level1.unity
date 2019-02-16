@@ -299,8 +299,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
@@ -377,8 +376,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Name
       value: Spawnpoint
@@ -459,8 +457,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
@@ -541,8 +538,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
@@ -1067,6 +1063,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0817eada1fd24be4e9070b2bd6c421b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1865923852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865923844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcf946c7ff9814409c97d9f58cf87f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
 --- !u!1 &1892330599 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f,
@@ -1155,8 +1163,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
