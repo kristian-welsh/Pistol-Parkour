@@ -1,8 +1,15 @@
+using System.Collections.Generic;
+
 namespace Kristian
 {
 	public class Util 
 	{
 		private static System.Random random = new System.Random();
+
+		public static T RandomElement<T>(List<T> list)
+		{
+			return RandomElement<T>(list.ToArray());
+		}
 
 		public static T RandomElement<T>(T[] array)
 		{

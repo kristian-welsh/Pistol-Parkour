@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class RespawnManager : MonoBehaviour
 
 	void Start ()
 	{
-		Spawn(playerPrefab, spawnPoints[0]);
-		SpawnAI(aiPrefab, spawnPoints[1]);
+		Spawn(playerPrefab, RandomValidSpawn());
+		SpawnAI(aiPrefab, RandomValidSpawn());
 	}
 
 	private GameObject SpawnAI(GameObject prefab, Waypoint spawnLocation)
@@ -24,8 +25,12 @@ public class RespawnManager : MonoBehaviour
 		return Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
 	}
 
-	private Waypoint RandomSpawn()
+	private Waypoint RandomValidSpawn()
 	{
-		return Kristian.Util.RandomElement<Waypoint>(spawnPoints);
+		List<Waypoint> validSpawns = new List<Waypoint>();
+		foreach(Waypoint spawn in spawnPoints)
+			if(spawn.IsValidSpawn())
+				validSpawns.Add(spawn);
+		return Kristian.Util.RandomElement<Waypoint>(validSpawns);
 	}
 }
