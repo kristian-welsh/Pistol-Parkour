@@ -8,7 +8,8 @@ public class RespawnManager : MonoBehaviour
 
 	void Start ()
 	{
-		SpawnAI(aiPrefab, RandomSpawn());
+		Spawn(playerPrefab, spawnPoints[0]);
+		SpawnAI(aiPrefab, spawnPoints[1]);
 	}
 
 	private GameObject SpawnAI(GameObject prefab, Waypoint spawnLocation)
