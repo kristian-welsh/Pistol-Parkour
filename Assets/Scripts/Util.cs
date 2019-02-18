@@ -2,6 +2,8 @@ namespace Kristian
 {
 	public class Util 
 	{
+		private static System.Random random = new System.Random();
+
 		public static T RandomElement<T>(T[] array)
 		{
 			return array[RandInt(0, array.Length)];
@@ -9,8 +11,7 @@ namespace Kristian
 
 		public static int RandInt(int start, int end)
 		{
-			System.Random r = new System.Random();
-			return r.Next(start, end);
+			return random.Next(start, end);
 		}
 	}
 }
