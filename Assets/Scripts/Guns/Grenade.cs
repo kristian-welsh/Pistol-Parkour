@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
         GameObject[] toDamage = lister.list.ToArray();
         foreach(GameObject obj in toDamage)
         {
-            FPSHealth health = obj.GetComponentInParent<FPSHealth>();
+            Kristian.Health health = obj.GetComponentInParent<Kristian.Health>();
             if(health != null)
                 health.Damage(damagePerExplosion);
         }

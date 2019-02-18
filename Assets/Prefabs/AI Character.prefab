@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 114351929063430262}
   - component: {fileID: 114715985039766916}
   - component: {fileID: 114223506403738498}
-  - component: {fileID: 114306964662151902}
+  - component: {fileID: 114025681506775920}
   m_Layer: 0
   m_Name: AI Character
   m_TagString: Player
@@ -3406,6 +3406,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114025681506775920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229294822106850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3c9616b4889a64781a69be31285ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  respawner: {fileID: 0}
 --- !u!114 &114223506403738498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3417,18 +3430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947b93a8383421d41ae30cd214c27f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114306964662151902
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1229294822106850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bcf946c7ff9814409c97d9f58cf87f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
 --- !u!114 &114351929063430262
 MonoBehaviour:
   m_ObjectHideFlags: 1

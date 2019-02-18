@@ -25,7 +25,7 @@ public class RespawnManager : MonoBehaviour
 	private GameObject Spawn(GameObject prefab, Waypoint spawnLocation)
 	{
 		GameObject obj = Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
-		obj.GetComponent<FPSHealth>().respawner = this;
+		obj.GetComponent<Kristian.Health>().respawner = this;
 		return obj;
 	}
 
