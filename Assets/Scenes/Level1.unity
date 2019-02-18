@@ -354,7 +354,7 @@ Prefab:
         type: 2}
       propertyPath: links.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1892330601}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[1]
