@@ -4,6 +4,9 @@ public class FPSHealth : MonoBehaviour
 {
 	public int startingHealth = 100;
 
+	[HideInInspector]
+	public RespawnManager respawner;
+
 	private int health;
 
 	void Start ()
@@ -22,7 +25,7 @@ public class FPSHealth : MonoBehaviour
 		if(health < 0)
 		{
 			health = 0;
-			// todo: trigger death animations etc here
+			respawner.NotifyOfDeath(gameObject);
 		}
 	}
 }

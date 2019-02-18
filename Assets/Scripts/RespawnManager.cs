@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
+	public int respawnSeconds;
 	public GameObject playerPrefab;
 	public GameObject aiPrefab;
 	public Waypoint[] spawnPoints;
@@ -22,7 +24,9 @@ public class RespawnManager : MonoBehaviour
 
 	private GameObject Spawn(GameObject prefab, Waypoint spawnLocation)
 	{
-		return Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
+		GameObject obj = Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
+		obj.GetComponent<FPSHealth>().respawner = this;
+		return obj;
 	}
 
 	private Waypoint RandomValidSpawn()
@@ -32,5 +36,30 @@ public class RespawnManager : MonoBehaviour
 			if(spawn.IsValidSpawn())
 				validSpawns.Add(spawn);
 		return Kristian.Util.RandomElement<Waypoint>(validSpawns);
+	}
+
+	public void NotifyOfDeath(GameObject deadObject)
+	{
+		Destroy(deadObject);
+		bool ai = isAi(deadObject);
+		StartCoroutine(RespawnTimer(ai));
+	}
+
+	private bool isAi(GameObject deadObject)
+	{
+		CharacterMovement movement = deadObject.GetComponent<CharacterMovement>();
+		return movement is AIMovement;
+	}
+
+    private IEnumerator RespawnTimer(bool ai)
+    {
+        yield return new WaitForSeconds(respawnSeconds);
+        Respawn(ai);
+    }
+
+    private void Respawn(bool ai)
+    {
+    	GameObject prefab = ai ? aiPrefab : playerPrefab;
+		Spawn(prefab, RandomValidSpawn());
 	}
 }

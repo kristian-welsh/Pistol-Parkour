@@ -782,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0499f55ee9194a14680ecbd9addc0af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnSeconds: 3
   playerPrefab: {fileID: 1668149357436664, guid: b4a20423d980fa5449f9c4deabb8c3c4,
     type: 2}
   aiPrefab: {fileID: 1229294822106850, guid: 504f6545378ff554a8e5f2c7493523d1, type: 2}
