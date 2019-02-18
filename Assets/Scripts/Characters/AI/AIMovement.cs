@@ -5,6 +5,7 @@ public class AIMovement : CharacterMovement
 	public float distanceThreshold = 1f;
 	public Waypoint destination;
 	
+	private bool haveAggro = false;
 	private NavigationRouter aggroTarget;
 	private Rigidbody rb;
 	private bool jump = false;
@@ -13,26 +14,39 @@ public class AIMovement : CharacterMovement
 
 	public override void Start ()
 	{
-		aggroTarget = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<NavigationRouter>();
+		GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+		aggroTarget = player.GetComponent<NavigationRouter>();
+		player.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 		rb = GetComponent<Rigidbody>();
 		if(aggroTarget == null)
-			aggroTarget = new NullNavigationRouter();
+			Deaggro(null);
 		raycaster = new Raycaster(3f, "Shootable");
 		base.Start();
+	}
+
+	private void Deaggro(GameObject obj)
+	{
+		aggroTarget = new NullNavigationRouter();
 	}
 	
 	protected override void FixedUpdate ()
 	{
 		StopJumping();
+		AcquireTarget();
 		UpdateDestination();
 		CalculateMovement();
-		//JumpOverPits();
+		JumpOverPits();
 		base.FixedUpdate();
 	}
 
 	private void StopJumping()
 	{
 		jump = false;
+	}
+
+	private void AcquireTarget()
+	{
+		//todo
 	}
 
 	private void UpdateDestination()

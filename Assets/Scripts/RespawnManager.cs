@@ -25,7 +25,7 @@ public class RespawnManager : MonoBehaviour
 	private GameObject Spawn(GameObject prefab, Waypoint spawnLocation)
 	{
 		GameObject obj = Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
-		obj.GetComponent<Kristian.Health>().respawner = this;
+		obj.GetComponent<Kristian.Health>().OnDeath += NotifyOfDeath;
 		return obj;
 	}
 
@@ -38,10 +38,9 @@ public class RespawnManager : MonoBehaviour
 		return Kristian.Util.RandomElement<Waypoint>(validSpawns);
 	}
 
-	public void NotifyOfDeath(GameObject deadObject)
+	public void NotifyOfDeath(GameObject obj)
 	{
-		Destroy(deadObject);
-		bool ai = isAi(deadObject);
+		bool ai = isAi(obj);
 		StartCoroutine(RespawnTimer(ai));
 	}
 
@@ -59,7 +58,13 @@ public class RespawnManager : MonoBehaviour
 
     private void Respawn(bool ai)
     {
-    	GameObject prefab = ai ? aiPrefab : playerPrefab;
-		Spawn(prefab, RandomValidSpawn());
+    	if(ai)
+    	{
+			SpawnAI(aiPrefab, RandomValidSpawn());
+    	}
+    	else
+    	{
+			Spawn(playerPrefab, RandomValidSpawn());
+    	}
 	}
 }

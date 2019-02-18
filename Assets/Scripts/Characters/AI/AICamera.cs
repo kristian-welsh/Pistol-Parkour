@@ -7,19 +7,32 @@ public class AICamera : CharacterCamera
 
 	private Vector3 characterRotation = Vector3.zero;
 	private Vector3 cameraRotation = Vector3.zero;
+	private bool aggro = true;
 
 	public override void Start ()
 	{
 		player = GameObject.FindGameObjectsWithTag("Player")[0];
+		player.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 		enemyMidpoint = player.transform.GetChild(0);
 		base.Start();
 	}
 
+	private void Deaggro(GameObject obj)
+	{
+		aggro = false;
+	}
+
 	public override void FixedUpdate ()
 	{
-		characterRotation = Vector3.up * RotationNeeded(Vector3.forward, Direction2D(), -Direction2D().x);
-		cameraRotation = Vector3.right * RotationNeeded(Direction2D(), Direction(), Direction().y);
+		if(aggro)
+			CalculateRotations();
 		base.FixedUpdate();
+	}
+
+	private void CalculateRotations()
+	{
+		characterRotation = Vector3.up * RotationNeeded(Vector3.forward, Direction2D(), -Direction2D().x);
+			cameraRotation = Vector3.right * RotationNeeded(Direction2D(), Direction(), Direction().y);
 	}
 
 	/* Returns the Euler rotation that needs to be performed on direction2d to reach direction3d

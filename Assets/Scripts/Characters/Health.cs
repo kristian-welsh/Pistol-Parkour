@@ -7,6 +7,12 @@ namespace Kristian
 		public int startingHealth = 100;
 
 		[HideInInspector]
+		public delegate void DeathAction(GameObject obj);
+
+		[HideInInspector]
+		public event DeathAction OnDeath;
+
+		[HideInInspector]
 		public RespawnManager respawner;
 
 		private int health;
@@ -27,7 +33,8 @@ namespace Kristian
 			if(health < 0)
 			{
 				health = 0;
-				respawner.NotifyOfDeath(gameObject);
+				OnDeath(gameObject);
+				Destroy(gameObject);
 			}
 		}
 	}
