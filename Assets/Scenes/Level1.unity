@@ -354,7 +354,7 @@ Prefab:
         type: 2}
       propertyPath: links.Array.data[0]
       value: 
-      objectReference: {fileID: 1892330601}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[1]
@@ -363,8 +363,7 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
@@ -444,11 +443,10 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Name
-      value: Spawnpoint
+      value: Waypoint
       objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
@@ -526,13 +524,12 @@ Prefab:
     - target: {fileID: 1772216621449518, guid: a003f34ceabbe114cacc74e91113167f, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: links.Array.data[2]
       value: 
-      objectReference: {fileID: 1892330601}
+      objectReference: {fileID: 0}
     - target: {fileID: 114833088016079960, guid: a003f34ceabbe114cacc74e91113167f,
         type: 2}
       propertyPath: jump
@@ -712,6 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1211963088}
   - component: {fileID: 1211963089}
+  - component: {fileID: 1211963090}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -747,6 +745,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d6bde9060de174f9a05e165d1fb536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1211963090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1211963087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0499f55ee9194a14680ecbd9addc0af3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 1668149357436664, guid: b4a20423d980fa5449f9c4deabb8c3c4,
+    type: 2}
+  aiPrefab: {fileID: 1229294822106850, guid: 504f6545378ff554a8e5f2c7493523d1, type: 2}
+  spawnPoints:
+  - {fileID: 1892330601}
 --- !u!4 &1219427493 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4154576225965766, guid: 0ea3cca7c25d3a94ba26c6aedf98a86b,
@@ -1070,10 +1084,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1892330599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e821b6edb0bcc20439ddc813ce97ccee, type: 3}
+  m_Script: {fileID: 11500000, guid: 541ec774d1e1fb642b34b94089c49364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   links:
   - {fileID: 707953483}
   jump: 0
-  AIprefab: {fileID: 1229294822106850, guid: 504f6545378ff554a8e5f2c7493523d1, type: 2}
