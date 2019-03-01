@@ -25,6 +25,13 @@ public class CharacterView : MonoBehaviour
     {
         camera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
         rigidbody = GetComponent<Rigidbody>();
+        Kristian.Health health = GetComponent<Kristian.Health>();
+        health.OnDeath += Die;
+	}
+
+	private void Die(GameObject obj)
+	{
+		Destroy(obj);
 	}
 
 	void OnTriggerEnter(Collider other)

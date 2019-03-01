@@ -34,7 +34,6 @@ namespace Kristian
 			{
 				health = 0;
 				OnDeath(gameObject);
-				Destroy(gameObject);
 			}
 		}
 	}

@@ -644,13 +644,13 @@ GameObject:
   - component: {fileID: 54935851765859428}
   - component: {fileID: 136263174021133476}
   - component: {fileID: 136129082592516834}
-  - component: {fileID: 114397463356042728}
   - component: {fileID: 114614544356489928}
   - component: {fileID: 114414829516740008}
   - component: {fileID: 114482060734498812}
   - component: {fileID: 114551854695491426}
   - component: {fileID: 114554476810611448}
   - component: {fileID: 114019977178521892}
+  - component: {fileID: 114339690101001334}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3522,7 +3522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 5
   inverted: 0
---- !u!114 &114397463356042728
+--- !u!114 &114339690101001334
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3530,10 +3530,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668149357436664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566af7e5be6b0be418b63811da4ce353, type: 3}
+  m_Script: {fileID: 11500000, guid: 0896e28158bdf2e4faf3f966ab90db06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 114614544356489928}
   climbAngleTolerence: 10
   climbSpeed: 5
   climbLength: 2

@@ -73,10 +73,11 @@ GameObject:
   - component: {fileID: 54747568617158664}
   - component: {fileID: 136414562406712840}
   - component: {fileID: 136387770555252778}
-  - component: {fileID: 114351929063430262}
   - component: {fileID: 114715985039766916}
   - component: {fileID: 114223506403738498}
   - component: {fileID: 114025681506775920}
+  - component: {fileID: 114037516742884702}
+  - component: {fileID: 114144652307972500}
   m_Layer: 0
   m_Name: AI Character
   m_TagString: Player
@@ -3419,6 +3420,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   respawner: {fileID: 0}
+--- !u!114 &114037516742884702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229294822106850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c45cce78718d24d83d54cf3fe9d564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114144652307972500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229294822106850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0896e28158bdf2e4faf3f966ab90db06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbAngleTolerence: 10
+  climbSpeed: 5
+  climbLength: 2
 --- !u!114 &114223506403738498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3430,21 +3456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947b93a8383421d41ae30cd214c27f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114351929063430262
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1229294822106850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566af7e5be6b0be418b63811da4ce353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {fileID: 114715985039766916}
-  climbAngleTolerence: 10
-  climbSpeed: 5
-  climbLength: 2
 --- !u!114 &114425981882182554
 MonoBehaviour:
   m_ObjectHideFlags: 1
