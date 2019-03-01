@@ -15,11 +15,8 @@ public class CharacterMovementModel : MonoBehaviour
     protected bool grounded = true;
 
     private CharacterView view;
-    new private Rigidbody rigidbody;
-    private GameObject myGun;
     private bool hasClimbed = false;
     private bool climbing = false;
-    private float originalDrag;
     private Vector3 jumpNormal;
     private IEnumerator stopCurrentProcess;
 	private Raycaster raycaster;
@@ -27,13 +24,8 @@ public class CharacterMovementModel : MonoBehaviour
     public virtual void Start()
     {
     	view = gameObject.GetComponent<CharacterView>();
-        GameObject myCamera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
-        myGun = myCamera.transform.GetChild(0).gameObject;
-        rigidbody = GetComponent<Rigidbody>();
-        originalDrag = rigidbody.drag;
         jumpNormal = Vector3.up;
 		raycaster = new Raycaster(0.1f);
-
 	}
 
     protected virtual void FixedUpdate()
@@ -48,7 +40,7 @@ public class CharacterMovementModel : MonoBehaviour
 
 	private void CheckGround()
     {
-        if(rigidbody.velocity.y < 0)
+        if(view.Velocity.y < 0)
         {
             RaycastHit? hit = raycaster.CastRay(transform.position, -transform.up);
             if (hit.HasValue)
@@ -67,7 +59,7 @@ public class CharacterMovementModel : MonoBehaviour
     private void Move()
     {
 		Vector3 movement = CalculateMovementForce();
-		rigidbody.AddForce(movement, ForceMode.Acceleration);
+		view.AddForce(movement, ForceMode.Acceleration);
     }
 
 	protected virtual Vector3 CalculateMovementForce()
@@ -88,7 +80,7 @@ public class CharacterMovementModel : MonoBehaviour
 	private void Jump()
 	{
 		Vector3 impulse = jumpNormal * jumpPower;
-		rigidbody.AddForce(impulse, ForceMode.Impulse);
+		view.AddForce(impulse, ForceMode.Impulse);
 		grounded = false;
 		climbing = false;
 		if (stopCurrentProcess != null)
@@ -108,9 +100,8 @@ public class CharacterMovementModel : MonoBehaviour
 
     private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
     {
-        GameObject gun = hoveringGun.transform.GetChild(0).gameObject;
-
-        myGun = view.CollectGun(gun);
+        GameObject gunPreset = hoveringGun.transform.GetChild(0).gameObject;
+        GameObject myGun = view.CollectGun(gunPreset);
 
         myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
         hoverScript.Disapear();
@@ -122,10 +113,7 @@ public class CharacterMovementModel : MonoBehaviour
         climbing = true;
         grounded = false;
         jumpNormal = normal;
-        rigidbody.velocity = velocity;
-		originalDrag = rigidbody.drag;
-		rigidbody.drag = 0;
-        rigidbody.useGravity = false;
+        view.StartParkour(velocity);
         stopCurrentProcess = ClimbingTimer();
         StartCoroutine(stopCurrentProcess);
     }
@@ -139,8 +127,7 @@ public class CharacterMovementModel : MonoBehaviour
     private void StopWallclimb()
     {
         climbing = false;
-        rigidbody.useGravity = true;
-        rigidbody.drag = originalDrag;
+        view.StopParkour();
         stopCurrentProcess = null;
     }
 }

@@ -2,31 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterView : MonoBehaviour {
-	GameObject myGun;
-	GameObject myCamera;
+public class CharacterView : MonoBehaviour
+{
+	new private GameObject camera;
+	new private Rigidbody rigidbody;
+	private float originalDrag;
+
+	public Vector3 Velocity { get {return rigidbody.velocity; } }
 
     void Start()
     {
-        myCamera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
-        myGun = myCamera.transform.GetChild(0).gameObject;
-        //rigidbody = GetComponent<Rigidbody>();
+        camera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
+        rigidbody = GetComponent<Rigidbody>();
 	}
 
-    public GameObject CollectGun(GameObject gun)
+	// attatches a copy of a gun to the view heirchy and returns that copy
+    public GameObject CollectGun(GameObject gunPreset)
     {
-    	print("here");
         // disable old gun
-        myCamera.transform.DetachChildren();
-        myGun.SetActive(false);
-        Destroy(myGun);
+    	GameObject gun = camera.transform.GetChild(0).gameObject;
+        camera.transform.DetachChildren();
+        gun.SetActive(false);
+        Destroy(gun);
 
         // create and enable new gun
-        myGun = Instantiate(gun, myCamera.transform);
-        myGun.transform.localPosition = Vector3.zero;
-        myGun.transform.localRotation = Quaternion.identity;
-        myGun.SetActive(true);
+        gun = Instantiate(gunPreset, camera.transform);
+        gun.transform.localPosition = Vector3.zero;
+        gun.transform.localRotation = Quaternion.identity;
+        gun.SetActive(true);
 
-        return myGun;
+        return gun;
+    }
+
+    public void StartParkour(Vector3 velocity)
+    {
+        originalDrag = rigidbody.drag;
+		rigidbody.drag = 0;
+        rigidbody.useGravity = false;
+        rigidbody.velocity = velocity;
+    }
+
+    public void StopParkour()
+    {
+        rigidbody.useGravity = true;
+        rigidbody.drag = originalDrag;
+    }
+
+    public void AddForce(Vector3 force, ForceMode mode)
+    {
+		rigidbody.AddForce(force, mode);
     }
 }
