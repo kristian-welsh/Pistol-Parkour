@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parkour : MonoBehaviour
 {
-    public CharacterMovement movement;
+    public CharacterMovementModel movement;
     public int climbAngleTolerence = 10;
     public int climbSpeed = 5;
     public int climbLength = 2;

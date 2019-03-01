@@ -46,7 +46,7 @@ public class RespawnManager : MonoBehaviour
 
 	private bool isAi(GameObject deadObject)
 	{
-		CharacterMovement movement = deadObject.GetComponent<CharacterMovement>();
+		CharacterMovementModel movement = deadObject.GetComponent<CharacterMovementModel>();
 		return movement is AIMovement;
 	}
 

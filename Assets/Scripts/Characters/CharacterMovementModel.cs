@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovementModel : MonoBehaviour
 {
     public float speed = 1000f;
     public float jumpPower = 20f;
     public int climbAngleTolerence = 10;
     public int climbSpeed = 5;
     public int climbLength = 2;
+
+    public bool HasClimbed { get { return hasClimbed; } }
+    public bool Grounded { get { return grounded; } }
 	
     protected bool grounded = true;
 
+    private CharacterView view;
     new private Rigidbody rigidbody;
-    private GameObject myCamera;
     private GameObject myGun;
     private bool hasClimbed = false;
     private bool climbing = false;
@@ -21,12 +24,10 @@ public class CharacterMovement : MonoBehaviour
     private IEnumerator stopCurrentProcess;
 	private Raycaster raycaster;
 
-    public bool HasClimbed { get { return hasClimbed; } }
-    public bool Grounded { get { return grounded; } }
-
     public virtual void Start()
     {
-        myCamera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
+    	view = gameObject.GetComponent<CharacterView>();
+        GameObject myCamera = transform.GetComponentInChildren<CharacterCamera>().gameObject;
         myGun = myCamera.transform.GetChild(0).gameObject;
         rigidbody = GetComponent<Rigidbody>();
         originalDrag = rigidbody.drag;
@@ -105,23 +106,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CollectGun(GameObject hoveringGun, HoveringGun hover)
+    private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
     {
         GameObject gun = hoveringGun.transform.GetChild(0).gameObject;
 
-        // disable old gun
-        myCamera.transform.DetachChildren();
-        myGun.SetActive(false);
-        Destroy(myGun);
-        
-        // create and enable new gun
-        myGun = Instantiate(gun, myCamera.transform);
-        myGun.transform.localPosition = Vector3.zero;
-        myGun.transform.localRotation = Quaternion.identity;
-        myGun.SetActive(true);
-        myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
+        myGun = view.CollectGun(gun);
 
-        hover.Disapear();
+        myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
+        hoverScript.Disapear();
     }
 	
 	public void StartParkour(Vector3 normal, Vector3 velocity)

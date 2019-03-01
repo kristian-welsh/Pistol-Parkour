@@ -24,12 +24,6 @@ public class StairClimb : MonoBehaviour
 
 		Vector3 rayStart = transform.position + velocity2d - rayVector;
 
-		print("rayStart: " + rayStart);
-		print("Vector3.down: " + Vector3.down);
 		RaycastHit? hit = raycaster.CastRay(rayStart, Vector3.down);
-		if(hit.HasValue)
-		{
-			print(hit.Value.point);
-		}
 	}
 }

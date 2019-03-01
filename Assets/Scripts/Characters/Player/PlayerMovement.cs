@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : CharacterMovement
+public class PlayerMovement : CharacterMovementModel
 {
 	private Vector3 movement = Vector3.zero;
 	private bool jump = false;

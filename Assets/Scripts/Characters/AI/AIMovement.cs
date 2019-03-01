@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-public class AIMovement : CharacterMovement
+public class AIMovement : CharacterMovementModel
 {
 	public float distanceThreshold = 1f;
 	public Waypoint destination;
 	
-	private bool haveAggro = false;
 	private NavigationRouter aggroTarget;
 	private Rigidbody rb;
 	private bool jump = false;

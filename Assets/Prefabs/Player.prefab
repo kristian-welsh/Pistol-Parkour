@@ -649,8 +649,8 @@ GameObject:
   - component: {fileID: 114414829516740008}
   - component: {fileID: 114482060734498812}
   - component: {fileID: 114551854695491426}
-  - component: {fileID: 114924993162178866}
   - component: {fileID: 114554476810611448}
+  - component: {fileID: 114019977178521892}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3483,6 +3483,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114019977178521892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668149357436664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c45cce78718d24d83d54cf3fe9d564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114105771908011346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3517,7 +3528,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 566af7e5be6b0be418b63811da4ce353, type: 3}
   m_Name: 
@@ -3589,20 +3600,6 @@ MonoBehaviour:
   climbAngleTolerence: 10
   climbSpeed: 5
   climbLength: 2
---- !u!114 &114924993162178866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bcf946c7ff9814409c97d9f58cf87f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  respawner: {fileID: 0}
-  health: 0
 --- !u!120 &120037382321860028
 LineRenderer:
   m_ObjectHideFlags: 1
