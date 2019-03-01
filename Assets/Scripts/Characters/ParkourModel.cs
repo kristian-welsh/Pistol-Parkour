@@ -2,25 +2,24 @@
 using System.Collections;
 using UnityEngine;
 
-public class ParkourModel : MonoBehaviour
+public class ParkourModel
 {
-    public int climbAngleTolerence = 10;
-    public int climbSpeed = 5;
-    public int climbLength = 2;
+    public CharacterMovementModel movement;
+    public CharacterView view;
 
-    private CharacterMovementModel movement;
-    private CharacterView view;
-	private Raycaster raycaster;
+    private int climbAngleTolerence;
+    private int climbSpeed;
+    private int climbLength;
+	private Raycaster raycaster = new Raycaster(1f, "Climbable");
 
-    void Start()
+    public ParkourModel(int climbAngleTolerence, int climbSpeed, int climbLength)
     {
-        movement = gameObject.GetComponent<CharacterMovementModel>();
-        view = gameObject.GetComponent<CharacterView>();
-        view.OnFixedUpdate += ParkourCheck;
-		raycaster = new Raycaster(1f, "Climbable");
-	}
+        this.climbAngleTolerence = climbAngleTolerence;
+        this.climbSpeed = climbSpeed;
+        this.climbLength = climbLength;
+    }
 
-    private void ParkourCheck()
+    public void ParkourCheck()
     {
         if (!movement.HasClimbed && MovingForwards())
         {

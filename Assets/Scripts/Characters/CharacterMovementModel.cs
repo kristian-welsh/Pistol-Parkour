@@ -24,20 +24,15 @@ public class CharacterMovementModel : MonoBehaviour
     public virtual void Start()
     {
     	view = gameObject.GetComponent<CharacterView>();
-        view.OnTrigger += WhenTriggerEntered;
-        view.OnFixedUpdate += Recalculate;
         jumpNormal = Vector3.up;
 		raycaster = new Raycaster(0.1f);
 	}
 
-    private void WhenTriggerEntered(Collider other)
+    public void TouchHoveringGun(GameObject hoveringGun)
     {
-        if (other.CompareTag("Collectable Gun"))
-        {
-            HoveringGun hover = other.gameObject.GetComponent<HoveringGun>();
-            if(hover.GetActive())
-                CollectGun(other.gameObject, hover);
-        }
+        HoveringGun hoverScript = hoveringGun.GetComponent<HoveringGun>();
+        if(hoverScript.GetActive())
+            CollectGun(hoveringGun, hoverScript);
     }
 
     private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
@@ -49,7 +44,7 @@ public class CharacterMovementModel : MonoBehaviour
         hoverScript.Disapear();
     }
 
-    private void Recalculate()
+    public void Recalculate()
     {
         if (!grounded)
             CheckGround();

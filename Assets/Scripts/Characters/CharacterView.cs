@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class CharacterView : MonoBehaviour
 {
-	[HideInInspector]
-	public delegate void TriggerEnter(Collider other);
-	[HideInInspector]
-	public event TriggerEnter OnTrigger;
-	[HideInInspector]
-	public delegate void PhysicsUpdate();
-	[HideInInspector]
-	public event PhysicsUpdate OnFixedUpdate;
-
 	public Vector3 Velocity { get { return rigidbody.velocity; } }
 	public Transform GetTransform { get { return transform; } }
 
@@ -33,16 +24,6 @@ public class CharacterView : MonoBehaviour
 	{
 		Destroy(obj);
 	}
-
-	void OnTriggerEnter(Collider other)
-    {
-    	OnTrigger(other);
-    }
-
-    void FixedUpdate()
-    {
-    	OnFixedUpdate();
-    }
 
 	// attatches a copy of a gun to the view heirchy and returns that copy
     public GameObject CollectGun(GameObject gunPreset)

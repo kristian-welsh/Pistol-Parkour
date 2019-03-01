@@ -11,7 +11,7 @@ public class AIMovement : CharacterMovementModel
 	private Vector3 movement = Vector3.zero;
 	private Raycaster raycaster;
 
-	public override void Start ()
+	void Start ()
 	{
 		GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
 		aggroTarget = player.GetComponent<NavigationRouter>();

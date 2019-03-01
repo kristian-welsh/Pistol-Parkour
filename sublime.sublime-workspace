@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"Forward"
+			],
+			[
 				"my",
 				"myGun\tGameObject"
 			],
@@ -43,25 +47,43 @@
 			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterView.cs",
 			"settings":
 			{
-				"buffer_size": 1823,
+				"buffer_size": 1659,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Assets/Scripts/Characters/ParkourModel.cs",
+			"file": "Assets/Scripts/Characters/AI/AIMovement.cs",
 			"settings":
 			{
-				"buffer_size": 1909,
+				"buffer_size": 2100,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Assets/Scripts/Characters/Health.cs",
+			"file": "Assets/Scripts/Characters/Player/PlayerMovement.cs",
 			"settings":
 			{
-				"buffer_size": 582,
+				"buffer_size": 656,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+			"settings":
+			{
+				"buffer_size": 1982,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
+			"settings":
+			{
+				"buffer_size": 3338,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
@@ -140,15 +162,19 @@
 	],
 	"file_history":
 	[
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterControler.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Health.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Guns/Shooting/Input/AIShootingInput.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerMovement.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
-		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/AICamera.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/StairClimb.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerCamera.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Health.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/StairClimb.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/RespawnManager.cs",
@@ -198,6 +224,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"parkour",
+			"transform",
 			"OnDeath",
 			"myGun",
 			"myCamera",
@@ -230,7 +258,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -239,15 +267,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1823,
+						"buffer_size": 1659,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								953,
-								953
+								79,
+								79
 							]
 						],
 						"settings":
@@ -259,7 +287,7 @@
 							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 342.0,
+						"translation.y": 57.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -267,80 +295,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "Assets/Scripts/Characters/ParkourModel.cs",
+					"file": "Assets/Scripts/Characters/AI/AIMovement.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1909,
+						"buffer_size": 2100,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								716,
-								716
-							]
-						],
-						"settings":
-						{
-							"oops":
-							{
-								"0,5": "Unnecessary using directive.",
-								"1044,1063": "Ambiguity between 'ParkourModel.climbAngleTolerence' and 'ParkourModel.climbAngleTolerence'",
-								"1089,1101": "Type 'ParkourModel' already defines a member called 'MaybeParkour' with the same parameter types",
-								"115,137": "The type or namespace name 'CharacterMovementModel' could not be found (are you missing a using directive or an assembly reference?)",
-								"1176,1185": "Ambiguity between 'ParkourModel.raycaster' and 'ParkourModel.raycaster'",
-								"1285,1302": "The call is ambiguous between the following methods or properties: 'ParkourModel.CalculateVelocity(RaycastHit, int, float)' and 'ParkourModel.CalculateVelocity(RaycastHit, int, float)'",
-								"1342,1350": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
-								"14,19": "Unnecessary using directive.",
-								"1430,1447": "Type 'ParkourModel' already defines a member called 'CalculateVelocity' with the same parameter types",
-								"1531,1541": "Ambiguity between 'ParkourModel.climbSpeed' and 'ParkourModel.climbSpeed'",
-								"1575,1594": "The call is ambiguous between the following methods or properties: 'ParkourModel.SideAxisFromSurface(Vector3, Transform)' and 'ParkourModel.SideAxisFromSurface(Vector3, Transform)'",
-								"1624,1634": "Ambiguity between 'ParkourModel.climbSpeed' and 'ParkourModel.climbSpeed'",
-								"1705,1724": "Type 'ParkourModel' already defines a member called 'SideAxisFromSurface' with the same parameter types",
-								"265,278": "The type or namespace name 'CharacterView' could not be found (are you missing a using directive or an assembly reference?)",
-								"348,353": "Type 'ParkourModel' already defines a member called 'Start' with the same parameter types",
-								"401,414": "The type or namespace name 'CharacterView' could not be found (are you missing a using directive or an assembly reference?)",
-								"427,442": "Ambiguity between 'ParkourModel.playerRigidbody' and 'ParkourModel.playerRigidbody'",
-								"474,483": "Ambiguity between 'ParkourModel.raycaster' and 'ParkourModel.raycaster'",
-								"532,543": "Type 'ParkourModel' already defines a member called 'FixedUpdate' with the same parameter types",
-								"565,573": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
-								"588,602": "The call is ambiguous between the following methods or properties: 'ParkourModel.MovingForwards()' and 'ParkourModel.MovingForwards()'",
-								"628,640": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
-								"684,692": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
-								"727,739": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
-								"73,85": "The namespace '<global namespace>' already contains a definition for 'ParkourModel'",
-								"778,790": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
-								"867,881": "Type 'ParkourModel' already defines a member called 'MovingForwards' with the same parameter types",
-								"919,934": "Ambiguity between 'ParkourModel.playerRigidbody' and 'ParkourModel.playerRigidbody'"
-							},
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Assets/Scripts/Characters/Health.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 582,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								237,
-								244
+								305,
+								305
 							]
 						],
 						"settings":
@@ -352,7 +319,96 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Assets/Scripts/Characters/Player/PlayerMovement.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 656,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								72
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1982,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1620,
+								1620
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2950,
+								2950
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1140.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

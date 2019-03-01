@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 114551854695491426}
   - component: {fileID: 114554476810611448}
   - component: {fileID: 114019977178521892}
-  - component: {fileID: 114339690101001334}
+  - component: {fileID: 114427335739726198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3522,20 +3522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 5
   inverted: 0
---- !u!114 &114339690101001334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0896e28158bdf2e4faf3f966ab90db06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbAngleTolerence: 10
-  climbSpeed: 5
-  climbLength: 2
 --- !u!114 &114414829516740008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3547,6 +3533,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fb9f95df0fb64f8ce93c097bc3e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114427335739726198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668149357436664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e12b2f056e6a3479ca0d9c8be6d75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbAngleTolerence: 10
+  climbSpeed: 5
+  climbLength: 2
 --- !u!114 &114482060734498812
 MonoBehaviour:
   m_ObjectHideFlags: 1
