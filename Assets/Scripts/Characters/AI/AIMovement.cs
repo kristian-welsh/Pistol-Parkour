@@ -28,14 +28,13 @@ public class AIMovement : CharacterMovementModel
 		aggroTarget = new NullNavigationRouter();
 	}
 	
-	protected override void FixedUpdate ()
+	void FixedUpdate ()
 	{
 		StopJumping();
 		AcquireTarget();
 		UpdateDestination();
 		CalculateMovement();
 		JumpOverPits();
-		base.FixedUpdate();
 	}
 
 	private void StopJumping()

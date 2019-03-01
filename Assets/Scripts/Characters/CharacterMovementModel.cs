@@ -24,11 +24,32 @@ public class CharacterMovementModel : MonoBehaviour
     public virtual void Start()
     {
     	view = gameObject.GetComponent<CharacterView>();
+        view.OnTrigger += WhenTriggerEntered;
+        view.OnFixedUpdate += Recalculate;
         jumpNormal = Vector3.up;
 		raycaster = new Raycaster(0.1f);
 	}
 
-    protected virtual void FixedUpdate()
+    private void WhenTriggerEntered(Collider other)
+    {
+        if (other.CompareTag("Collectable Gun"))
+        {
+            HoveringGun hover = other.gameObject.GetComponent<HoveringGun>();
+            if(hover.GetActive())
+                CollectGun(other.gameObject, hover);
+        }
+    }
+
+    private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
+    {
+        GameObject gunPreset = hoveringGun.transform.GetChild(0).gameObject;
+        GameObject myGun = view.CollectGun(gunPreset);
+
+        myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
+        hoverScript.Disapear();
+    }
+
+    private void Recalculate()
     {
         if (!grounded)
             CheckGround();
@@ -87,25 +108,6 @@ public class CharacterMovementModel : MonoBehaviour
 			StopCoroutine(stopCurrentProcess);
 		StopWallclimb();
 	}
-
-	void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Collectable Gun"))
-        {
-            HoveringGun hover = other.gameObject.GetComponent<HoveringGun>();
-            if(hover.GetActive())
-                CollectGun(other.gameObject, hover);
-        }
-    }
-
-    private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
-    {
-        GameObject gunPreset = hoveringGun.transform.GetChild(0).gameObject;
-        GameObject myGun = view.CollectGun(gunPreset);
-
-        myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
-        hoverScript.Disapear();
-    }
 	
 	public void StartParkour(Vector3 normal, Vector3 velocity)
     {
