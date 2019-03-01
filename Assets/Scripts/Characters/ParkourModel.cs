@@ -2,46 +2,47 @@
 using System.Collections;
 using UnityEngine;
 
-public class Parkour : MonoBehaviour
+public class ParkourModel : MonoBehaviour
 {
-    public CharacterMovementModel movement;
     public int climbAngleTolerence = 10;
     public int climbSpeed = 5;
     public int climbLength = 2;
 
-    Rigidbody playerRigidbody;
-	Raycaster raycaster;
+    private CharacterMovementModel movement;
+    private CharacterView view;
+	private Raycaster raycaster;
 
     void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
+        movement = gameObject.GetComponent<CharacterMovementModel>();
+        view = gameObject.GetComponent<CharacterView>();
+        view.OnFixedUpdate += ParkourCheck;
 		raycaster = new Raycaster(1f, "Climbable");
-
 	}
 
-    void FixedUpdate()
+    private void ParkourCheck()
     {
         if (!movement.HasClimbed && MovingForwards())
         {
-            MaybeParkour(transform.forward, 0, 1f);
+            MaybeParkour(view.GetTransform.forward, 0, 1f);
             if(!movement.Grounded)
             {
-		        MaybeParkour(transform.right, -1, 0.3f);
-		        MaybeParkour(-transform.right, 1, 0.3f);
+		        MaybeParkour(view.GetTransform.right, -1, 0.3f);
+		        MaybeParkour(-view.GetTransform.right, 1, 0.3f);
             }
         }
     }
 
     private bool MovingForwards()
     {
-        Vector3 velocity2D = playerRigidbody.velocity;
+        Vector3 velocity2D = view.Velocity;
         velocity2D.y = 0;
-        return Vector3.Angle(transform.forward, velocity2D.normalized) < climbAngleTolerence;
+        return Vector3.Angle(view.GetTransform.forward, velocity2D.normalized) < climbAngleTolerence;
     }
 
     private void MaybeParkour(Vector3 axis, int sideDir, float upSpeed)
     {
-        RaycastHit? hit = raycaster.CastRay(transform.position, axis);
+        RaycastHit? hit = raycaster.CastRay(view.GetTransform.position, axis);
         if (hit.HasValue)
         {
 	        Vector3 velocity = CalculateVelocity(hit.Value, sideDir, upSpeed);
@@ -49,9 +50,9 @@ public class Parkour : MonoBehaviour
         }
     }
 
-    private Vector3 CalculateVelocity(RaycastHit hit, int sideDir, float foo)
+    private Vector3 CalculateVelocity(RaycastHit hit, int sideDir, float upSpeed)
     {
-        Vector3 upVel = Vector3.up * climbSpeed * foo;
+        Vector3 upVel = Vector3.up * climbSpeed * upSpeed;
         Vector3 sideVel = SideAxisFromSurface(hit.normal, hit.transform) * climbSpeed * sideDir;
         return upVel + sideVel;
     }

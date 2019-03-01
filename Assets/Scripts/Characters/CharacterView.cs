@@ -13,7 +13,8 @@ public class CharacterView : MonoBehaviour
 	[HideInInspector]
 	public event PhysicsUpdate OnFixedUpdate;
 
-	public Vector3 Velocity { get {return rigidbody.velocity; } }
+	public Vector3 Velocity { get { return rigidbody.velocity; } }
+	public Transform GetTransform { get { return transform; } }
 
 	new private GameObject camera;
 	new private Rigidbody rigidbody;

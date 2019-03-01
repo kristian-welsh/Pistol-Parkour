@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"my",
+				"myGun\tGameObject"
+			],
+			[
+				"Vect",
+				"Vector3\tVector3"
+			],
+			[
+				"Get",
+				"GetComponent<T>()\tT"
+			],
+			[
+				"add",
+				"AddComponent(Type componentType)\tComponent"
+			],
+			[
 				"explo",
 				"explosionCollider\tGameObject"
 			],
@@ -24,28 +40,19 @@
 	"buffers":
 	[
 		{
-			"file": "Assets/Scripts/RespawnManager.cs",
+			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterView.cs",
 			"settings":
 			{
-				"buffer_size": 1656,
+				"buffer_size": 1823,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Assets/Scripts/Characters/AI/AIMovement.cs",
+			"file": "Assets/Scripts/Characters/ParkourModel.cs",
 			"settings":
 			{
-				"buffer_size": 2185,
-				"encoding": "UTF-8 with BOM",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Characters/CharacterMovement.cs",
-			"settings":
-			{
-				"buffer_size": 4132,
+				"buffer_size": 1909,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
@@ -55,24 +62,6 @@
 			"settings":
 			{
 				"buffer_size": 582,
-				"encoding": "UTF-8 with BOM",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Characters/AI/AICamera.cs",
-			"settings":
-			{
-				"buffer_size": 1901,
-				"encoding": "UTF-8 with BOM",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Guns/Shooting/Input/AIShootingInput.cs",
-			"settings":
-			{
-				"buffer_size": 385,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
@@ -89,6 +78,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
 			[
 				"Package Control: ins",
 				"Package Control: Install Package"
@@ -143,24 +136,41 @@
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/Input"
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Player"
 	],
 	"file_history":
 	[
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/NavigationRouter.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerMovement.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/GunShooting.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/HoveringGun.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Grenade.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/AICamera.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/StairClimb.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerCamera.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Health.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/StairClimb.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/RespawnManager.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/HoveringGun.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerMovement.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovement.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementController.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/RespawnManager.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Tests/RespawnManager.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/PlayTests/RespawnManager.cs",
+		"//smbhome.uscs.susx.ac.uk/kjw28/Desktop/RespawnManager.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterMovement.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/Input/AIShootingInput.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Tests/Tests.asmdef",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/NavigationRouter.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/GunShooting.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Grenade.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/FPSHealth.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Util.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/Waypoint.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/CollisionLister.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/NullNavigationRouter.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterMovement.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/ProjectileGun.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/Shotgun.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Guns/Shooting/RaycastGun.cs",
@@ -173,7 +183,7 @@
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -188,6 +198,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"OnDeath",
+			"myGun",
+			"myCamera",
+			"rigidbody",
+			"originalDrag",
+			"rigidbody",
+			"print",
+			"myGun",
+			"myCamera",
+			"CalculateMovementForce",
 			"running",
 			"FPSHealth",
 			"Random",
@@ -215,53 +235,89 @@
 			[
 				{
 					"buffer": 0,
-					"file": "Assets/Scripts/RespawnManager.cs",
+					"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterView.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1656,
+						"buffer_size": 1823,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								976,
-								976
+								953,
+								953
 							]
 						],
 						"settings":
 						{
+							"oops":
+							{
+								"134,135": "Invalid token ';' in class, struct, or interface member declaration"
+							},
 							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 114.0,
+						"translation.y": 342.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Assets/Scripts/Characters/AI/AIMovement.cs",
+					"file": "Assets/Scripts/Characters/ParkourModel.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2185,
+						"buffer_size": 1909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								365,
-								365
+								716,
+								716
 							]
 						],
 						"settings":
 						{
+							"oops":
+							{
+								"0,5": "Unnecessary using directive.",
+								"1044,1063": "Ambiguity between 'ParkourModel.climbAngleTolerence' and 'ParkourModel.climbAngleTolerence'",
+								"1089,1101": "Type 'ParkourModel' already defines a member called 'MaybeParkour' with the same parameter types",
+								"115,137": "The type or namespace name 'CharacterMovementModel' could not be found (are you missing a using directive or an assembly reference?)",
+								"1176,1185": "Ambiguity between 'ParkourModel.raycaster' and 'ParkourModel.raycaster'",
+								"1285,1302": "The call is ambiguous between the following methods or properties: 'ParkourModel.CalculateVelocity(RaycastHit, int, float)' and 'ParkourModel.CalculateVelocity(RaycastHit, int, float)'",
+								"1342,1350": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
+								"14,19": "Unnecessary using directive.",
+								"1430,1447": "Type 'ParkourModel' already defines a member called 'CalculateVelocity' with the same parameter types",
+								"1531,1541": "Ambiguity between 'ParkourModel.climbSpeed' and 'ParkourModel.climbSpeed'",
+								"1575,1594": "The call is ambiguous between the following methods or properties: 'ParkourModel.SideAxisFromSurface(Vector3, Transform)' and 'ParkourModel.SideAxisFromSurface(Vector3, Transform)'",
+								"1624,1634": "Ambiguity between 'ParkourModel.climbSpeed' and 'ParkourModel.climbSpeed'",
+								"1705,1724": "Type 'ParkourModel' already defines a member called 'SideAxisFromSurface' with the same parameter types",
+								"265,278": "The type or namespace name 'CharacterView' could not be found (are you missing a using directive or an assembly reference?)",
+								"348,353": "Type 'ParkourModel' already defines a member called 'Start' with the same parameter types",
+								"401,414": "The type or namespace name 'CharacterView' could not be found (are you missing a using directive or an assembly reference?)",
+								"427,442": "Ambiguity between 'ParkourModel.playerRigidbody' and 'ParkourModel.playerRigidbody'",
+								"474,483": "Ambiguity between 'ParkourModel.raycaster' and 'ParkourModel.raycaster'",
+								"532,543": "Type 'ParkourModel' already defines a member called 'FixedUpdate' with the same parameter types",
+								"565,573": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
+								"588,602": "The call is ambiguous between the following methods or properties: 'ParkourModel.MovingForwards()' and 'ParkourModel.MovingForwards()'",
+								"628,640": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
+								"684,692": "Ambiguity between 'ParkourModel.movement' and 'ParkourModel.movement'",
+								"727,739": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
+								"73,85": "The namespace '<global namespace>' already contains a definition for 'ParkourModel'",
+								"778,790": "The call is ambiguous between the following methods or properties: 'ParkourModel.MaybeParkour(Vector3, int, float)' and 'ParkourModel.MaybeParkour(Vector3, int, float)'",
+								"867,881": "Type 'ParkourModel' already defines a member called 'MovingForwards' with the same parameter types",
+								"919,934": "Ambiguity between 'ParkourModel.playerRigidbody' and 'ParkourModel.playerRigidbody'"
+							},
 							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -272,36 +328,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "Assets/Scripts/Characters/CharacterMovement.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4132,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1206,
-								1206
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 171.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "Assets/Scripts/Characters/Health.cs",
 					"semi_transient": false,
 					"settings":
@@ -313,77 +339,20 @@
 						"selection":
 						[
 							[
-								582,
-								582
+								237,
+								244
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 28.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Assets/Scripts/Characters/AI/AICamera.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1901,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								509,
-								509
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 131.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "Assets/Scripts/Guns/Shooting/Input/AIShootingInput.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 385,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								248,
-								248
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -391,7 +360,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 29.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -436,7 +405,7 @@
 	"project": "sublime.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
