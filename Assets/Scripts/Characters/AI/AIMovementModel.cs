@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 
-public class AIMovement : CharacterMovementModel
+public class AIMovementModel : CharacterMovementModel
 {
-	public float distanceThreshold = 1f;
-	public Waypoint destination;
+	private static float DISTANCE_THRESHOLD = 1f;
 	
+	private CharacterView view;
 	private NavigationRouter aggroTarget;
-	private Rigidbody rb;
 	private bool jump = false;
 	private Vector3 movement = Vector3.zero;
 	private Raycaster raycaster;
+	private Waypoint destination;
 
-	void Start ()
+	public Waypoint Destination
 	{
-		GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-		aggroTarget = player.GetComponent<NavigationRouter>();
-		player.GetComponent<Kristian.Health>().OnDeath += Deaggro;
-		rb = GetComponent<Rigidbody>();
+		get { return destination; }
+		set { destination = value; }
+	}
+
+	public AIMovementModel(CharacterView view, GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(view, speed, jumpPower, climbLength)
+	{
+		aggroTarget = targetPlayer.GetComponent<NavigationRouter>();
+		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 		if(aggroTarget == null)
 			Deaggro(null);
 		raycaster = new Raycaster(3f, "Shootable");
-		base.Start();
 	}
 
 	private void Deaggro(GameObject obj)
@@ -28,8 +31,9 @@ public class AIMovement : CharacterMovementModel
 		aggroTarget = new NullNavigationRouter();
 	}
 	
-	void FixedUpdate ()
+    public override void Recalculate()
 	{
+		base.Recalculate();
 		StopJumping();
 		AcquireTarget();
 		UpdateDestination();
@@ -59,20 +63,20 @@ public class AIMovement : CharacterMovementModel
 
 	private bool ReachedDestination()
 	{
-		float distance = Vector3.Distance(destination.transform.position, gameObject.transform.position);
-		return distance < distanceThreshold;
+		float distance = Vector3.Distance(destination.Position, view.GetTransform.position);
+		return distance < DISTANCE_THRESHOLD;
 	}
 
 	private void CalculateMovement()
 	{
-		Vector3 difference = destination.transform.position - gameObject.transform.position;
+		Vector3 difference = destination.Position - view.GetTransform.position;
 		movement = difference.normalized * speed;
 		movement.y = 0;
 	}
 
 	private void JumpOverPits()
 	{
-		Vector3 position = gameObject.transform.position + new Vector3(0f, 1f, 0f);
+		Vector3 position = view.GetTransform.position + new Vector3(0f, 1f, 0f);
 		Vector3 angle = CreateLookDownAngle();
 		RaycastHit? hit = raycaster.CastRay(position, angle);
 		if(!hit.HasValue)
@@ -81,9 +85,9 @@ public class AIMovement : CharacterMovementModel
 
 	private Vector3 CreateLookDownAngle()
 	{
-		Vector3 velocity2d = rb.velocity.normalized;
+		Vector3 velocity2d = view.Velocity.normalized;
 		velocity2d.y = 0;
-		Vector3 angle = velocity2d - gameObject.transform.up;
+		Vector3 angle = velocity2d - view.GetTransform.up;
 		return angle.normalized;
 	}
 

@@ -644,13 +644,12 @@ GameObject:
   - component: {fileID: 54935851765859428}
   - component: {fileID: 136263174021133476}
   - component: {fileID: 136129082592516834}
-  - component: {fileID: 114614544356489928}
   - component: {fileID: 114414829516740008}
   - component: {fileID: 114482060734498812}
   - component: {fileID: 114551854695491426}
   - component: {fileID: 114554476810611448}
   - component: {fileID: 114019977178521892}
-  - component: {fileID: 114427335739726198}
+  - component: {fileID: 114010326790490616}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3483,6 +3482,22 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114010326790490616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668149357436664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd398bd4b78eae4d9310d0b05a444a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbAngleTolerence: 10
+  climbSpeed: 5
+  climbLength: 2
+  speed: 30
+  jumpPower: 20
 --- !u!114 &114019977178521892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3533,20 +3548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fb9f95df0fb64f8ce93c097bc3e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114427335739726198
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e12b2f056e6a3479ca0d9c8be6d75e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbAngleTolerence: 10
-  climbSpeed: 5
-  climbLength: 2
 --- !u!114 &114482060734498812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3583,22 +3584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepsize: 1
---- !u!114 &114614544356489928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d4dc641d9373448a8f3b55afd8534d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  jumpPower: 20
-  climbAngleTolerence: 10
-  climbSpeed: 5
-  climbLength: 2
 --- !u!120 &120037382321860028
 LineRenderer:
   m_ObjectHideFlags: 1

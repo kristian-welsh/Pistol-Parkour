@@ -18,7 +18,7 @@ public class RespawnManager : MonoBehaviour
 	private GameObject SpawnAI(GameObject prefab, Waypoint spawnLocation)
 	{
 		GameObject ai = Spawn(prefab, spawnLocation);
-		ai.GetComponent<AIMovement>().destination = spawnLocation;
+		ai.GetComponent<AIController>().SetDestination(spawnLocation);
 		return ai;
 	}
 
@@ -47,7 +47,7 @@ public class RespawnManager : MonoBehaviour
 	private bool isAi(GameObject deadObject)
 	{
 		CharacterMovementModel movement = deadObject.GetComponent<CharacterMovementModel>();
-		return movement is AIMovement;
+		return movement is AIMovementModel;
 	}
 
     private IEnumerator RespawnTimer(bool ai)

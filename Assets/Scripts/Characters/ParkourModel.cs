@@ -9,14 +9,12 @@ public class ParkourModel
 
     private int climbAngleTolerence;
     private int climbSpeed;
-    private int climbLength;
 	private Raycaster raycaster = new Raycaster(1f, "Climbable");
 
-    public ParkourModel(int climbAngleTolerence, int climbSpeed, int climbLength)
+    public ParkourModel(int climbAngleTolerence, int climbSpeed)
     {
         this.climbAngleTolerence = climbAngleTolerence;
         this.climbSpeed = climbSpeed;
-        this.climbLength = climbLength;
     }
 
     public void ParkourCheck()

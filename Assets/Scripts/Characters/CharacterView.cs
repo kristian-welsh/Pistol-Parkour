@@ -11,7 +11,6 @@ public class CharacterView : MonoBehaviour
 	new private Rigidbody rigidbody;
 	private float originalDrag;
 
-
     void Start()
     {
         camera = transform.GetComponentInChildren<CharacterCamera>().gameObject;

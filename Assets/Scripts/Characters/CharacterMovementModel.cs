@@ -1,32 +1,34 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CharacterMovementModel : MonoBehaviour
+public class CharacterMovementModel
 {
-    public float speed = 1000f;
-    public float jumpPower = 20f;
-    public int climbAngleTolerence = 10;
-    public int climbSpeed = 5;
-    public int climbLength = 2;
-
-    public bool HasClimbed { get { return hasClimbed; } }
-    public bool Grounded { get { return grounded; } }
-	
+    protected CharacterView view;
     protected bool grounded = true;
+    protected float speed;
 
-    private CharacterView view;
+    private float jumpPower;
+    private int climbLength;
     private bool hasClimbed = false;
     private bool climbing = false;
     private Vector3 jumpNormal;
     private IEnumerator stopCurrentProcess;
 	private Raycaster raycaster;
 
-    public virtual void Start()
+    private TimedAction timer;
+
+    public bool HasClimbed { get { return hasClimbed; } }
+    public bool Grounded { get { return grounded; } }
+
+    public CharacterMovementModel(CharacterView view, float speed, float jumpPower, int climbLength)
     {
-    	view = gameObject.GetComponent<CharacterView>();
+    	this.view = view;
+        this.speed = speed;
+        this.jumpPower = jumpPower;
+        this.climbLength = climbLength;
         jumpNormal = Vector3.up;
 		raycaster = new Raycaster(0.1f);
-	}
+    }
 
     public void TouchHoveringGun(GameObject hoveringGun)
     {
@@ -44,7 +46,7 @@ public class CharacterMovementModel : MonoBehaviour
         hoverScript.Disapear();
     }
 
-    public void Recalculate()
+    public virtual void Recalculate()
     {
         if (!grounded)
             CheckGround();
@@ -58,7 +60,7 @@ public class CharacterMovementModel : MonoBehaviour
     {
         if(view.Velocity.y < 0)
         {
-            RaycastHit? hit = raycaster.CastRay(transform.position, -transform.up);
+            RaycastHit? hit = raycaster.CastRay(view.GetTransform.position, -view.GetTransform.up);
             if (hit.HasValue)
             {
                 if (hit.Value.transform.gameObject.CompareTag("Ground"))
@@ -99,9 +101,8 @@ public class CharacterMovementModel : MonoBehaviour
 		view.AddForce(impulse, ForceMode.Impulse);
 		grounded = false;
 		climbing = false;
-		if (stopCurrentProcess != null)
-			StopCoroutine(stopCurrentProcess);
-		StopWallclimb();
+		if (timer != null)
+			timer.PerformActionEarly();
 	}
 	
 	public void StartParkour(Vector3 normal, Vector3 velocity)
@@ -111,14 +112,9 @@ public class CharacterMovementModel : MonoBehaviour
         grounded = false;
         jumpNormal = normal;
         view.StartParkour(velocity);
-        stopCurrentProcess = ClimbingTimer();
-        StartCoroutine(stopCurrentProcess);
-    }
-
-    private IEnumerator ClimbingTimer()
-    {
-        yield return new WaitForSeconds(climbLength);
-        StopWallclimb();
+        timer = TimedAction.Create(climbLength);
+        timer.delayedAction += StopWallclimb;
+        timer.StartTimer();
     }
 
     private void StopWallclimb()
