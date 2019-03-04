@@ -34,7 +34,7 @@ public class CharacterMovement
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
         jumpNormal = Vector3.up;
-		raycaster = new Raycaster(1f);
+		raycaster = new Raycaster(0.1f);
     }
 
     public void TouchHoveringGun(GameObject hoveringGun)

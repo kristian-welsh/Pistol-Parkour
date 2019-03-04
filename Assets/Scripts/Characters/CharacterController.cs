@@ -23,7 +23,6 @@ namespace Kristian
 			movement = CreateMovement();
 			parkour = new ParkourModel(climbAngleTolerence, climbSpeed);
 			parkour.movement = movement;
-			parkour.view = view;
 
 			view.movement = movement;
 		}
@@ -42,7 +41,7 @@ namespace Kristian
 		void FixedUpdate()
 		{
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
-			parkour.ParkourCheck();
+			parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity);
 		}
 	}
 }

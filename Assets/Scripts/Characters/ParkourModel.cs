@@ -5,7 +5,6 @@ using UnityEngine;
 public class ParkourModel
 {
     public CharacterMovement movement;
-    public CharacterView view;
 
     private int climbAngleTolerence;
     private int climbSpeed;
@@ -17,29 +16,30 @@ public class ParkourModel
         this.climbSpeed = climbSpeed;
     }
 
-    public void ParkourCheck()
+    public void ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity)
     {
-        if (!movement.HasClimbed && MovingForwards())
+        if (!movement.HasClimbed && MovingForwards(forward, velocity))
         {
-            MaybeParkour(view.GetTransform.forward, 0, 1f);
+            MaybeParkour(position, forward, 0, 1f);
             if(!movement.Grounded)
             {
-		        MaybeParkour(view.GetTransform.right, -1, 0.3f);
-		        MaybeParkour(-view.GetTransform.right, 1, 0.3f);
+                Vector3 right = Vector3.Cross(Vector3.up, forward);
+		        MaybeParkour(position, right, -1, 0.3f);
+		        MaybeParkour(position, -right, 1, 0.3f);
             }
         }
     }
 
-    private bool MovingForwards()
+    private bool MovingForwards(Vector3 forward, Vector3 velocity)
     {
-        Vector3 velocity2D = view.Velocity;
+        Vector3 velocity2D = velocity;
         velocity2D.y = 0;
-        return Vector3.Angle(view.GetTransform.forward, velocity2D.normalized) < climbAngleTolerence;
+        return Vector3.Angle(forward, velocity2D.normalized) < climbAngleTolerence;
     }
 
-    private void MaybeParkour(Vector3 axis, int sideDir, float upSpeed)
+    private void MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
     {
-        RaycastHit? hit = raycaster.CastRay(view.GetTransform.position, axis);
+        RaycastHit? hit = raycaster.CastRay(position, axis);
         if (hit.HasValue)
         {
 	        Vector3 velocity = CalculateVelocity(hit.Value, sideDir, upSpeed);
