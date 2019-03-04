@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CharacterMovementModel
+public class CharacterMovement
 {
-    protected CharacterView view;
+    public delegate void CollectGunUpdate(GameObject newGun);
+    public delegate void StartParkourUpdate(Vector3 velocity);
+    public delegate void StopParkourUpdate();
+    public delegate void AddForceUpdate(Vector3 force, ForceMode mode);
+    public CollectGunUpdate collectGunEvent;
+    public StartParkourUpdate startParkourEvent;
+    public StopParkourUpdate stopParkourEvent;
+    public AddForceUpdate addForceEvent;
+
     protected bool grounded = true;
     protected float speed;
 
@@ -20,14 +28,13 @@ public class CharacterMovementModel
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    public CharacterMovementModel(CharacterView view, float speed, float jumpPower, int climbLength)
+    public CharacterMovement(float speed, float jumpPower, int climbLength)
     {
-    	this.view = view;
         this.speed = speed;
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
         jumpNormal = Vector3.up;
-		raycaster = new Raycaster(0.1f);
+		raycaster = new Raycaster(1f);
     }
 
     public void TouchHoveringGun(GameObject hoveringGun)
@@ -40,27 +47,28 @@ public class CharacterMovementModel
     private void CollectGun(GameObject hoveringGun, HoveringGun hoverScript)
     {
         GameObject gunPreset = hoveringGun.transform.GetChild(0).gameObject;
-        GameObject myGun = view.CollectGun(gunPreset);
+        GameObject myGun = GameObject.Instantiate(gunPreset);
+        collectGunEvent(myGun);
 
         myGun.GetComponentInChildren<GunShooting>(true).gameObject.SetActive(true);
         hoverScript.Disapear();
     }
 
-    public virtual void Recalculate()
+    public virtual void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
     {
         if (!grounded)
-            CheckGround();
+            CheckGround(velocity, position);
         if (!climbing)
-            Move();
+            Move(forward);
         if (canJump() && wantsToJump())
             Jump();
 	}
 
-	private void CheckGround()
+	private void CheckGround(Vector3 velocity, Vector3 position)
     {
-        if(view.Velocity.y < 0)
+        if(velocity.y < 0)
         {
-            RaycastHit? hit = raycaster.CastRay(view.GetTransform.position, -view.GetTransform.up);
+            RaycastHit? hit = raycaster.CastRay(position, -Vector3.up);
             if (hit.HasValue)
             {
                 if (hit.Value.transform.gameObject.CompareTag("Ground"))
@@ -74,13 +82,13 @@ public class CharacterMovementModel
         }
     }
 
-    private void Move()
+    private void Move(Vector3 forward)
     {
-		Vector3 movement = CalculateMovementForce();
-		view.AddForce(movement, ForceMode.Acceleration);
+		Vector3 movement = CalculateMovementForce(forward);
+		addForceEvent(movement, ForceMode.Acceleration);
     }
 
-	protected virtual Vector3 CalculateMovementForce()
+	protected virtual Vector3 CalculateMovementForce(Vector3 forward)
 	{
 		throw new System.Exception("Illegal base method call wantsToJump()");
 	}
@@ -98,7 +106,7 @@ public class CharacterMovementModel
 	private void Jump()
 	{
 		Vector3 impulse = jumpNormal * jumpPower;
-		view.AddForce(impulse, ForceMode.Impulse);
+		addForceEvent(impulse, ForceMode.Impulse);
 		grounded = false;
 		climbing = false;
 		if (timer != null)
@@ -111,7 +119,7 @@ public class CharacterMovementModel
         climbing = true;
         grounded = false;
         jumpNormal = normal;
-        view.StartParkour(velocity);
+        startParkourEvent(velocity);
         timer = TimedAction.Create(climbLength);
         timer.delayedAction += StopWallclimb;
         timer.StartTimer();
@@ -120,7 +128,7 @@ public class CharacterMovementModel
     private void StopWallclimb()
     {
         climbing = false;
-        view.StopParkour();
+        stopParkourEvent();
         stopCurrentProcess = null;
     }
 }

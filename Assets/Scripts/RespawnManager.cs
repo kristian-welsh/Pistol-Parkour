@@ -46,8 +46,8 @@ public class RespawnManager : MonoBehaviour
 
 	private bool isAi(GameObject deadObject)
 	{
-		CharacterMovementModel movement = deadObject.GetComponent<CharacterMovementModel>();
-		return movement is AIMovementModel;
+		CharacterController controller = deadObject.GetComponent<CharacterController>();
+		return controller is AIController;
 	}
 
     private IEnumerator RespawnTimer(bool ai)

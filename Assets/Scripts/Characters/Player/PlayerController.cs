@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class PlayerController : Kristian.CharacterController
 {
-	protected override CharacterMovementModel CreateMovement(CharacterView view)
+	protected override CharacterMovement CreateMovement()
 	{
-        return new PlayerMovement(view, speed, jumpPower, climbLength);
+        return new PlayerMovement(speed, jumpPower, climbLength);
     }
 
     void Update()
     {
-        ((PlayerMovement)movement).UpdateInput();
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        bool spaceDepressed = Input.GetKeyDown("space");
+        ((PlayerMovement)movement).UpdateInput(horizontalInput, verticalInput, spaceDepressed);
     }
 }

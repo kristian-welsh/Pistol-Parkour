@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterView : MonoBehaviour
 {
+    [HideInInspector]
+    public CharacterMovement movement;
+
 	public Vector3 Velocity { get { return rigidbody.velocity; } }
 	public Transform GetTransform { get { return transform; } }
 
@@ -17,6 +20,10 @@ public class CharacterView : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         Kristian.Health health = GetComponent<Kristian.Health>();
         health.OnDeath += Die;
+        movement.collectGunEvent += CollectGun;
+        movement.startParkourEvent += StartParkour;
+        movement.stopParkourEvent += StopParkour;
+        movement.addForceEvent += AddForce;
 	}
 
 	private void Die(GameObject obj)
@@ -25,7 +32,7 @@ public class CharacterView : MonoBehaviour
 	}
 
 	// attatches a copy of a gun to the view heirchy and returns that copy
-    public GameObject CollectGun(GameObject gunPreset)
+    public void CollectGun(GameObject newGun)
     {
         // disable old gun
     	GameObject gun = camera.transform.GetChild(0).gameObject;
@@ -34,12 +41,11 @@ public class CharacterView : MonoBehaviour
         Destroy(gun);
 
         // create and enable new gun
-        gun = Instantiate(gunPreset, camera.transform);
+        gun = newGun;
+        gun.transform.SetParent(camera.transform);
         gun.transform.localPosition = Vector3.zero;
         gun.transform.localRotation = Quaternion.identity;
         gun.SetActive(true);
-
-        return gun;
     }
 
     public void StartParkour(Vector3 velocity)

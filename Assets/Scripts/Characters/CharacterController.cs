@@ -14,21 +14,23 @@ namespace Kristian
 		public float jumpPower = 20f;
 
 		protected CharacterView view;
-		protected CharacterMovementModel movement;
+		protected CharacterMovement movement;
 		private ParkourModel parkour;
 
 		void Start ()
 		{
 			view = GetComponent<CharacterView>();
-			movement = CreateMovement(view);
+			movement = CreateMovement();
 			parkour = new ParkourModel(climbAngleTolerence, climbSpeed);
 			parkour.movement = movement;
 			parkour.view = view;
+
+			view.movement = movement;
 		}
 
-		protected virtual CharacterMovementModel CreateMovement(CharacterView view)
+		protected virtual CharacterMovement CreateMovement()
 		{
-			return new CharacterMovementModel(view, speed, jumpPower, climbLength);
+			return new CharacterMovement(speed, jumpPower, climbLength);
 		}
 
 		void OnTriggerEnter(Collider other)
@@ -39,7 +41,7 @@ namespace Kristian
 
 		void FixedUpdate()
 		{
-			movement.Recalculate();
+			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
 			parkour.ParkourCheck();
 		}
 	}

@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : CharacterMovementModel
+public class PlayerMovement : CharacterMovement
 {
 	private Vector3 movement = Vector3.zero;
 	private bool jump = false;
 
-	public PlayerMovement(CharacterView view, float speed, float jumpPower, int climbLength) : base(view, speed, jumpPower, climbLength) {}
+	public PlayerMovement(float speed, float jumpPower, int climbLength) : base(speed, jumpPower, climbLength) {}
 
-	public void UpdateInput()
+	public void UpdateInput(float horizontalInput, float verticalInput, bool spaceDepressed)
 	{
-		Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+		Vector3 input = new Vector3(horizontalInput, 0f, verticalInput);
 		movement = input.normalized * speed;
-		if(Input.GetKeyDown("space"))
+		if(spaceDepressed)
 			jump = true;
 	}
 
@@ -22,9 +22,10 @@ public class PlayerMovement : CharacterMovementModel
 		return result;
 	}
 
-	protected override Vector3 CalculateMovementForce()
+	protected override Vector3 CalculateMovementForce(Vector3 forward)
 	{
 		//movement was calculated in world space, transform to player space
-		return view.GetTransform.forward * movement.z + view.GetTransform.right * movement.x;
+		Vector3 right = Vector3.Cross(Vector3.up, forward);
+		return forward * movement.z + right * movement.x;
 	}
 }

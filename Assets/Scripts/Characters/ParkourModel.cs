@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParkourModel
 {
-    public CharacterMovementModel movement;
+    public CharacterMovement movement;
     public CharacterView view;
 
     private int climbAngleTolerence;

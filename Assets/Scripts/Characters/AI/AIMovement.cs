@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class AIMovementModel : CharacterMovementModel
+public class AIMovement : CharacterMovement
 {
 	private static float DISTANCE_THRESHOLD = 1f;
 	
-	private CharacterView view;
 	private NavigationRouter aggroTarget;
 	private bool jump = false;
 	private Vector3 movement = Vector3.zero;
@@ -17,7 +16,7 @@ public class AIMovementModel : CharacterMovementModel
 		set { destination = value; }
 	}
 
-	public AIMovementModel(CharacterView view, GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(view, speed, jumpPower, climbLength)
+	public AIMovement(GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(speed, jumpPower, climbLength)
 	{
 		aggroTarget = targetPlayer.GetComponent<NavigationRouter>();
 		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
@@ -31,14 +30,14 @@ public class AIMovementModel : CharacterMovementModel
 		aggroTarget = new NullNavigationRouter();
 	}
 	
-    public override void Recalculate()
+    public override void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
 	{
-		base.Recalculate();
+		base.Recalculate(velocity, position, forward);
 		StopJumping();
 		AcquireTarget();
-		UpdateDestination();
-		CalculateMovement();
-		JumpOverPits();
+		UpdateDestination(position);
+		CalculateMovement(position);
+		JumpOverPits(velocity, position);
 	}
 
 	private void StopJumping()
@@ -51,9 +50,9 @@ public class AIMovementModel : CharacterMovementModel
 		//todo
 	}
 
-	private void UpdateDestination()
+	private void UpdateDestination(Vector3 position)
 	{
-		if(ReachedDestination())
+		if(ReachedDestination(position))
 		{
 			if(destination.jump)
 				jump = true;
@@ -61,33 +60,33 @@ public class AIMovementModel : CharacterMovementModel
 		}
 	}
 
-	private bool ReachedDestination()
+	private bool ReachedDestination(Vector3 position)
 	{
-		float distance = Vector3.Distance(destination.Position, view.GetTransform.position);
+		float distance = Vector3.Distance(destination.Position, position);
 		return distance < DISTANCE_THRESHOLD;
 	}
 
-	private void CalculateMovement()
+	private void CalculateMovement(Vector3 position)
 	{
-		Vector3 difference = destination.Position - view.GetTransform.position;
+		Vector3 difference = destination.Position - position;
 		movement = difference.normalized * speed;
 		movement.y = 0;
 	}
 
-	private void JumpOverPits()
+	private void JumpOverPits(Vector3 velocity, Vector3 position)
 	{
-		Vector3 position = view.GetTransform.position + new Vector3(0f, 1f, 0f);
-		Vector3 angle = CreateLookDownAngle();
-		RaycastHit? hit = raycaster.CastRay(position, angle);
+		Vector3 rayPosition = position + new Vector3(0f, 1f, 0f);
+		Vector3 angle = CreateLookDownAngle(velocity);
+		RaycastHit? hit = raycaster.CastRay(rayPosition, angle);
 		if(!hit.HasValue)
 			jump = true;
 	}
 
-	private Vector3 CreateLookDownAngle()
+	private Vector3 CreateLookDownAngle(Vector3 velocity)
 	{
-		Vector3 velocity2d = view.Velocity.normalized;
+		Vector3 velocity2d = velocity.normalized;
 		velocity2d.y = 0;
-		Vector3 angle = velocity2d - view.GetTransform.up;
+		Vector3 angle = velocity2d - Vector3.up;
 		return angle.normalized;
 	}
 
@@ -96,7 +95,7 @@ public class AIMovementModel : CharacterMovementModel
 		return jump;
 	}
 
-	protected override Vector3 CalculateMovementForce()
+	protected override Vector3 CalculateMovementForce(Vector3 forward)
 	{
 		return movement;
 	}
