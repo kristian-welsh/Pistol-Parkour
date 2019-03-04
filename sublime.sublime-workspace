@@ -71,7 +71,7 @@
 			}
 		},
 		{
-			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+			"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
 			"settings":
 			{
 				"buffer_size": 1982,
@@ -165,10 +165,10 @@
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterControler.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/CharacterMovementModel.cs",
-		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Health.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
-		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
 		"/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Guns/Shooting/Input/AIShootingInput.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/Player/PlayerMovement.cs",
 		"/N/Documents/Year-3/games-project/project/pistol-parkour/Assets/Scripts/Characters/AI/AIMovement.cs",
@@ -353,7 +353,7 @@
 				},
 				{
 					"buffer": 3,
-					"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/ParkourModel.cs",
+					"file": "/N/Documents/Year-3/games-project/Project/pistol-parkour/Assets/Scripts/Characters/Parkour.cs",
 					"semi_transient": false,
 					"settings":
 					{

@@ -15,13 +15,13 @@ namespace Kristian
 
 		protected CharacterView view;
 		protected CharacterMovement movement;
-		private ParkourModel parkour;
+		private Parkour parkour;
 
 		void Start ()
 		{
 			view = GetComponent<CharacterView>();
 			movement = CreateMovement();
-			parkour = new ParkourModel(climbAngleTolerence, climbSpeed);
+			parkour = new Parkour(climbAngleTolerence, climbSpeed);
 			parkour.movement = movement;
 
 			view.movement = movement;
@@ -41,7 +41,9 @@ namespace Kristian
 		void FixedUpdate()
 		{
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
-			parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity);
+			ParkourResult parkourResult = parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);
+			if(parkourResult != null)
+				movement.StartParkour(parkourResult.normal, parkourResult.velocity);
 		}
 	}
 }

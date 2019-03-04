@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ParkourModel
+public class Parkour
 {
     public CharacterMovement movement;
 
@@ -10,24 +10,32 @@ public class ParkourModel
     private int climbSpeed;
 	private Raycaster raycaster = new Raycaster(1f, "Climbable");
 
-    public ParkourModel(int climbAngleTolerence, int climbSpeed)
+    public Parkour(int climbAngleTolerence, int climbSpeed)
     {
         this.climbAngleTolerence = climbAngleTolerence;
         this.climbSpeed = climbSpeed;
     }
 
-    public void ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity)
+    public ParkourResult ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
     {
-        if (!movement.HasClimbed && MovingForwards(forward, velocity))
+        ParkourResult result;
+        if (!hasClimbed && MovingForwards(forward, velocity))
         {
-            MaybeParkour(position, forward, 0, 1f);
-            if(!movement.Grounded)
+            result = MaybeParkour(position, forward, 0, 1f);
+            if(result != null)
+                return result;
+            if(!grounded)
             {
                 Vector3 right = Vector3.Cross(Vector3.up, forward);
-		        MaybeParkour(position, right, -1, 0.3f);
-		        MaybeParkour(position, -right, 1, 0.3f);
+                result = MaybeParkour(position, right, -1, 0.3f);
+                if(result != null)
+                    return result;
+                result = MaybeParkour(position, -right, 1, 0.3f);
+                if(result != null)
+                    return result;
             }
         }
+        return null;
     }
 
     private bool MovingForwards(Vector3 forward, Vector3 velocity)
@@ -37,14 +45,15 @@ public class ParkourModel
         return Vector3.Angle(forward, velocity2D.normalized) < climbAngleTolerence;
     }
 
-    private void MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
+    private ParkourResult MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
     {
         RaycastHit? hit = raycaster.CastRay(position, axis);
         if (hit.HasValue)
         {
 	        Vector3 velocity = CalculateVelocity(hit.Value, sideDir, upSpeed);
-        	movement.StartParkour(hit.Value.normal, velocity);
+        	return new ParkourResult(hit.Value.normal, velocity);
         }
+        return null;
     }
 
     private Vector3 CalculateVelocity(RaycastHit hit, int sideDir, float upSpeed)
