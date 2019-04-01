@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: d89821add86d68b4886a70ffe6f73f59
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: dummy_hips3
+    100004: dummy_hips3_dummy_belly
+    100006: dummy_hips3_dummy_belly_dummy_torso
+    100008: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder
+    100010: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm
+    100012: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow
+    100014: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm
+    100016: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist
+    100018: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhand
+    100020: dummy_hips3_dummy_belly_dummy_torso_dummy_neck
+    100022: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headq
+    100024: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder
+    100026: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm
+    100028: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow
+    100030: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm
+    100032: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist
+    100034: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhand
+    100036: dummy_hips3_dummy_lpelvis
+    100038: dummy_hips3_dummy_lpelvis_dummy_lupleg
+    100040: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee
+    100042: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg
+    100044: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle
+    100046: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfoot
+    100048: dummy_hips3_dummy_rpelvis
+    100050: dummy_hips3_dummy_rpelvis_dummy_rupleg
+    100052: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee
+    100054: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg
+    100056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle
+    100058: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
+    100060: head
+    100062: head-handle
+    100064: left-ankle
+    100066: left-arm-ik-chain
+    100068: left-arm-skele-stub
+    100070: left-arm-target
+    100072: left-elbow-helper
+    100074: left-foot
+    100076: left-foot-handle
+    100078: left-hand
+    100080: left-hand-handle
+    100082: left-hip
+    100084: left-knee-helper
+    100086: left-leg-ik-chain
+    100088: left-leg-target
+    100090: left-lower-arm
+    100092: left-lower-leg
+    100094: left-sholder
+    100096: left-upper-arm
+    100098: left-upper-leg
+    100100: neck
+    100102: pelvis
+    100104: pelvis-handle
+    100106: right-ankle
+    100108: right-arm-ik-chain
+    100110: right-arm-skele-stub
+    100112: right-arm-target
+    100114: right-elbow-helper
+    100116: right-foot
+    100118: right-foot-handle
+    100120: right-hand
+    100122: right-hand-handle
+    100124: right-hip
+    100126: right-knee-helper
+    100128: right-leg-ik-chain
+    100130: right-leg-target
+    100132: right-lower-arm
+    100134: right-lower-leg
+    100136: right-sholder
+    100138: right-upper-arm
+    100140: right-upper-leg
+    100142: spine
+    100144: target-circle-graphic
+    100146: target-circle-graphic 1
+    100148: target-circle-graphic 10
+    100150: target-circle-graphic 11
+    100152: target-circle-graphic 2
+    100154: target-circle-graphic 3
+    100156: target-circle-graphic 4
+    100158: target-circle-graphic 5
+    100160: target-circle-graphic 6
+    100162: target-circle-graphic 7
+    100164: target-circle-graphic 8
+    100166: target-circle-graphic 9
+    100168: torso-handle
+    400000: //RootNode
+    400002: dummy_hips3
+    400004: dummy_hips3_dummy_belly
+    400006: dummy_hips3_dummy_belly_dummy_torso
+    400008: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder
+    400010: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm
+    400012: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow
+    400014: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm
+    400016: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist
+    400018: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhand
+    400020: dummy_hips3_dummy_belly_dummy_torso_dummy_neck
+    400022: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headq
+    400024: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder
+    400026: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm
+    400028: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow
+    400030: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm
+    400032: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist
+    400034: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhand
+    400036: dummy_hips3_dummy_lpelvis
+    400038: dummy_hips3_dummy_lpelvis_dummy_lupleg
+    400040: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee
+    400042: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg
+    400044: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle
+    400046: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfoot
+    400048: dummy_hips3_dummy_rpelvis
+    400050: dummy_hips3_dummy_rpelvis_dummy_rupleg
+    400052: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee
+    400054: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg
+    400056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle
+    400058: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
+    400060: head
+    400062: head-handle
+    400064: left-ankle
+    400066: left-arm-ik-chain
+    400068: left-arm-skele-stub
+    400070: left-arm-target
+    400072: left-elbow-helper
+    400074: left-foot
+    400076: left-foot-handle
+    400078: left-hand
+    400080: left-hand-handle
+    400082: left-hip
+    400084: left-knee-helper
+    400086: left-leg-ik-chain
+    400088: left-leg-target
+    400090: left-lower-arm
+    400092: left-lower-leg
+    400094: left-sholder
+    400096: left-upper-arm
+    400098: left-upper-leg
+    400100: neck
+    400102: pelvis
+    400104: pelvis-handle
+    400106: right-ankle
+    400108: right-arm-ik-chain
+    400110: right-arm-skele-stub
+    400112: right-arm-target
+    400114: right-elbow-helper
+    400116: right-foot
+    400118: right-foot-handle
+    400120: right-hand
+    400122: right-hand-handle
+    400124: right-hip
+    400126: right-knee-helper
+    400128: right-leg-ik-chain
+    400130: right-leg-target
+    400132: right-lower-arm
+    400134: right-lower-leg
+    400136: right-sholder
+    400138: right-upper-arm
+    400140: right-upper-leg
+    400142: spine
+    400144: target-circle-graphic
+    400146: target-circle-graphic 1
+    400148: target-circle-graphic 10
+    400150: target-circle-graphic 11
+    400152: target-circle-graphic 2
+    400154: target-circle-graphic 3
+    400156: target-circle-graphic 4
+    400158: target-circle-graphic 5
+    400160: target-circle-graphic 6
+    400162: target-circle-graphic 7
+    400164: target-circle-graphic 8
+    400166: target-circle-graphic 9
+    400168: torso-handle
+    2100000: 'Material #26'
+    2300000: dummy_hips3
+    2300002: dummy_hips3_dummy_belly
+    2300004: dummy_hips3_dummy_belly_dummy_torso
+    2300006: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder
+    2300008: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm
+    2300010: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow
+    2300012: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm
+    2300014: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist
+    2300016: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhand
+    2300018: dummy_hips3_dummy_belly_dummy_torso_dummy_neck
+    2300020: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headq
+    2300022: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder
+    2300024: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm
+    2300026: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow
+    2300028: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm
+    2300030: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist
+    2300032: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhand
+    2300034: dummy_hips3_dummy_lpelvis
+    2300036: dummy_hips3_dummy_lpelvis_dummy_lupleg
+    2300038: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee
+    2300040: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg
+    2300042: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle
+    2300044: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfoot
+    2300046: dummy_hips3_dummy_rpelvis
+    2300048: dummy_hips3_dummy_rpelvis_dummy_rupleg
+    2300050: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee
+    2300052: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg
+    2300054: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle
+    2300056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
+    3300000: dummy_hips3
+    3300002: dummy_hips3_dummy_belly
+    3300004: dummy_hips3_dummy_belly_dummy_torso
+    3300006: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder
+    3300008: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm
+    3300010: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow
+    3300012: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm
+    3300014: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist
+    3300016: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhand
+    3300018: dummy_hips3_dummy_belly_dummy_torso_dummy_neck
+    3300020: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headq
+    3300022: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder
+    3300024: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm
+    3300026: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow
+    3300028: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm
+    3300030: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist
+    3300032: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhand
+    3300034: dummy_hips3_dummy_lpelvis
+    3300036: dummy_hips3_dummy_lpelvis_dummy_lupleg
+    3300038: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee
+    3300040: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg
+    3300042: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle
+    3300044: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfoot
+    3300046: dummy_hips3_dummy_rpelvis
+    3300048: dummy_hips3_dummy_rpelvis_dummy_rupleg
+    3300050: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee
+    3300052: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg
+    3300054: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle
+    3300056: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
+    4300000: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle_dummy_lfoot
+    4300002: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle_dummy_rfoot
+    4300004: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg
+    4300006: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee_dummy_lleg_dummy_lankle
+    4300008: dummy_hips3_dummy_lpelvis_dummy_lupleg
+    4300010: dummy_hips3_dummy_lpelvis_dummy_lupleg_dummy_lknee
+    4300012: dummy_hips3_dummy_lpelvis
+    4300014: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg
+    4300016: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee_dummy_rleg_dummy_rankle
+    4300018: dummy_hips3_dummy_rpelvis_dummy_rupleg
+    4300020: dummy_hips3_dummy_rpelvis_dummy_rupleg_dummy_rknee
+    4300022: dummy_hips3_dummy_rpelvis
+    4300024: dummy_hips3_dummy_belly
+    4300026: dummy_hips3
+    4300028: dummy_hips3_dummy_belly_dummy_torso_dummy_neck
+    4300030: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm
+    4300032: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist
+    4300034: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm
+    4300036: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow
+    4300038: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder
+    4300040: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm
+    4300042: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist
+    4300044: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm
+    4300046: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow
+    4300048: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder
+    4300050: dummy_hips3_dummy_belly_dummy_torso
+    4300052: dummy_hips3_dummy_belly_dummy_torso_dummy_rshoulder_dummy_rarm_dummy_relbow_dummy_rfarm_dummy_rwrist_dummy_rhand
+    4300054: dummy_hips3_dummy_belly_dummy_torso_dummy_neck_dummy_headq
+    4300056: dummy_hips3_dummy_belly_dummy_torso_dummy_lshoulder_dummy_larm_dummy_lelbow_dummy_lfarm_dummy_lwrist_dummy_lhand
+    7400000: walk
+    7400002: idle
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: walk
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 41
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

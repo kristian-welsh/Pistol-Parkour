@@ -19,12 +19,11 @@ namespace Kristian
 
 		void Start ()
 		{
-			view = GetComponent<CharacterView>();
 			movement = CreateMovement();
+			view = GetComponent<CharacterView>();
+			view.RegisterEvents(movement);
 			parkour = new Parkour(climbAngleTolerence, climbSpeed);
 			parkour.movement = movement;
-
-			view.movement = movement;
 		}
 
 		protected virtual CharacterMovement CreateMovement()

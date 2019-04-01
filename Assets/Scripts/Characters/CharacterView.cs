@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CharacterView : MonoBehaviour
 {
-    [HideInInspector]
-    public CharacterMovement movement;
-
 	public Vector3 Velocity { get { return rigidbody.velocity; } }
 	public Transform GetTransform { get { return transform; } }
 
 	new private GameObject camera;
 	new private Rigidbody rigidbody;
 	private float originalDrag;
+    private Animator anim;
 
     void Start()
     {
@@ -20,18 +18,28 @@ public class CharacterView : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         Kristian.Health health = GetComponent<Kristian.Health>();
         health.OnDeath += Die;
+        anim = transform.GetComponentInChildren<Animator>();
+        
+        // animations currently screwing with game logic, can't walk properly
+        anim.enabled = false;
+	}
+
+    public void RegisterEvents(CharacterMovement movement)
+    {
         movement.collectGunEvent += CollectGun;
         movement.startParkourEvent += StartParkour;
         movement.stopParkourEvent += StopParkour;
         movement.addForceEvent += AddForce;
-	}
+        movement.startWalkingEvent += StartWalking;
+        movement.stopWalkingEvent += StopWalking;
+    }
 
 	private void Die(GameObject obj)
 	{
 		Destroy(obj);
 	}
 
-	// attatches a copy of a gun to the view heirchy and returns that copy
+	// attaches a copy of a gun to the view hierarchy and returns that copy
     public void CollectGun(GameObject newGun)
     {
         // disable old gun
@@ -65,5 +73,16 @@ public class CharacterView : MonoBehaviour
     public void AddForce(Vector3 force, ForceMode mode)
     {
 		rigidbody.AddForce(force, mode);
+    }
+
+    public void StartWalking()
+    {
+    
+        anim.SetBool("IsWalking", true);
+    }
+
+    public void StopWalking()
+    {
+        anim.SetBool("IsWalking", false);
     }
 }

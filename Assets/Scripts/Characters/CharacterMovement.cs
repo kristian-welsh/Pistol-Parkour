@@ -6,11 +6,15 @@ public class CharacterMovement
     public delegate void CollectGunUpdate(GameObject newGun);
     public delegate void StartParkourUpdate(Vector3 velocity);
     public delegate void StopParkourUpdate();
+    public delegate void StartWalkingUpdate();
+    public delegate void StopWalkingUpdate();
     public delegate void AddForceUpdate(Vector3 force, ForceMode mode);
     public CollectGunUpdate collectGunEvent;
     public StartParkourUpdate startParkourEvent;
     public StopParkourUpdate stopParkourEvent;
     public AddForceUpdate addForceEvent;
+    public StartWalkingUpdate startWalkingEvent;
+    public StopWalkingUpdate stopWalkingEvent;
 
     protected bool grounded = true;
     protected float speed;
@@ -85,7 +89,13 @@ public class CharacterMovement
     private void Move(Vector3 forward)
     {
 		Vector3 movement = CalculateMovementForce(forward);
+        //MonoBehaviour.print("addForceEvent: " + addForceEvent);
 		addForceEvent(movement, ForceMode.Acceleration);
+        movement.y = 0;
+        if(grounded && movement.sqrMagnitude > 0)
+            startWalkingEvent();
+        else
+            stopWalkingEvent();
     }
 
 	protected virtual Vector3 CalculateMovementForce(Vector3 forward)
