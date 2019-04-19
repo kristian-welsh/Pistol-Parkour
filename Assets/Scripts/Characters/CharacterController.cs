@@ -24,6 +24,10 @@ namespace Kristian
 			Initialize();
 		}
 
+		/* Needs to be available seperately to start because we instantiate it manually then
+		 * immediately call something on it assuming it's initialized already. Start won't do that.
+		 * Consider re-writing RespawnManager to resolve this.
+		 */
 		public void Initialize()
 		{
 			if(initialized)
@@ -51,7 +55,7 @@ namespace Kristian
 
 		void FixedUpdate()
 		{
-			if(!initialized)
+			if(!(initialized && view.initialized))
 				return;
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
 			ParkourResult parkourResult = parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);

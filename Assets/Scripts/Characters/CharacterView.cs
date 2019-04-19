@@ -11,6 +11,7 @@ public class CharacterView : MonoBehaviour
 	new private Rigidbody rigidbody;
 	private float originalDrag;
     //private Animator anim;
+    public bool initialized = false;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class CharacterView : MonoBehaviour
         
         // animations currently screwing with game logic, can't walk properly
         //anim.enabled = false;
+        initialized = true;
 	}
 
     public void RegisterEvents(CharacterMovement movement)

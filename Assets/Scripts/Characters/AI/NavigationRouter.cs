@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// todo: make this and its null object models to avoid instantiating MonoBehaviours in AIMovement
 public class NavigationRouter : MonoBehaviour
 {
 	//leads calling object to the gameobject this is attached to, one step at a time

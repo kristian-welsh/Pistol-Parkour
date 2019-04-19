@@ -24,7 +24,6 @@ public class CharacterMovement
     private bool hasClimbed = false;
     private bool climbing = false;
     private Vector3 jumpNormal;
-    private IEnumerator stopCurrentProcess;
 	private Raycaster raycaster;
 
     private TimedAction timer;
@@ -140,6 +139,5 @@ public class CharacterMovement
     {
         climbing = false;
         stopParkourEvent();
-        stopCurrentProcess = null;
     }
 }
