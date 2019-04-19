@@ -15,6 +15,11 @@ public class AIShootingInput : ShootingInput
 		aggressive = false;
 	}
 
+	public void AcquireTarget(GameObject obj)
+	{
+		aggressive = true;
+	}
+
 	public override bool ShouldShoot()
 	{
 		return aggressive;

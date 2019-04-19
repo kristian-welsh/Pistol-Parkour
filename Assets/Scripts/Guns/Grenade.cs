@@ -80,6 +80,10 @@ public class Grenade : MonoBehaviour
 
 	private void HideExplosion()
 	{
+		explosion.SetActive(false);
+		explosionCollider.SetActive(false);
+		model.SetActive(false);
+		gameObject.SetActive(false);
 		Destroy(gameObject);
 	}
 }

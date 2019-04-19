@@ -2,24 +2,38 @@
 
 public class AICamera : CharacterCamera
 {
+	// todo: we might be able to delete this
 	public GameObject player;
 	public Transform enemyMidpoint;
 
 	private Vector3 characterRotation = Vector3.zero;
 	private Vector3 cameraRotation = Vector3.zero;
-	private bool aggro = true;
+	private bool aggro;
 
 	public override void Start ()
 	{
-		player = GameObject.FindGameObjectsWithTag("Player")[0];
-		player.GetComponent<Kristian.Health>().OnDeath += Deaggro;
-		enemyMidpoint = player.transform.GetChild(0);
+		AcquireTarget(GameObject.FindGameObjectsWithTag("Player")[0]);
 		base.Start();
 	}
 
 	private void Deaggro(GameObject obj)
 	{
 		aggro = false;
+	}
+
+	public void AcquireTarget(GameObject targetPlayer)
+	{
+		if(targetPlayer != null)
+		{
+			aggro = true;
+			player = targetPlayer;
+			player.GetComponent<Kristian.Health>().OnDeath += Deaggro;
+			enemyMidpoint = player.transform.GetChild(0);
+		}
+		else
+		{
+			Deaggro(null);
+		}
 	}
 
 	public override void FixedUpdate ()

@@ -8,25 +8,31 @@ public class RespawnManager : MonoBehaviour
 	public GameObject playerPrefab;
 	public GameObject aiPrefab;
 	public Waypoint[] spawnPoints;
+	
+	private AIController aiController;
 
 	void Start ()
 	{
-		Spawn(playerPrefab, RandomValidSpawn());
-		SpawnAI(aiPrefab, RandomValidSpawn());
+		SpawnPlayer(RandomValidSpawn());
+		SpawnAI(RandomValidSpawn());
 	}
 
-	private GameObject SpawnAI(GameObject prefab, Waypoint spawnLocation)
+	private GameObject SpawnAI(Waypoint spawnLocation)
 	{
-		GameObject ai = Spawn(prefab, spawnLocation);
-		ai.GetComponent<AIController>().Initialize();
-		ai.GetComponent<AIController>().SetDestination(spawnLocation);
+		GameObject ai = Instantiate(aiPrefab, spawnLocation.transform.position, Quaternion.identity, transform);
+		ai.GetComponent<Kristian.Health>().OnDeath += NotifyOfDeath;
+		aiController = ai.GetComponent<AIController>();
+		aiController.Initialize();
+		aiController.SetDestination(spawnLocation);
 		return ai;
 	}
 
-	private GameObject Spawn(GameObject prefab, Waypoint spawnLocation)
+	private GameObject SpawnPlayer(Waypoint spawnLocation)
 	{
-		GameObject obj = Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity, transform);
+		GameObject obj = Instantiate(playerPrefab, spawnLocation.transform.position, Quaternion.identity, transform);
 		obj.GetComponent<Kristian.Health>().OnDeath += NotifyOfDeath;
+		if(aiController != null)
+			aiController.AggroToTarget(obj);
 		return obj;
 	}
 
@@ -61,11 +67,11 @@ public class RespawnManager : MonoBehaviour
     {
     	if(ai)
     	{
-			SpawnAI(aiPrefab, RandomValidSpawn());
+			SpawnAI(RandomValidSpawn());
     	}
     	else
     	{
-			Spawn(playerPrefab, RandomValidSpawn());
+			SpawnPlayer(RandomValidSpawn());
     	}
 	}
 }

@@ -18,23 +18,30 @@ public class AIMovement : CharacterMovement
 
 	public AIMovement(GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(speed, jumpPower, climbLength)
 	{
-		aggroTarget = targetPlayer.GetComponent<NavigationRouter>();
-		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
-		if(aggroTarget == null)
+		if(targetPlayer == null)
 			Deaggro(null);
+		else
+			AcquireTarget(targetPlayer);
 		raycaster = new Raycaster(3f, "Shootable");
 	}
 
+	// need the argument to be a valid listener for player death
 	private void Deaggro(GameObject obj)
 	{
 		aggroTarget = new NullNavigationRouter();
+	}
+
+	// in the future when we have more than one player we may scan the environment for players 
+	public void AcquireTarget(GameObject targetPlayer)
+	{
+		aggroTarget = targetPlayer.GetComponent<NavigationRouter>();
+		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 	}
 	
     public override void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
 	{
 		base.Recalculate(velocity, position, forward);
 		StopJumping();
-		AcquireTarget();
 		UpdateDestination(position);
 		CalculateMovement(position);
 		JumpOverPits(velocity, position);
@@ -43,11 +50,6 @@ public class AIMovement : CharacterMovement
 	private void StopJumping()
 	{
 		jump = false;
-	}
-
-	private void AcquireTarget()
-	{
-		//todo
 	}
 
 	private void UpdateDestination(Vector3 position)
@@ -78,8 +80,10 @@ public class AIMovement : CharacterMovement
 		Vector3 rayPosition = position + new Vector3(0f, 1f, 0f);
 		Vector3 angle = CreateLookDownAngle(velocity);
 		RaycastHit? hit = raycaster.CastRay(rayPosition, angle);
-		if(!hit.HasValue)
+		if(!hit.HasValue) {
+			MonoBehaviour.print("jumping over pit");
 			jump = true;
+		}
 	}
 
 	private Vector3 CreateLookDownAngle(Vector3 velocity)
