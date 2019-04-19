@@ -10,7 +10,7 @@ public class CharacterView : MonoBehaviour
 	new private GameObject camera;
 	new private Rigidbody rigidbody;
 	private float originalDrag;
-    private Animator anim;
+    //private Animator anim;
 
     void Start()
     {
@@ -18,10 +18,10 @@ public class CharacterView : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         Kristian.Health health = GetComponent<Kristian.Health>();
         health.OnDeath += Die;
-        anim = transform.GetComponentInChildren<Animator>();
+        //anim = transform.GetComponentInChildren<Animator>();
         
         // animations currently screwing with game logic, can't walk properly
-        anim.enabled = false;
+        //anim.enabled = false;
 	}
 
     public void RegisterEvents(CharacterMovement movement)
@@ -30,8 +30,8 @@ public class CharacterView : MonoBehaviour
         movement.startParkourEvent += StartParkour;
         movement.stopParkourEvent += StopParkour;
         movement.addForceEvent += AddForce;
-        movement.startWalkingEvent += StartWalking;
-        movement.stopWalkingEvent += StopWalking;
+        //movement.startWalkingEvent += StartWalking;
+        //movement.stopWalkingEvent += StopWalking;
     }
 
 	private void Die(GameObject obj)
@@ -74,7 +74,7 @@ public class CharacterView : MonoBehaviour
     {
 		rigidbody.AddForce(force, mode);
     }
-
+    /*
     public void StartWalking()
     {
     
@@ -84,5 +84,5 @@ public class CharacterView : MonoBehaviour
     public void StopWalking()
     {
         anim.SetBool("IsWalking", false);
-    }
+    }*/
 }

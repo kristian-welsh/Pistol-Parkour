@@ -17,13 +17,23 @@ namespace Kristian
 		protected CharacterMovement movement;
 		private Parkour parkour;
 
+		private bool initialized = false;
+
 		void Start ()
 		{
+			Initialize();
+		}
+
+		public void Initialize()
+		{
+			if(initialized)
+				return;
 			movement = CreateMovement();
 			view = GetComponent<CharacterView>();
 			view.RegisterEvents(movement);
 			parkour = new Parkour(climbAngleTolerence, climbSpeed);
 			parkour.movement = movement;
+			initialized = true;
 		}
 
 		protected virtual CharacterMovement CreateMovement()
@@ -33,12 +43,16 @@ namespace Kristian
 
 		void OnTriggerEnter(Collider other)
 		{
+			if(!initialized)
+				return;
 			if (other.CompareTag("Collectable Gun"))
 				movement.TouchHoveringGun(other.gameObject);
 		}
 
 		void FixedUpdate()
 		{
+			if(!initialized)
+				return;
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
 			ParkourResult parkourResult = parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);
 			if(parkourResult != null)

@@ -18,6 +18,7 @@ public class RespawnManager : MonoBehaviour
 	private GameObject SpawnAI(GameObject prefab, Waypoint spawnLocation)
 	{
 		GameObject ai = Spawn(prefab, spawnLocation);
+		ai.GetComponent<AIController>().Initialize();
 		ai.GetComponent<AIController>().SetDestination(spawnLocation);
 		return ai;
 	}

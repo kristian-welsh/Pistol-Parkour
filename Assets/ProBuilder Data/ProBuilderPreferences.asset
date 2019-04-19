@@ -29,16 +29,18 @@ MonoBehaviour:
   - pbEditorScroll.x
   - pbEditorScroll.y
   - pbWeldDistance
+  - pbBevelAmount
   m_String_keys: []
   m_Color_keys: []
   m_Material_keys:
   - pbDefaultMaterial
   m_Bool_values: 0100000001
-  m_Int_values: 01000000020000000100000000000000020000000200000000000000
+  m_Int_values: 00000000020000000100000000000000020000000200000000000000
   m_Float_values:
   - 0
   - 0
   - 17.22
+  - 0.14945251
   m_String_values: []
   m_Color_values: []
   m_Material_values:

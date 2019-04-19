@@ -2,11 +2,13 @@
 
 public class NavigationRouter : MonoBehaviour
 {
+	//leads calling object to the gameobject this is attached to, one step at a time
 	public virtual Waypoint NextDestination(Waypoint current)
 	{
 		return NearestLink(current);
 	}
 
+	// find the child link of start that is nearest to the gameobject this script is attached to
 	private Waypoint NearestLink(Waypoint start)
 	{
 		Waypoint nearest = null;
