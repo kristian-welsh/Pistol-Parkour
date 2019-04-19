@@ -1170,7 +1170,6 @@ GameObject:
   - component: {fileID: 114414829516740008}
   - component: {fileID: 114482060734498812}
   - component: {fileID: 114551854695491426}
-  - component: {fileID: 114554476810611448}
   - component: {fileID: 114019977178521892}
   - component: {fileID: 114010326790490616}
   m_Layer: 0
@@ -5049,7 +5048,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1823023944587350}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: d89821add86d68b4886a70ffe6f73f59, type: 3}
   m_Controller: {fileID: 9100000, guid: e60b4ea0b9605ef479b11dd1c50f617d, type: 2}
   m_CullingMode: 0
@@ -5108,7 +5107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   climbAngleTolerence: 10
-  climbSpeed: 5
+  climbSpeed: 7
   climbLength: 2
   speed: 30
   jumpPower: 20
@@ -5138,6 +5137,8 @@ MonoBehaviour:
   timeBetweenBullets: 0.15
   effectsDisplayPercentage: 0.2
   range: 100
+  isAi: 0
+  aiAccuracy: 30
 --- !u!114 &114209336048666194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5186,18 +5187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   respawner: {fileID: 0}
---- !u!114 &114554476810611448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668149357436664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a55f7491a574ce48b18077447a07dc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stepsize: 1
 --- !u!120 &120037382321860028
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Kristian
 {
@@ -19,6 +20,12 @@ namespace Kristian
 		public static int RandInt(int start, int end)
 		{
 			return random.Next(start, end);
+		}
+
+		public static bool RandBool(int percentChanceTrue = 50)
+		{
+			double fraction = ((double)percentChanceTrue) / 100;
+			return random.NextDouble() < fraction;
 		}
 	}
 }

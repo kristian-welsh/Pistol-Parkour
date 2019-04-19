@@ -13,10 +13,7 @@ public class AIMovement : CharacterMovement
 	public Waypoint Destination
 	{
 		get { return destination; }
-		set {
-			destination = value;
-			MonoBehaviour.print("setting destination to: " + value);
-		}
+		set { destination = value; }
 	}
 
 	public AIMovement(GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(speed, jumpPower, climbLength)
@@ -65,7 +62,6 @@ public class AIMovement : CharacterMovement
 
 	private bool ReachedDestination(Vector3 position)
 	{
-		MonoBehaviour.print(destination);
 		float distance = Vector3.Distance(destination.Position, position);
 		return distance < DISTANCE_THRESHOLD;
 	}
