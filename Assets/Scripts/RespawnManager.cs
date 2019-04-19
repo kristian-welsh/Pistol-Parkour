@@ -47,8 +47,8 @@ public class RespawnManager : MonoBehaviour
 
 	private bool isAi(GameObject deadObject)
 	{
-		CharacterController controller = deadObject.GetComponent<CharacterController>();
-		return controller is AIController;
+		AIController controller = (AIController)deadObject.GetComponent(typeof(AIController));
+		return controller != null;
 	}
 
     private IEnumerator RespawnTimer(bool ai)
