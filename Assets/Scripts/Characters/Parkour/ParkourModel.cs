@@ -2,18 +2,22 @@
 using System.Collections;
 using UnityEngine;
 
+// TODO: rename file or class so they're the same
 public class Parkour
 {
     public CharacterMovement movement;
 
     private int climbAngleTolerence;
     private int climbSpeed;
-	private Raycaster raycaster = new Raycaster(1f, "Climbable");
+	private Raycaster raycaster;
 
-    public Parkour(int climbAngleTolerence, int climbSpeed)
+    public Parkour(int climbAngleTolerence, int climbSpeed, Raycaster raycaster = null)
     {
         this.climbAngleTolerence = climbAngleTolerence;
         this.climbSpeed = climbSpeed;
+        this.raycaster = raycaster;
+        if(this.raycaster == null)
+            this.raycaster = new Raycaster(1f, "Climbable");
     }
 
     public ParkourResult ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
@@ -21,6 +25,7 @@ public class Parkour
         ParkourResult result;
         if (!hasClimbed && MovingForwards(forward, velocity))
         {
+            // vertical wallclimb
             result = MaybeParkour(position, forward, 0, 1f);
             if(result != null)
                 return result;
@@ -47,19 +52,19 @@ public class Parkour
 
     private ParkourResult MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
     {
-        RaycastHit? hit = raycaster.CastRay(position, axis);
-        if (hit.HasValue)
+        RaycasterResult result = raycaster.CastWrappedRay(position, axis);
+        if (result.HasValue)
         {
-	        Vector3 velocity = CalculateVelocity(hit.Value, sideDir, upSpeed);
-        	return new ParkourResult(hit.Value.normal, velocity);
+	        Vector3 velocity = CalculateVelocity(result, sideDir, upSpeed);
+        	return new ParkourResult(result.Normal, velocity);
         }
         return null;
     }
 
-    private Vector3 CalculateVelocity(RaycastHit hit, int sideDir, float upSpeed)
+    private Vector3 CalculateVelocity(RaycasterResult result, int sideDir, float upSpeed)
     {
         Vector3 upVel = Vector3.up * climbSpeed * upSpeed;
-        Vector3 sideVel = SideAxisFromSurface(hit.normal, hit.transform) * climbSpeed * sideDir;
+        Vector3 sideVel = SideAxisFromSurface(result.Normal, result.Transform) * climbSpeed * sideDir;
         return upVel + sideVel;
     }
 

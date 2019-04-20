@@ -7,7 +7,7 @@ public class TestableCharacterMovement : CharacterMovement
 	Queue<bool> testJumpInputs = new Queue<bool>();
 
 
-	public TestableCharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null):base(speed, jumpPower, climbLength, raycaster){}
+	public TestableCharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory taf = null):base(speed, jumpPower, climbLength, raycaster, taf){}
 
 	public void addMovementForce(Vector3 force)
 	{

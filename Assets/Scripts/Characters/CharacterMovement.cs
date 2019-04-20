@@ -6,15 +6,11 @@ public class CharacterMovement
     public delegate void CollectGunUpdate(GameObject newGun);
     public delegate void StartParkourUpdate(Vector3 velocity);
     public delegate void StopParkourUpdate();
-    //public delegate void StartWalkingUpdate();
-    //public delegate void StopWalkingUpdate();
     public delegate void AddForceUpdate(Vector3 force, ForceMode mode);
     public CollectGunUpdate collectGunEvent;
     public StartParkourUpdate startParkourEvent;
     public StopParkourUpdate stopParkourEvent;
     public AddForceUpdate addForceEvent;
-    //public StartWalkingUpdate startWalkingEvent;
-    //public StopWalkingUpdate stopWalkingEvent;
 
     protected bool grounded = true;
     protected float speed;
@@ -26,19 +22,24 @@ public class CharacterMovement
     private Vector3 jumpNormal;
     private Raycaster raycaster;
 
+    private TimedActionFactory timedActionFactory;
     private TimedAction timer;
 
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    public CharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null)
+    public CharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
     {
         this.speed = speed;
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
         jumpNormal = Vector3.up;
-        if(raycaster == null)
-            raycaster = new Raycaster(0.1f);
+        this.raycaster = raycaster;
+        if(this.raycaster == null)
+            this.raycaster = new Raycaster(0.1f);
+        this.timedActionFactory = timedActionFactory;
+        if(this.timedActionFactory == null)
+            this.timedActionFactory = new TimedActionFactoryImplementation();
     }
 
     public void TouchHoveringGun(GameObject hoveringGun)
@@ -89,14 +90,8 @@ public class CharacterMovement
     private void Move(Vector3 forward)
     {
         Vector3 movement = CalculateMovementForce(forward);
-        //MonoBehaviour.print("addForceEvent: " + addForceEvent);
         addForceEvent(movement, ForceMode.Acceleration);
         movement.y = 0;
-        /*
-        if(grounded && movement.sqrMagnitude > 0)
-            startWalkingEvent();
-        else
-            stopWalkingEvent();*/
     }
 
     protected virtual Vector3 CalculateMovementForce(Vector3 forward)
@@ -131,7 +126,7 @@ public class CharacterMovement
         grounded = false;
         jumpNormal = normal;
         startParkourEvent(velocity);
-        timer = TimedAction.Create(climbLength);
+        timer = timedActionFactory.Create(climbLength);
         timer.delayedAction += StopWallclimb;
         timer.StartTimer();
     }

@@ -11,6 +11,11 @@ public class MockRaycaster : Raycaster
 		testHits = new Queue<MockRaycasterResult>();
 	}
 
+	public MockRaycaster(float range, String mask) : base(range, mask)
+	{
+		testHits = new Queue<MockRaycasterResult>();
+	}
+
 	public void addNullResult()
 	{
 		testHits.Enqueue(new MockRaycasterResult());
@@ -26,7 +31,7 @@ public class MockRaycaster : Raycaster
 		testHits.Enqueue(new MockRaycasterResult(normal));
 	}
 
-	new public RaycasterResult CastWrappedRay(Vector3 position, Vector3 direction)
+	public override RaycasterResult CastWrappedRay(Vector3 position, Vector3 direction)
 	{
 		return testHits.Dequeue();
 	}
@@ -37,8 +42,9 @@ public class MockRaycasterResult : RaycasterResult
 	private bool hasValue;
 	private bool hasTag = false;
 	private Vector3 normal = Vector3.zero;
-	new public bool HasValue { get { return hasValue; } }
-	new public Vector3 Normal { get { return normal; } }
+	public override bool HasValue { get { return hasValue; } }
+	public override Vector3 Normal { get { return normal; } }
+	public override Transform Transform { get { return new GameObject().transform; } }
 	
 	new public bool HasTag(String tagName)
 	{

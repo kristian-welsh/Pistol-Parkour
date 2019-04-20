@@ -9,14 +9,21 @@ public class ParkourTests
     private System.Collections.Generic.List<String> eventsPublished;
     private TestableCharacterMovement movement;
     private Parkour parkour;
+    private MockRaycaster movementRaycaster;
+    private MockRaycaster parkourRaycaster;
+    private MockTimedActionFactory factory;
 
+    [SetUp]
     public void SetUp()
     {
-        movement = new TestableCharacterMovement(5f, 3f, 3, new MockRaycaster(0.1f));
+        movementRaycaster = new MockRaycaster(0.1f);
+        parkourRaycaster = new MockRaycaster(1f, "Climbable");
+        factory = new MockTimedActionFactory();
+        movement = new TestableCharacterMovement(5f, 5f, 3, movementRaycaster, factory);
         movement.startParkourEvent += RecieveStartParkour;
         movement.stopParkourEvent += RecieveStopParkour;
         movement.addForceEvent += RecieveAddForce;
-        parkour = new Parkour(10, 3);
+        parkour = new Parkour(10, 3, parkourRaycaster);
         parkour.movement = movement;
 
         eventsPublished = new List<String>();
@@ -70,17 +77,22 @@ public class ParkourTests
     }
 
     [Test]
-    public void NoClimbing()
+    public void CanVerticalWallclimb()
     {
-        SetUp();
+        movementRaycaster.addGroundResult(new Vector3(0f, 1f, 0f));
+        parkourRaycaster.addGroundResult(new Vector3(-1f, 0f, 0f));
+
         // velocity, position, forward, testMovementForce, wantsToJump (bool)
         RunTicks(new float[1,13] {
-            {1f, 0f, 0f,   0f, 0f, 0f,   1f, 0f, 0f,   3f,3f,3f,   1f}
+            {2f, 0f, 0f,   0f, 0f, 0f,   1f, 0f, 0f,   1f,0f,0f,   1f}
         });
-        // assert
-        // Use the Assert class to test conditions.
-        AssertEvents(new String[1,3] {
-            {"Force", "(3.0, 3.0, 3.0)", "Acceleration"}
+        factory.currentAction.delayedAction();
+
+        AssertEvents(new String[4,3] {
+            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
+            {"Start", "(0.0, 3.0, 0.0)", ""},
+            {"Stop", "", ""}
         });
     }
 }

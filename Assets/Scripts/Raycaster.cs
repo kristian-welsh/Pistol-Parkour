@@ -28,7 +28,7 @@ public class Raycaster
 	}
 
 	// return wrapped result
-	public RaycasterResult CastWrappedRay(Vector3 position, Vector3 direction)
+	public virtual RaycasterResult CastWrappedRay(Vector3 position, Vector3 direction)
 	{
 		Ray ray = new Ray(position, direction);
 		RaycastHit hit;
@@ -42,8 +42,9 @@ public class Raycaster
 public class RaycasterResult
 {
 	private RaycastHit? hit;
-	public bool HasValue { get { return hit.HasValue; } }
-	public Vector3 Normal { get { return hit.Value.normal; } }
+	public virtual bool HasValue { get { return hit.HasValue; } }
+	public virtual Vector3 Normal { get { return hit.Value.normal; } }
+	public virtual Transform Transform { get { return hit.Value.transform; } }
 
 	public bool HasTag(String tagName)
 	{
