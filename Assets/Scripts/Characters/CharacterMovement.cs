@@ -24,20 +24,21 @@ public class CharacterMovement
     private bool hasClimbed = false;
     private bool climbing = false;
     private Vector3 jumpNormal;
-	private Raycaster raycaster;
+    private Raycaster raycaster;
 
     private TimedAction timer;
 
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    public CharacterMovement(float speed, float jumpPower, int climbLength)
+    public CharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null)
     {
         this.speed = speed;
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
         jumpNormal = Vector3.up;
-		raycaster = new Raycaster(0.1f);
+        if(raycaster == null)
+            raycaster = new Raycaster(0.1f);
     }
 
     public void TouchHoveringGun(GameObject hoveringGun)
@@ -65,21 +66,21 @@ public class CharacterMovement
             Move(forward);
         if (canJump() && wantsToJump())
             Jump();
-	}
+    }
 
-	private void CheckGround(Vector3 velocity, Vector3 position)
+    private void CheckGround(Vector3 velocity, Vector3 position)
     {
         if(velocity.y < 0)
         {
-            RaycastHit? hit = raycaster.CastRay(position, -Vector3.up);
-            if (hit.HasValue)
+            RaycasterResult result = raycaster.CastWrappedRay(position, -Vector3.up);
+            if (result.HasValue)
             {
-                if (hit.Value.transform.gameObject.CompareTag("Ground"))
+                if (result.HasTag("Ground"))
                 {
                     grounded = true;
                     hasClimbed = false;
                     climbing = false;
-                    jumpNormal = hit.Value.normal;
+                    jumpNormal = result.Normal;
                 }
             }
         }
@@ -87,9 +88,9 @@ public class CharacterMovement
 
     private void Move(Vector3 forward)
     {
-		Vector3 movement = CalculateMovementForce(forward);
+        Vector3 movement = CalculateMovementForce(forward);
         //MonoBehaviour.print("addForceEvent: " + addForceEvent);
-		addForceEvent(movement, ForceMode.Acceleration);
+        addForceEvent(movement, ForceMode.Acceleration);
         movement.y = 0;
         /*
         if(grounded && movement.sqrMagnitude > 0)
@@ -98,32 +99,32 @@ public class CharacterMovement
             stopWalkingEvent();*/
     }
 
-	protected virtual Vector3 CalculateMovementForce(Vector3 forward)
-	{
-		throw new System.Exception("Illegal base method call wantsToJump()");
-	}
+    protected virtual Vector3 CalculateMovementForce(Vector3 forward)
+    {
+        throw new System.Exception("Illegal base method call wantsToJump()");
+    }
 
-	private bool canJump()
-	{
-		return grounded | climbing;
-	}
+    private bool canJump()
+    {
+        return grounded | climbing;
+    }
 
-	protected virtual bool wantsToJump()
-	{
-		throw new System.Exception("Illegal base method call wantsToJump()");
-	}
+    protected virtual bool wantsToJump()
+    {
+        throw new System.Exception("Illegal base method call wantsToJump()");
+    }
 
-	private void Jump()
-	{
-		Vector3 impulse = jumpNormal * jumpPower;
-		addForceEvent(impulse, ForceMode.Impulse);
-		grounded = false;
-		climbing = false;
-		if (timer != null)
-			timer.PerformActionEarly();
-	}
-	
-	public void StartParkour(Vector3 normal, Vector3 velocity)
+    private void Jump()
+    {
+        Vector3 impulse = jumpNormal * jumpPower;
+        addForceEvent(impulse, ForceMode.Impulse);
+        grounded = false;
+        climbing = false;
+        if (timer != null)
+            timer.PerformActionEarly();
+    }
+    
+    public void StartParkour(Vector3 normal, Vector3 velocity)
     {
         hasClimbed = true;
         climbing = true;

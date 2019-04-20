@@ -18,11 +18,48 @@ public class Raycaster
 		this.mask = LayerMask.GetMask(mask);
 	}
 
+	// depreciated
 	public RaycastHit? CastRay(Vector3 position, Vector3 direction)
 	{
 		Ray ray = new Ray(position, direction);
 		RaycastHit hit;
 		bool hitSomething = Physics.Raycast(ray, out hit, range, mask);
 		return hitSomething ? (RaycastHit?)hit : null;
+	}
+
+	// return wrapped result
+	public RaycasterResult CastWrappedRay(Vector3 position, Vector3 direction)
+	{
+		Ray ray = new Ray(position, direction);
+		RaycastHit hit;
+		bool hitSomething = Physics.Raycast(ray, out hit, range, mask);
+		if(hitSomething)
+			return new RaycasterResult(hit);
+		return new RaycasterResult();
+	}
+}
+
+public class RaycasterResult
+{
+	private RaycastHit? hit;
+	public bool HasValue { get { return hit.HasValue; } }
+	public Vector3 Normal { get { return hit.Value.normal; } }
+
+	public bool HasTag(String tagName)
+	{
+		if(hit.HasValue)
+			return hit.Value.transform.gameObject.CompareTag(tagName);
+		MonoBehaviour.print("WARNING: calling HasTag on a RaycastResult without a value, returning false");
+		return false;
+	}
+
+	public RaycasterResult()
+	{
+		// intentionally blank
+	}
+
+	public RaycasterResult(RaycastHit hit)
+	{
+		this.hit = hit;
 	}
 }

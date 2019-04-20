@@ -38,7 +38,7 @@ public class AIMovement : CharacterMovement
 		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 	}
 	
-    public override void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
+	public override void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
 	{
 		base.Recalculate(velocity, position, forward);
 		StopJumping();
