@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Kristian
 {
+	/* Provides global functions to use across the application
+	 * the intent was to hang all global functions here, not just random object generators
+	 */
 	public class Util 
 	{
 		private static System.Random random = new System.Random();

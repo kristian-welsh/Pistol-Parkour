@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/* Attached in the scene to a point at the tip of a gun.
+ * Allows guns to shoot
+ */
 public class GunShooting : MonoBehaviour
 {
     public int damagePerShot = 20;

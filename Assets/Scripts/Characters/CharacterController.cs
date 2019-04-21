@@ -26,8 +26,8 @@ namespace Kristian
 		}
 
 		/* Needs to be available seperately to start because we instantiate it manually then
-		 * immediately call something on it assuming it's initialized already. Start won't do that.
-		 * Consider re-writing RespawnManager to resolve this.
+		 * immediately call something on it assuming it's initialized already.
+		 * Start won't be called in time.
 		 */
 		public void Initialize()
 		{

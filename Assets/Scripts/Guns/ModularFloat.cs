@@ -1,9 +1,10 @@
-﻿public class ModularFloat
+﻿/* Represents a floating point number that wraps back around to zero past a maximum value
+ */
+public class ModularFloat
 {
     private float value;
     private float maximum;
 
-    /// A float that wraps back around to 0 once it reaches a maximum value
     public ModularFloat(float maximum, float value = 0)
     {
         this.value = value;
@@ -19,6 +20,8 @@
         }
     }
 
+    /* Value of the float as a percentage of its maximum
+     */
     public float Percent
     {
         get
@@ -27,8 +30,11 @@
         }
     }
 
+    /* convenience method to add to the value more easily
+     */
     public void Add(float num)
     {
+        // use the setter to get the wrapping
         Value = value + num;
     }
 }
