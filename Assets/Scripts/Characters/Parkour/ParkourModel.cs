@@ -17,6 +17,7 @@ public class Parkour
     private TimedActionFactory timedActionFactory;
     private ITimedAction timer;
     private bool climbing = false;
+    private Vector3 lastClimbAxis = Vector3.zero;
 
     public Parkour(int climbAngleTolerence, int climbSpeed, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
     {
@@ -39,8 +40,21 @@ public class Parkour
 
     public void ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
     {
-        if (!hasClimbed && MovingForwards(forward, velocity))
+        // if we're already climbing
+        if(climbing)
         {
+            // re-test last direction to see if we need to crest the obstacle
+            RaycasterResult result = raycaster.CastWrappedRay(position, lastClimbAxis);
+            // if we don't hit anything
+            if (!result.HasValue)
+            {
+                // fall
+                StopParkourEarly();
+            }
+        }
+        else if (!hasClimbed && MovingForwards(forward, velocity))
+        {
+            // Otherwise, try to start climbing
             // vertical wallclimb
             if(MaybeParkour(position, forward, 0, 1f))
                 return;
@@ -67,6 +81,7 @@ public class Parkour
         RaycasterResult result = raycaster.CastWrappedRay(position, axis);
         if (result.HasValue)
         {
+            lastClimbAxis = axis;
 	        Vector3 velocity = CalculateVelocity(result.Normal, sideDir, upSpeed);
             StartParkour(result.Normal, velocity);
         }
@@ -102,5 +117,14 @@ public class Parkour
             stopParkourEvent();
             climbing = false;
         }
+    }
+
+    // we need this too to avoid a memory leak in TimedAction
+    private void StopParkourEarly()
+    {
+        if(timer != null)
+            timer.PerformActionEarly();
+        else
+            StopParkour();
     }
 }

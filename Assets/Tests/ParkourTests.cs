@@ -195,7 +195,6 @@ public class ParkourTests
         });
     }
     
-/*
     // new feature
     // climb up a wall till you reach the top, then stop
     [Test]
@@ -208,7 +207,7 @@ public class ParkourTests
         parkourRaycaster.addNullResult();
 
         //  velocity,      forward,  movementInput, jumpInput (bool)
-        RunTicks(new float[2,13] {
+        RunTicks(new float[2,10] {
             {2f, 0f, 0f,   1f, 0f, 0f,   1f,0f,0f,   1f},// jump forward
             {0f, 3f, 0f,   1f, 0f, 0f,   1f,0f,0f,   0f}// climb up (expected result of first tick)
         });
@@ -216,11 +215,11 @@ public class ParkourTests
 
         // event name, arg 1, arg 2
         AssertEvents(new String[4,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(0.0, 3.0, 0.0)", ""},
+            {"Start", "(-1.0, 0.0, 0.0)", "(0.0, 3.0, 0.0)"},
             {"Stop", "", ""}
         });
-        // Stop is the event we're most interested in, we'll get events depleted failure if it's not there
-    }*/
+        // Stop is the event we're most interested in, we'll get events depleted failure instead if the feature is unimplemented
+    }
 }
