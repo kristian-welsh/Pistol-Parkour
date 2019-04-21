@@ -88,10 +88,32 @@ public class ParkourTests
         });
         factory.currentAction.delayedAction();
 
+        // event name, arg 1, arg 2
         AssertEvents(new String[4,3] {
             {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(0.0, 3.0, 0.0)", ""},
+            {"Stop", "", ""}
+        });
+    }
+
+    [Test]
+    public void CanRightWallrun()
+    {
+        movementRaycaster.addGroundResult(new Vector3(0f, 1f, 0f));
+        parkourRaycaster.addNullResult();
+        parkourRaycaster.addGroundResult(new Vector3(0f, 0f, 1f));
+
+        // velocity, position, forward, testMovementForce, wantsToJump (bool)
+        RunTicks(new float[1,13] {
+            {2f, 0f, 0f,   0f, 0f, 0f,   1f, 0f, 0f,   1f,0f,0f,   1f}
+        });
+        factory.currentAction.delayedAction();
+
+        AssertEvents(new String[4,3] {
+            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
+            {"Start", "(3.0, 0.9, 0.0)", ""},
             {"Stop", "", ""}
         });
     }

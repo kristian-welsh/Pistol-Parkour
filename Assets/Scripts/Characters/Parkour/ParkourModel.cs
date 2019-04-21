@@ -13,6 +13,7 @@ public class Parkour
 
     public Parkour(int climbAngleTolerence, int climbSpeed, Raycaster raycaster = null)
     {
+        print("Parkour", climbAngleTolerence, climbSpeed);
         this.climbAngleTolerence = climbAngleTolerence;
         this.climbSpeed = climbSpeed;
         this.raycaster = raycaster;
@@ -22,6 +23,7 @@ public class Parkour
 
     public ParkourResult ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
     {
+        print("ParkourCheck: ", forward, position, velocity, hasClimbed, grounded);
         ParkourResult result;
         if (!hasClimbed && MovingForwards(forward, velocity))
         {
@@ -52,9 +54,11 @@ public class Parkour
 
     private ParkourResult MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
     {
+        print("MaybeParkour: ", position, axis, sideDir, upSpeed);
         RaycasterResult result = raycaster.CastWrappedRay(position, axis);
         if (result.HasValue)
         {
+            MonoBehaviour.print(result.Normal);
 	        Vector3 velocity = CalculateVelocity(result, sideDir, upSpeed);
         	return new ParkourResult(result.Normal, velocity);
         }
@@ -63,14 +67,42 @@ public class Parkour
 
     private Vector3 CalculateVelocity(RaycasterResult result, int sideDir, float upSpeed)
     {
+        print("CalculateVelocity: ", result.Normal, result.Transform, sideDir, upSpeed);
         Vector3 upVel = Vector3.up * climbSpeed * upSpeed;
         Vector3 sideVel = SideAxisFromSurface(result.Normal, result.Transform) * climbSpeed * sideDir;
+
+        Vector3 foo = Vector3.Cross(result.Normal, Vector3.up).normalized * climbSpeed * sideDir;
+        Vector3 bar = result.Transform.TransformVector(Vector3.Cross(result.Normal, Vector3.up)).normalized * climbSpeed * sideDir;
+        print2("prospective, actual: ", foo, bar);
+
         return upVel + sideVel;
     }
 
     private Vector3 SideAxisFromSurface(Vector3 normal, Transform transform)
     {
+        print("SideAxisFromSurface: ", normal, transform);
         Vector3 wallSideAxis = Vector3.Cross(normal, Vector3.up);
-        return transform.TransformVector(wallSideAxis).normalized;
+        return wallSideAxis.normalized;
+    }
+
+    private void print(params object[] list)
+    {
+        return;
+        String printable = "";
+        for(int i = 0; i < list.Length; i++)
+        {
+            printable += list[i] + ", ";
+        }
+        MonoBehaviour.print(printable);
+    }
+
+    private void print2(params object[] list)
+    {
+        String printable = "";
+        for(int i = 0; i < list.Length; i++)
+        {
+            printable += list[i] + ", ";
+        }
+        MonoBehaviour.print(printable);
     }
 }
