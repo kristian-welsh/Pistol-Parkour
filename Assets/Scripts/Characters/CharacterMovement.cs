@@ -5,44 +5,40 @@ using UnityEngine;
 public class CharacterMovement
 {
     public delegate void CollectGunUpdate(GameObject newGun);
-    public delegate void StartParkourUpdate(Vector3 velocity);
-    public delegate void StopParkourUpdate();
     public delegate void AddForceUpdate(Vector3 force, ForceMode mode);
+    public delegate void JumpUpdate();
     public CollectGunUpdate collectGunEvent;
-    public StartParkourUpdate startParkourEvent;
-    public StopParkourUpdate stopParkourEvent;
     public AddForceUpdate addForceEvent;
+    public JumpUpdate jumpEvent;
 
     protected bool grounded = true;
     protected float speed;
 
     private float jumpPower;
-    private int climbLength;
     private bool hasClimbed = false;
     private bool climbing = false;
     private Vector3 jumpNormal;
     private Raycaster raycaster;
     private MovementDecisionAgent agent;
 
-    private TimedActionFactory timedActionFactory;
-    private ITimedAction timer;
-
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    public CharacterMovement(MovementDecisionAgent agent, float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
+    public CharacterMovement(MovementDecisionAgent agent, float speed, float jumpPower, Raycaster raycaster = null)
     {
         jumpNormal = Vector3.up;
         this.agent = agent;
         this.speed = speed;
         this.jumpPower = jumpPower;
-        this.climbLength = climbLength;
         this.raycaster = raycaster;
         if(this.raycaster == null)
             this.raycaster = new Raycaster(0.1f);
-        this.timedActionFactory = timedActionFactory;
-        if(this.timedActionFactory == null)
-            this.timedActionFactory = new TimedActionFactoryImplementation();
+    }
+
+    public void RegisterEvents(Parkour parkour)
+    {
+        parkour.startParkourEvent += StartParkour;
+        parkour.stopParkourEvent += StopParkour;
     }
 
     public void TouchHoveringGun(GameObject hoveringGun)
@@ -119,12 +115,10 @@ public class CharacterMovement
 
     private void Jump()
     {
+        grounded = false;
         Vector3 impulse = jumpNormal * jumpPower;
         addForceEvent(impulse, ForceMode.Impulse);
-        grounded = false;
-        climbing = false;
-        if (timer != null)
-            timer.PerformActionEarly();
+        jumpEvent();
     }
     
     public void StartParkour(Vector3 normal, Vector3 velocity)
@@ -133,15 +127,10 @@ public class CharacterMovement
         climbing = true;
         grounded = false;
         jumpNormal = normal;
-        startParkourEvent(velocity);
-        timer = timedActionFactory.Create(climbLength);
-        timer.AddDelayedAction(stopParkourEarly);
-        timer.StartTimer();
     }
 
-    private void stopParkourEarly()
+    private void StopParkour()
     {
         climbing = false;
-        stopParkourEvent();
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : Kristian.CharacterController
 {
-    new private PlayerMovement agent;
+    private PlayerMovement agent;
 
     protected override MovementDecisionAgent CreateAgent()
     {

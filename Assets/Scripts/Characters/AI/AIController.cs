@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AIController : Kristian.CharacterController
 {
-    new private AIMovement agent;
+    private AIMovement agent;
 
     protected override MovementDecisionAgent CreateAgent()
     {

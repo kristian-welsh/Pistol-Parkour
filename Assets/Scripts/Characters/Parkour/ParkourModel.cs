@@ -5,42 +5,54 @@ using UnityEngine;
 // TODO: rename file or class so they're the same
 public class Parkour
 {
-    public CharacterMovement movement;
+    public delegate void StartParkourUpdate(Vector3 normal, Vector3 velocity);
+    public delegate void StopParkourUpdate();
+    public StartParkourUpdate startParkourEvent;
+    public StopParkourUpdate stopParkourEvent;
 
     private int climbAngleTolerence;
     private int climbSpeed;
+    private int climbLength;
 	private Raycaster raycaster;
+    private TimedActionFactory timedActionFactory;
+    private ITimedAction timer;
+    private bool climbing = false;
 
-    public Parkour(int climbAngleTolerence, int climbSpeed, Raycaster raycaster = null)
+    public Parkour(int climbAngleTolerence, int climbSpeed, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
     {
         this.climbAngleTolerence = climbAngleTolerence;
         this.climbSpeed = climbSpeed;
+        this.climbLength = climbLength;
         this.raycaster = raycaster;
         if(this.raycaster == null)
             this.raycaster = new Raycaster(1f, "Climbable");
+        this.timedActionFactory = timedActionFactory;
+        if(this.timedActionFactory == null)
+            this.timedActionFactory = new TimedActionFactoryImplementation();
     }
 
-    public ParkourResult ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
+    public void RegisterEvents(CharacterMovement movement)
     {
-        ParkourResult result;
+        // this redirect is needed because only Parkour should know that jumping stops parkour
+        movement.jumpEvent += StopParkour;
+    }
+
+    public void ParkourCheck(Vector3 forward, Vector3 position, Vector3 velocity, bool hasClimbed, bool grounded)
+    {
         if (!hasClimbed && MovingForwards(forward, velocity))
         {
             // vertical wallclimb
-            result = MaybeParkour(position, forward, 0, 1f);
-            if(result != null)
-                return result;
+            if(MaybeParkour(position, forward, 0, 1f))
+                return;
             if(!grounded)
             {
                 Vector3 right = Vector3.Cross(Vector3.up, forward);
-                result = MaybeParkour(position, right, -1, 0.3f);
-                if(result != null)
-                    return result;
-                result = MaybeParkour(position, -right, 1, 0.3f);
-                if(result != null)
-                    return result;
+                if(MaybeParkour(position, right, -1, 0.3f))
+                    return;
+                if(MaybeParkour(position, -right, 1, 0.3f))
+                    return;
             }
         }
-        return null;
     }
 
     private bool MovingForwards(Vector3 forward, Vector3 velocity)
@@ -50,15 +62,15 @@ public class Parkour
         return Vector3.Angle(forward, velocity2D.normalized) < climbAngleTolerence;
     }
 
-    private ParkourResult MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
+    private bool MaybeParkour(Vector3 position, Vector3 axis, int sideDir, float upSpeed)
     {
         RaycasterResult result = raycaster.CastWrappedRay(position, axis);
         if (result.HasValue)
         {
 	        Vector3 velocity = CalculateVelocity(result.Normal, sideDir, upSpeed);
-        	return new ParkourResult(result.Normal, velocity);
+            StartParkour(result.Normal, velocity);
         }
-        return null;
+        return result.HasValue;
     }
 
     private Vector3 CalculateVelocity(Vector3 normal, int sideDir, float upSpeed)
@@ -72,5 +84,23 @@ public class Parkour
     {
         Vector3 wallSideAxis = Vector3.Cross(normal, Vector3.up);
         return wallSideAxis.normalized;
+    }
+
+    private void StartParkour(Vector3 normal, Vector3 velocity)
+    {
+        climbing = true;
+        startParkourEvent(normal, velocity);
+        timer = timedActionFactory.Create(climbLength);
+        timer.AddDelayedAction(StopParkour);
+        timer.StartTimer();
+    }
+
+    private void StopParkour()
+    {
+        if(climbing)
+        {
+            stopParkourEvent();
+            climbing = false;
+        }
     }
 }

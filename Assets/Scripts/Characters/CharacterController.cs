@@ -34,11 +34,12 @@ namespace Kristian
 			if(initialized)
 				return;
 			agent = CreateAgent();
-			movement = new CharacterMovement(agent, speed, jumpPower, climbLength);
+			movement = new CharacterMovement(agent, speed, jumpPower);
+			parkour = new Parkour(climbAngleTolerence, climbSpeed, climbLength);
 			view = GetComponent<CharacterView>();
-			view.RegisterEvents(movement);
-			parkour = new Parkour(climbAngleTolerence, climbSpeed);
-			parkour.movement = movement;
+			movement.RegisterEvents(parkour);
+			parkour.RegisterEvents(movement);
+			view.RegisterEvents(movement, parkour);
 			initialized = true;
 		}
 
@@ -61,9 +62,7 @@ namespace Kristian
 				return;
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
 			agent.Recalculate(view.Velocity, view.GetTransform.position);
-			ParkourResult parkourResult = parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);
-			if(parkourResult != null)
-				movement.StartParkour(parkourResult.normal, parkourResult.velocity);
+			parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);
 		}
 	}
 }

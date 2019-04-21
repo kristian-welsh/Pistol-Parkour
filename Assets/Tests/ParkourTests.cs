@@ -21,19 +21,21 @@ public class ParkourTests
         parkourRaycaster = new MockRaycaster(1f, "Climbable");
         agent = new MockMovementDecisionAgent();
         factory = new MockTimedActionFactory();
-        movement = new CharacterMovement(agent, 10f, 5f, 3, movementRaycaster, factory);
-        movement.startParkourEvent += RecieveStartParkour;
-        movement.stopParkourEvent += RecieveStopParkour;
+        movement = new CharacterMovement(agent, 10f, 5f, movementRaycaster);
+        parkour = new Parkour(10, 3, 1, parkourRaycaster, factory);
         movement.addForceEvent += RecieveAddForce;
-        parkour = new Parkour(10, 3, parkourRaycaster);
-        parkour.movement = movement;
+        parkour.startParkourEvent += RecieveStartParkour;
+        parkour.stopParkourEvent += RecieveStopParkour;
+
+        movement.RegisterEvents(parkour);
+        parkour.RegisterEvents(movement);
 
         eventsPublished = new List<String>();
     }
 
-    private void RecieveStartParkour(Vector3 velocity)
+    private void RecieveStartParkour(Vector3 normal, Vector3 velocity)
     {
-        eventsPublished.Add("Start: " + velocity + ", ");
+        eventsPublished.Add("Start: " + normal + ", " + velocity);
     }
 
     private void RecieveStopParkour()
@@ -75,9 +77,7 @@ public class ParkourTests
     {
         Vector3 position = Vector3.zero;
         movement.Recalculate(velocity, position, forward);
-        ParkourResult parkourResult = parkour.ParkourCheck(forward, position, velocity, movement.HasClimbed, movement.Grounded);
-        if(parkourResult != null)
-            movement.StartParkour(parkourResult.normal, parkourResult.velocity);
+        parkour.ParkourCheck(forward, position, velocity, movement.HasClimbed, movement.Grounded);
     }
 
     [Test]
@@ -99,7 +99,7 @@ public class ParkourTests
         AssertEvents(new String[4,3] {
             {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(0.0, 3.0, 0.0)", ""},
+            {"Start", "(-1.0, 0.0, 0.0)", "(0.0, 3.0, 0.0)"},
             {"Stop", "", ""}
         });
     }
@@ -120,7 +120,7 @@ public class ParkourTests
         AssertEvents(new String[4,3] {
             {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(3.0, 0.9, 0.0)", ""},
+            {"Start", "(0.0, 0.0, 1.0)", "(3.0, 0.9, 0.0)"},
             {"Stop", "", ""}
         });
     }
@@ -142,7 +142,7 @@ public class ParkourTests
         AssertEvents(new String[4,3] {
             {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(3.0, 0.9, 0.0)", ""},
+            {"Start", "(0.0, 0.0, -1.0)", "(3.0, 0.9, 0.0)"},
             {"Stop", "", ""}
         });
     }
@@ -166,7 +166,7 @@ public class ParkourTests
         AssertEvents(new String[5,3] {
             {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(0.0, 3.0, 0.0)", ""},
+            {"Start", "(-1.0, 0.0, 0.0)", "(0.0, 3.0, 0.0)"},
             {"Force", "(-5.0, 0.0, 0.0)", "Impulse"},
             {"Stop", "", ""}
         });
@@ -189,7 +189,7 @@ public class ParkourTests
         AssertEvents(new String[5,3] {
             {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
-            {"Start", "(3.0, 0.9, 0.0)", ""},
+            {"Start", "(0.0, 0.0, 1.0)", "(3.0, 0.9, 0.0)"},
             {"Force", "(0.0, 0.0, 5.0)", "Impulse"},
             {"Stop", "", ""}
         });
