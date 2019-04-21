@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class PlayerController : Kristian.CharacterController
 {
-	protected override CharacterMovement CreateMovement()
-	{
-        return new PlayerMovement(speed, jumpPower, climbLength);
+    new private PlayerMovement agent;
+
+    protected override MovementDecisionAgent CreateAgent()
+    {
+        agent = new PlayerMovement();
+        return agent;
     }
 
     void Update()
@@ -12,6 +15,6 @@ public class PlayerController : Kristian.CharacterController
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
         bool spaceDepressed = Input.GetKeyDown("space");
-        ((PlayerMovement)movement).UpdateInput(horizontalInput, verticalInput, spaceDepressed);
+        agent.UpdateInput(horizontalInput, verticalInput, spaceDepressed);
     }
 }

@@ -7,7 +7,8 @@ using System.Collections.Generic;
 public class ParkourTests
 {
     private System.Collections.Generic.List<String> eventsPublished;
-    private TestableCharacterMovement movement;
+    private MockMovementDecisionAgent agent;
+    private CharacterMovement movement;
     private Parkour parkour;
     private MockRaycaster movementRaycaster;
     private MockRaycaster parkourRaycaster;
@@ -18,8 +19,9 @@ public class ParkourTests
     {
         movementRaycaster = new MockRaycaster(0.1f);
         parkourRaycaster = new MockRaycaster(1f, "Climbable");
+        agent = new MockMovementDecisionAgent();
         factory = new MockTimedActionFactory();
-        movement = new TestableCharacterMovement(5f, 5f, 3, movementRaycaster, factory);
+        movement = new CharacterMovement(agent, 10f, 5f, 3, movementRaycaster, factory);
         movement.startParkourEvent += RecieveStartParkour;
         movement.stopParkourEvent += RecieveStopParkour;
         movement.addForceEvent += RecieveAddForce;
@@ -63,8 +65,8 @@ public class ParkourTests
             Vector3 forward = new Vector3(data[i,3], data[i,4], data[i,5]);
             Vector3 movementForce = new Vector3(data[i,6], data[i,7], data[i,8]);
             bool shouldJump = (data[i,9] == 1f);
-            movement.addMovementForce(movementForce);
-            movement.addJumpInput(shouldJump);
+            agent.addMovementForce(movementForce);
+            agent.addJumpInput(shouldJump);
             Tick(velocity, forward);
         }
     }
@@ -95,7 +97,7 @@ public class ParkourTests
 
         // event name, arg 1, arg 2
         AssertEvents(new String[4,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(0.0, 3.0, 0.0)", ""},
             {"Stop", "", ""}
@@ -116,7 +118,7 @@ public class ParkourTests
         factory.currentAction.PerformActionEarly();
 
         AssertEvents(new String[4,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(3.0, 0.9, 0.0)", ""},
             {"Stop", "", ""}
@@ -138,7 +140,7 @@ public class ParkourTests
         factory.currentAction.PerformActionEarly();
 
         AssertEvents(new String[4,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(3.0, 0.9, 0.0)", ""},
             {"Stop", "", ""}
@@ -162,7 +164,7 @@ public class ParkourTests
         // no manual delayed action, testing automatic one
 
         AssertEvents(new String[5,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(0.0, 3.0, 0.0)", ""},
             {"Force", "(-5.0, 0.0, 0.0)", "Impulse"},
@@ -185,7 +187,7 @@ public class ParkourTests
         // no manual delayed action, testing automatic one
 
         AssertEvents(new String[5,3] {
-            {"Force", "(1.0, 0.0, 0.0)", "Acceleration"},
+            {"Force", "(10.0, 0.0, 0.0)", "Acceleration"},
             {"Force", "(0.0, 5.0, 0.0)", "Impulse"},
             {"Start", "(3.0, 0.9, 0.0)", ""},
             {"Force", "(0.0, 0.0, 5.0)", "Impulse"},

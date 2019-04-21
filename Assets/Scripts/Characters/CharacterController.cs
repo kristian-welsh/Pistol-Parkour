@@ -16,6 +16,7 @@ namespace Kristian
 		protected CharacterView view;
 		protected CharacterMovement movement;
 		private Parkour parkour;
+		private MovementDecisionAgent agent;
 
 		private bool initialized = false;
 
@@ -32,7 +33,8 @@ namespace Kristian
 		{
 			if(initialized)
 				return;
-			movement = CreateMovement();
+			agent = CreateAgent();
+			movement = new CharacterMovement(agent, speed, jumpPower, climbLength);
 			view = GetComponent<CharacterView>();
 			view.RegisterEvents(movement);
 			parkour = new Parkour(climbAngleTolerence, climbSpeed);
@@ -40,9 +42,9 @@ namespace Kristian
 			initialized = true;
 		}
 
-		protected virtual CharacterMovement CreateMovement()
+		protected virtual MovementDecisionAgent CreateAgent()
 		{
-			return new CharacterMovement(speed, jumpPower, climbLength);
+			return null;
 		}
 
 		void OnTriggerEnter(Collider other)
@@ -58,6 +60,7 @@ namespace Kristian
 			if(!(initialized && view.initialized))
 				return;
 			movement.Recalculate(view.Velocity, view.GetTransform.position, view.GetTransform.forward);
+			agent.Recalculate(view.Velocity, view.GetTransform.position);
 			ParkourResult parkourResult = parkour.ParkourCheck(view.GetTransform.forward, view.GetTransform.position, view.Velocity, movement.HasClimbed, movement.Grounded);
 			if(parkourResult != null)
 				movement.StartParkour(parkourResult.normal, parkourResult.velocity);

@@ -22,6 +22,7 @@ public class CharacterMovement
     private bool climbing = false;
     private Vector3 jumpNormal;
     private Raycaster raycaster;
+    private MovementDecisionAgent agent;
 
     private TimedActionFactory timedActionFactory;
     private ITimedAction timer;
@@ -29,9 +30,10 @@ public class CharacterMovement
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
-    public CharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
+    public CharacterMovement(MovementDecisionAgent agent, float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
     {
         jumpNormal = Vector3.up;
+        this.agent = agent;
         this.speed = speed;
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
@@ -66,7 +68,7 @@ public class CharacterMovement
             LandOnGround(velocity, position);
         if (!climbing)
             Move(forward);
-        if (canJump() && wantsToJump())
+        if (canJump() && agent.wantsToJump())
             Jump();
     }
 
@@ -105,24 +107,14 @@ public class CharacterMovement
 
     private void Move(Vector3 forward)
     {
-        Vector3 movement = CalculateMovementForce(forward);
+        Vector3 movement = agent.CalculateMovementForce(forward) * speed;
         addForceEvent(movement, ForceMode.Acceleration);
         movement.y = 0;
-    }
-
-    protected virtual Vector3 CalculateMovementForce(Vector3 forward)
-    {
-        throw new System.Exception("Illegal base method call wantsToJump()");
     }
 
     private bool canJump()
     {
         return grounded | climbing;
-    }
-
-    protected virtual bool wantsToJump()
-    {
-        throw new System.Exception("Illegal base method call wantsToJump()");
     }
 
     private void Jump()

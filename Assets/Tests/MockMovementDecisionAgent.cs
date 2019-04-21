@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TestableCharacterMovement : CharacterMovement
+public class MockMovementDecisionAgent : MovementDecisionAgent
 {
 	Queue<Vector3> testMovementForces = new Queue<Vector3>();
 	Queue<bool> testJumpInputs = new Queue<bool>();
-
-
-	public TestableCharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory taf = null):base(speed, jumpPower, climbLength, raycaster, taf){}
+	
+    public void Recalculate(Vector3 velocity, Vector3 position)
+	{
+		// conform to interface
+	}
 
 	public void addMovementForce(Vector3 force)
 	{
@@ -19,13 +21,13 @@ public class TestableCharacterMovement : CharacterMovement
 		testJumpInputs.Enqueue(jump);
 	}
 
-    protected override Vector3 CalculateMovementForce(Vector3 forward)
-    {
+	public Vector3 CalculateMovementForce(Vector3 forward)
+	{
 		return testMovementForces.Dequeue();
-    }
+	}
 
-    protected override bool wantsToJump()
-    {
+	public bool wantsToJump()
+	{
 		return testJumpInputs.Dequeue();
-    }
+	}
 }

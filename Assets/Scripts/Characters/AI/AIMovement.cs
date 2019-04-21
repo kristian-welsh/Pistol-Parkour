@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AIMovement : CharacterMovement
+public class AIMovement : MovementDecisionAgent
 {
 	private static float DISTANCE_THRESHOLD = 1f;
 	
@@ -16,7 +16,7 @@ public class AIMovement : CharacterMovement
 		set { destination = value; }
 	}
 
-	public AIMovement(GameObject targetPlayer, float speed, float jumpPower, int climbLength) : base(speed, jumpPower, climbLength)
+	public AIMovement(GameObject targetPlayer)
 	{
 		if(targetPlayer == null)
 			Deaggro(null);
@@ -38,9 +38,8 @@ public class AIMovement : CharacterMovement
 		targetPlayer.GetComponent<Kristian.Health>().OnDeath += Deaggro;
 	}
 	
-	public override void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
+	public void Recalculate(Vector3 velocity, Vector3 position)
 	{
-		base.Recalculate(velocity, position, forward);
 		StopJumping();
 		UpdateDestination(position);
 		CalculateMovement(position);
@@ -71,7 +70,7 @@ public class AIMovement : CharacterMovement
 	private void CalculateMovement(Vector3 position)
 	{
 		Vector3 difference = destination.Position - position;
-		movement = difference.normalized * speed;
+		movement = difference.normalized;
 		movement.y = 0;
 	}
 
@@ -80,9 +79,8 @@ public class AIMovement : CharacterMovement
 		Vector3 rayPosition = position + new Vector3(0f, 1f, 0f);
 		Vector3 angle = CreateLookDownAngle(velocity);
 		RaycastHit? hit = raycaster.CastRay(rayPosition, angle);
-		if(!hit.HasValue) {
+		if(!hit.HasValue)
 			jump = true;
-		}
 	}
 
 	private Vector3 CreateLookDownAngle(Vector3 velocity)
@@ -93,12 +91,12 @@ public class AIMovement : CharacterMovement
 		return angle.normalized;
 	}
 
-	protected override bool wantsToJump()
+	public bool wantsToJump()
 	{
 		return jump;
 	}
 
-	protected override Vector3 CalculateMovementForce(Vector3 forward)
+	public Vector3 CalculateMovementForce(Vector3 forward)
 	{
 		return movement;
 	}
