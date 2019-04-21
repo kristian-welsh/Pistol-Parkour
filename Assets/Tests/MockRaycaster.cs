@@ -44,7 +44,6 @@ public class MockRaycasterResult : RaycasterResult
 	private Vector3 normal = Vector3.zero;
 	public override bool HasValue { get { return hasValue; } }
 	public override Vector3 Normal { get { return normal; } }
-	public override Transform Transform { get { return new GameObject().transform; } }
 	
 	new public bool HasTag(String tagName)
 	{
