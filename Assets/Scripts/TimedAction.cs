@@ -8,14 +8,18 @@ using UnityEngine.SceneManagement;
  * Construct with Create, then attach functions to delayedAction with +=, then StartTimer.
  * TimedAction is not re-usable, one StartTimer per Create.
  */
-public class TimedAction : MonoBehaviour
+public class TimedAction : MonoBehaviour, ITimedAction
 {
-    public delegate void DelayedAction();
-    public DelayedAction delayedAction;
+    private Action action;
     
     protected int seconds;
 
     private IEnumerator waitingAction;
+
+    public void AddDelayedAction(Action action)
+    {
+        this.action = action;
+    }
 
     public static TimedAction Create(int seconds)
     {
@@ -32,23 +36,23 @@ public class TimedAction : MonoBehaviour
         return host.GetComponent<TimedAction>();
     }
 
-    public virtual void StartTimer()
+    public void StartTimer()
     {
         waitingAction = PerformAction();
         StartCoroutine(waitingAction);
     }
 
-    public virtual void PerformActionEarly()
+    public void PerformActionEarly()
     {
         StopCoroutine(waitingAction);
-        delayedAction();
+        action();
         Destroy(this);
     }
 
     private IEnumerator PerformAction()
     {
         yield return new WaitForSeconds(seconds);
-        delayedAction();
+        action();
         Destroy(this);
     }
 }

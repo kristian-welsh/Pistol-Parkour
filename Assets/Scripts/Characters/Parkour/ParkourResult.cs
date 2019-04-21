@@ -9,6 +9,5 @@ public class ParkourResult
     {
         this.normal = normal;
         this.velocity = velocity;
-        MonoBehaviour.print("result: normal:" + normal + ", velocity: " + velocity);
     }
 }

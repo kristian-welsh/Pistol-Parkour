@@ -81,7 +81,6 @@ public class AIMovement : CharacterMovement
 		Vector3 angle = CreateLookDownAngle(velocity);
 		RaycastHit? hit = raycaster.CastRay(rayPosition, angle);
 		if(!hit.HasValue) {
-			MonoBehaviour.print("jumping over pit");
 			jump = true;
 		}
 	}

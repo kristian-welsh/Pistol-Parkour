@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine;
 
 public class CharacterMovement
@@ -23,17 +24,17 @@ public class CharacterMovement
     private Raycaster raycaster;
 
     private TimedActionFactory timedActionFactory;
-    private TimedAction timer;
+    private ITimedAction timer;
 
     public bool HasClimbed { get { return hasClimbed; } }
     public bool Grounded { get { return grounded; } }
 
     public CharacterMovement(float speed, float jumpPower, int climbLength, Raycaster raycaster = null, TimedActionFactory timedActionFactory = null)
     {
+        jumpNormal = Vector3.up;
         this.speed = speed;
         this.jumpPower = jumpPower;
         this.climbLength = climbLength;
-        jumpNormal = Vector3.up;
         this.raycaster = raycaster;
         if(this.raycaster == null)
             this.raycaster = new Raycaster(0.1f);
@@ -62,29 +63,44 @@ public class CharacterMovement
     public virtual void Recalculate(Vector3 velocity, Vector3 position, Vector3 forward)
     {
         if (!grounded)
-            CheckGround(velocity, position);
+            LandOnGround(velocity, position);
         if (!climbing)
             Move(forward);
         if (canJump() && wantsToJump())
             Jump();
     }
 
-    private void CheckGround(Vector3 velocity, Vector3 position)
+    private void LandOnGround(Vector3 velocity, Vector3 position)
     {
-        if(velocity.y < 0)
+        if(FallingDown(velocity))
         {
-            RaycasterResult result = raycaster.CastWrappedRay(position, -Vector3.up);
-            if (result.HasValue)
-            {
-                if (result.HasTag("Ground"))
-                {
-                    grounded = true;
-                    hasClimbed = false;
-                    climbing = false;
-                    jumpNormal = result.Normal;
-                }
-            }
+            RaycasterResult objectBeneath = CastRayDown(position);
+            if (IsGround(objectBeneath))
+                LandOn(objectBeneath);
         }
+    }
+
+    private bool FallingDown(Vector3 velocity)
+    {
+        return velocity.y < 0;
+    }
+
+    private RaycasterResult CastRayDown(Vector3 position)
+    {
+        return raycaster.CastWrappedRay(position, -Vector3.up);
+    }
+
+    private bool IsGround(RaycasterResult result)
+    {
+        return result.HasValue && result.HasTag("Ground");
+    }
+
+    private void LandOn(RaycasterResult landableObject)
+    {
+        grounded = true;
+        hasClimbed = false;
+        climbing = false;
+        jumpNormal = landableObject.Normal;
     }
 
     private void Move(Vector3 forward)
@@ -127,11 +143,11 @@ public class CharacterMovement
         jumpNormal = normal;
         startParkourEvent(velocity);
         timer = timedActionFactory.Create(climbLength);
-        timer.delayedAction += StopWallclimb;
+        timer.AddDelayedAction(stopParkourEarly);
         timer.StartTimer();
     }
 
-    private void StopWallclimb()
+    private void stopParkourEarly()
     {
         climbing = false;
         stopParkourEvent();
