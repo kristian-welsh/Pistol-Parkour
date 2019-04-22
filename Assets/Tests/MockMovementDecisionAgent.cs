@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/* Allows tests to inject decision data to be provided to models
+ */
 public class MockMovementDecisionAgent : MovementDecisionAgent
 {
 	Queue<Vector3> testMovementForces = new Queue<Vector3>();

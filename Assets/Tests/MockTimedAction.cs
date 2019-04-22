@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-// removes any time delaying behaviour leaving the test client to extract and
-// run delayed method when appropriate in the test environment
+/* Allows tests to trigger delayed actions early to assert on side-effects performed
+ * removes any time delaying behaviour leaving the test client to extract and
+ * run delayed method when appropriate in the test environment without waiting in real time
+ */
 public class MockTimedAction : ITimedAction
 {
     private Action action;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Allows tests to inject raycasting results to be provided to models
+ */
 public class MockRaycaster : Raycaster
 {
 	Queue<MockRaycasterResult> testHits;

@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 
-// todo: make this and its null object models to avoid instantiating MonoBehaviours in AIMovement
+/* Leads calling object to the gameobject this is attached to, one step at a time
+ */
 public class NavigationRouter : MonoBehaviour
 {
-	//leads calling object to the gameobject this is attached to, one step at a time
+	/* Next waypoint to move to.
+	 * virtual to support multiple implementations
+	 */
 	public virtual Waypoint NextDestination(Waypoint current)
 	{
 		return NearestLink(current);
 	}
 
-	// find the child link of start that is nearest to the gameobject this script is attached to
+	/* find the child link of start that is nearest to the gameobject this script is attached to.
+	 * Is only sufficient for simple maps as it results in the AI getting stuck in local minimums.
+	 */
 	private Waypoint NearestLink(Waypoint start)
 	{
+		// simple find minimum distance implementation
 		Waypoint nearest = null;
 		float minDistance = float.PositiveInfinity;
 		foreach (Waypoint point in start.links)

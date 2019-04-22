@@ -60,6 +60,8 @@ public class RespawnManager : MonoBehaviour
 	}
 
 	/* Called when a combatant reaches 0 health
+	 * Note: The type check required on obj requires all event subscribers to have this argument too
+	 * In the future, remove the argument and add a method isAi to controller & subclasses
 	 */
 	public void NotifyOfDeath(GameObject obj)
 	{
@@ -77,6 +79,7 @@ public class RespawnManager : MonoBehaviour
 	}
 
 	/* Waits for a certain period of time then respawns the required combatant
+	 * todo: use TimedAction
 	 */
     private IEnumerator RespawnTimer(bool ai)
     {
